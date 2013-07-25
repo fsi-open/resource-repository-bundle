@@ -1,0 +1,6 @@
+main_resource_group:
+    type: group
+    this_is_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_long_path:
+        type: group
+        resource:
+            type: text

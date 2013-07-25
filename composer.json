@@ -1,0 +1,40 @@
+{
+    "name": "fsi/resource-repository-bundle",
+    "type": "symfony-bundle",
+    "description": "Resource repository bundle",
+    "keywords": ["fsi", "resource", "repository", "bundle"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Norbert Orzechowicz",
+            "email": "norbert@fsi.pl"
+        }
+    ],
+    "repositories": [
+        { "type": "composer", "url": "http://git.fsi.pl" }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/framework-bundle": "~2.2",
+        "symfony/form" : "~2.2",
+        "symfony/validator": "~2.2",
+        "fsi/doctrine-extensions" : "0.9.*",
+        "fsi/form-extensions-bundle": "0.9.*"
+    },
+    "require-dev": {
+        "doctrine/orm": "~2.3",
+        "phpspec/phpspec": "2.0.*@dev"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "FSi\\Bundle\\ResourceRepositoryBundle": "" }
+    },
+    "target-dir": "FSi/Bundle/ResourceRepositoryBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

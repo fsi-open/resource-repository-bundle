@@ -1,0 +1,10 @@
+main_resource_group:
+    type: group
+    resource_block:
+        type: group
+        resource_a:
+            type: text
+        resource_b:
+            type: text
+            name: Resource B
+            type: text
