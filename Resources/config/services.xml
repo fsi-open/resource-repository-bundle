@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="fsi_resource_repository.map_builder.class">FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder</parameter>
+        <parameter key="fsi_resource_repository.repository.class">FSi\Bundle\ResourceRepositoryBundle\Repository\Repository</parameter>
+        <parameter key="fsi_resource_repository.entity.repository.class">FSi\Bundle\ResourceRepositoryBundle\Entity\Repository\Resource</parameter>
+        <parameter key="fsi_resource_repository.twig.extension.resource_repository.class">FSi\Bundle\ResourceRepositoryBundle\Twig\Extension\ResourceRepository</parameter>
+        <parameter key="fsi_resource_repository.form.type.resource.class">FSi\Bundle\ResourceRepositoryBundle\Form\Type\ResourceType</parameter>
+        <parameter key="fsi_resource_repository.form.type.resource_collection.class">FSi\Bundle\ResourceRepositoryBundle\Form\Type\ResourceCollectionType</parameter>
+    </parameters>
+
+    <services>
+        <service id="fsi_resource_repository.entity.repository"
+                 factory-service="doctrine.orm.default_entity_manager"
+                 factory-method="getRepository"
+                 class="%fsi_resource_repository.entity.repository.class%">
+            <argument>FSiResourceRepositoryBundle:Resource</argument>
+        </service>
+
+        <service id="fsi_resource_repository.map_builder" class="%fsi_resource_repository.map_builder.class%">
+            <argument>%fsi_resource_repository.map_path%</argument>
+            <argument>%fsi_resource_repository.resource_types%</argument>
+        </service>
+
+        <service id="fsi_resource_repository.repository" class="%fsi_resource_repository.repository.class%">
+            <argument type="service" id="fsi_resource_repository.map_builder" />
+            <argument type="service" id="fsi_resource_repository.entity.repository"/>
+        </service>
+
+        <!-- Resouce Types -->
+        <service id="fsi_resource_repository.resource.type.text" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType">
+            <tag name="resource.type" alias="text"/>
+        </service>
+        <service id="fsi_resource_repository.resource.type.url" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\UrlType">
+            <tag name="resource.type" alias="url"/>
+        </service>
+        <service id="fsi_resource_repository.resource.type.url" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\EmailType">
+            <tag name="resource.type" alias="email"/>
+        </service>
+        <service id="fsi_resource_repository.resource.type.wysiwyg" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\WysiwygType">
+            <tag name="resource.type" alias="wysiwyg"/>
+        </service>
+        <service id="fsi_resource_repository.resource.type.datetime" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\DatetimeType">
+            <tag name="resource.type" alias="datetime"/>
+        </service>
+        <service id="fsi_resource_repository.resource.type.date" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\DateType">
+            <tag name="resource.type" alias="date"/>
+        </service>
+        <service id="fsi_resource_repository.resource.type.time" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TimeType">
+            <tag name="resource.type" alias="time"/>
+        </service>
+        <service id="fsi_resource_repository.resource.type.integer" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\IntegerType">
+            <tag name="resource.type" alias="integer"/>
+        </service>
+        <service id="fsi_resource_repository.resource.type.number" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\NumberType">
+            <tag name="resource.type" alias="number"/>
+        </service>
+        <service id="fsi_resource_repository.resource.type.bool" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\BoolType">
+            <tag name="resource.type" alias="bool"/>
+        </service>
+        <service id="fsi_resource_repository.resource.type.file" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\FileType">
+            <tag name="resource.type" alias="file"/>
+        </service>
+
+        <!-- Twig Extension -->
+        <service id="fsi_resource_repository.twig.extension.resource_repository" class="%fsi_resource_repository.twig.extension.resource_repository.class%">
+            <tag name="twig.extension" />
+            <argument type="service" id="fsi_resource_repository.repository"></argument>
+        </service>
+
+        <!-- Symfony Form Types -->
+        <service id="fsi_resource_repository.form.type.resource" class="%fsi_resource_repository.form.type.resource.class%">
+            <tag name="form.type" alias="resource" />
+            <argument type="service" id="fsi_resource_repository.map_builder"/>
+        </service>
+
+        <service id="fsi_resource_repository.form.type.resource_collection" class="%fsi_resource_repository.form.type.resource_collection.class%">
+            <tag name="form.type" alias="resource_collection" />
+            <argument type="service" id="fsi_resource_repository.map_builder"/>
+        </service>
+    </services>
+</container>

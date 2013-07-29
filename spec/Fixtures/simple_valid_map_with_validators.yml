@@ -1,0 +1,7 @@
+resources:
+    type: group
+    resource_text:
+        type: text
+        constraints:
+            NotBlank: ~
+
