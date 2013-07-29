@@ -9,6 +9,7 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle;
 
+use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourcePass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\TwigFormPass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\FSIResourceRepositoryExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -22,6 +23,7 @@ class FSiResourceRepositoryBundle extends Bundle
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new TwigFormPass());
+        $container->addCompilerPass(new ResourcePass());
     }
 
 

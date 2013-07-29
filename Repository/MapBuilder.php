@@ -16,11 +16,6 @@ use Symfony\Component\Yaml\Yaml;
 class MapBuilder
 {
     /**
-     * Template used to create type object
-     */
-    const TYPE_CLASS = 'FSi\\Bundle\\ResourceRepositoryBundle\\Repository\\Resource\\Type\\%sType';
-
-    /**
      * Template used to create constraint object
      */
     const CONSTRAINT_CLASS = 'Symfony\\Component\\Validator\\Constraints\\%s';
@@ -45,11 +40,23 @@ class MapBuilder
     protected $resources;
 
     /**
-     * @param string $mapPath
+     * @var string[]
      */
-    public function __construct($mapPath)
+    protected $resourceTypes;
+
+    /**
+     * @param string $mapPath
+     * @param string[] $resourceTypes
+     */
+    public function __construct($mapPath, $resourceTypes = array())
     {
+        $this->resourceTypes = array();
         $this->resources = array();
+
+        foreach ($resourceTypes as $type => $class) {
+            $this->resourceTypes[$type] = $class;
+        }
+
         $this->map = $this->recursiveParseRawMap(Yaml::parse($mapPath));
     }
 
@@ -133,12 +140,13 @@ class MapBuilder
     {
         $type = $configuration['type'];
 
-        $class = sprintf(self::TYPE_CLASS, ucfirst($type));
-        if (!class_exists($class)) {
+        if (!array_key_exists($type, $this->resourceTypes)) {
             throw new ConfigurationException(
-                sprintf('"%s" is not a valid resource type', $type)
+                sprintf('"%s" is not a valid resource type. Try one from: %s', $type, implode(', ', array_keys($this->resourceTypes)))
             );
         }
+
+        $class = $this->resourceTypes[$type];
 
         return new $class($path);
     }

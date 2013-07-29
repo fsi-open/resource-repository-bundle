@@ -27,6 +27,9 @@ class FSiResourceRepositoryBundleSpec extends ObjectBehavior
     {
         $container->addCompilerPass(Argument::type('FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\TwigFormPass'))
             ->shouldBeCalled();
+        $container->addCompilerPass(Argument::type('FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourcePass'))
+            ->shouldBeCalled();
+
 
         $this->build($container);
     }

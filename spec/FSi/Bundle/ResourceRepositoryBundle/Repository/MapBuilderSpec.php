@@ -10,9 +10,14 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class MapBuilderSpec extends ObjectBehavior
 {
-    function let()
+    protected $resources = array(
+        'text' => 'FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType',
+        'integer' => 'FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\TypeIntegerType'
+    );
+
+    function let(TextType $text)
     {
-        $this->beConstructedWith(__DIR__ . '/../../../../Fixtures/simple_valid_map.yml');
+        $this->beConstructedWith(__DIR__ . '/../../../../Fixtures/simple_valid_map.yml', $this->resources);
     }
 
     function it_is_initializable()
@@ -48,26 +53,35 @@ class MapBuilderSpec extends ObjectBehavior
     {
         $this->shouldThrow(
             new ConfigurationException('Missing "type" declaration in "main_resource_group.resource_block" element configuration')
-        )->during('__construct', array(__DIR__ . '/../../../../Fixtures/simple_map_with_missing_group_type.yml'));
+        )->during('__construct', array(
+                __DIR__ . '/../../../../Fixtures/simple_map_with_missing_group_type.yml',
+                $this->resources
+            ));
     }
 
     function it_should_throw_exception_when_element_have_invalid_type()
     {
         $this->shouldThrow(
-            new ConfigurationException('"this_is_not_a_valid_type" is not a valid resource type')
-        )->during('__construct', array(__DIR__ . '/../../../../Fixtures/simple_map_with_invalid_resource_type.yml'));
+            new ConfigurationException('"this_is_not_a_valid_type" is not a valid resource type. Try one from: text, integer')
+        )->during('__construct', array(
+                __DIR__ . '/../../../../Fixtures/simple_map_with_invalid_resource_type.yml',
+                $this->resources
+            ));
     }
 
     function it_should_throw_exception_when_resource_path_is_longer_than_255_characters()
     {
         $this->shouldThrow(
             new ConfigurationException('"main_resource_group.this_is_long..." key is too long. Maximum key length is 255 characters')
-        )->during('__construct', array(__DIR__ . '/../../../../Fixtures/simple_map_with_too_long_path.yml'));
+        )->during('__construct', array(
+                __DIR__ . '/../../../../Fixtures/simple_map_with_too_long_path.yml',
+                $this->resources
+            ));
     }
 
     function it_should_parse_empty_file_witht_resource_map()
     {
-        $this->beConstructedWith(__DIR__ . '/../../../../Fixtures/empty_map.yml');
+        $this->beConstructedWith(__DIR__ . '/../../../../Fixtures/empty_map.yml', $this->resources);
         $this->getMap()->shouldReturn(array());
     }
 
@@ -76,7 +90,7 @@ class MapBuilderSpec extends ObjectBehavior
         $text = new TextType('resources.resource_text');
         $text->addConstraint(new NotBlank());
 
-        $this->beConstructedWith(__DIR__ . '/../../../../Fixtures/simple_valid_map_with_validators.yml');
+        $this->beConstructedWith(__DIR__ . '/../../../../Fixtures/simple_valid_map_with_validators.yml', $this->resources);
         $this->getResource('resources.resource_text')->shouldBeLike($text);
     }
 
