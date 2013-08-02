@@ -1,0 +1,5 @@
+main_resource_group:
+    type: group
+    resource_block:
+        resource_a:
+            type: text
