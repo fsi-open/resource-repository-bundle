@@ -38,7 +38,7 @@ class WysiwygTypeSpec extends ObjectBehavior
     function it_return_form_builder(FormFactory $factory, FormBuilder $form)
     {
         $factory->createNamedBuilder('textValue', 'ckeditor', null, array(
-            'label' => 'resource_group.resource_wysiwyg.name',
+            'label' => false,
             'required' => false,
         ))->shouldBeCalled()->willReturn($form);
 
@@ -50,7 +50,7 @@ class WysiwygTypeSpec extends ObjectBehavior
         $this->addConstraint($notBlank);
 
         $factory->createNamedBuilder('textValue', 'ckeditor', null, array(
-            'label' => 'resource_group.resource_wysiwyg.name',
+            'label' => false,
             'required' => false,
             'constraints' => array(
                 $notBlank

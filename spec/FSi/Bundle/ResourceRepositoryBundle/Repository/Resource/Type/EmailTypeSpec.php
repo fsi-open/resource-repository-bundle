@@ -39,7 +39,7 @@ class EmailTypeSpec extends ObjectBehavior
     function it_return_form_builder(FormFactory $factory, FormBuilder $form)
     {
         $factory->createNamedBuilder('textValue', 'email', null, array(
-            'label' => 'resource_group.resource_email.name',
+            'label' => false,
             'required' => false,
             'constraints' => array(
                 new Email(),
@@ -54,7 +54,7 @@ class EmailTypeSpec extends ObjectBehavior
         $this->addConstraint($notBlank);
 
         $factory->createNamedBuilder('textValue', 'email', null, array(
-            'label' => 'resource_group.resource_email.name',
+            'label' => false,
             'required' => false,
             'constraints' => array(
                 new Email(),

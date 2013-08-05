@@ -68,10 +68,14 @@ class Resource
 
     /**
      * @param string $key
+     *
+     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
      */
     public function setKey($key)
     {
         $this->key = $key;
+
+        return $this;
     }
 
     /**
@@ -84,10 +88,14 @@ class Resource
 
     /**
      * @param string $textValue
+     *
+     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
      */
     public function setTextValue($textValue)
     {
         $this->textValue = $textValue;
+
+        return $this;
     }
 
     /**
@@ -100,10 +108,14 @@ class Resource
 
     /**
      * @param mixed $dateValue
+     *
+     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
      */
     public function setDateValue($dateValue)
     {
         $this->dateValue = $dateValue;
+
+        return $this;
     }
 
     /**
@@ -116,10 +128,14 @@ class Resource
 
     /**
      * @param \DateTime $datetimeValue
+     *
+     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
      */
     public function setDatetimeValue($datetimeValue)
     {
         $this->datetimeValue = $datetimeValue;
+
+        return $this;
     }
 
     /**
@@ -132,10 +148,14 @@ class Resource
 
     /**
      * @param mixed $timeValue
+     *
+     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
      */
     public function setTimeValue($timeValue)
     {
         $this->timeValue = $timeValue;
+
+        return $this;
     }
 
     /**
@@ -148,10 +168,14 @@ class Resource
 
     /**
      * @param mixed $numberValue
+     *
+     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
      */
     public function setNumberValue($numberValue)
     {
         $this->numberValue = $numberValue;
+
+        return $this;
     }
 
     /**
@@ -164,10 +188,14 @@ class Resource
 
     /**
      * @param int $integerValue
+     *
+     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
      */
     public function setIntegerValue($integerValue)
     {
         $this->integerValue = $integerValue;
+
+        return $this;
     }
 
     /**
@@ -180,10 +208,14 @@ class Resource
 
     /**
      * @param boolean $boolValue
+     *
+     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
      */
     public function setBoolValue($boolValue)
     {
         $this->boolValue = $boolValue;
+
+        return $this;
     }
 
     /**
@@ -196,10 +228,16 @@ class Resource
 
     /**
      * @param \FSi\DoctrineExtensions\Uploadable\File|null $file
+     *
+     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
      */
     public function setFileValue($file)
     {
-        $this->fileValue = $file;
+        if (!empty($file)) {
+            $this->fileValue = $file;
+        }
+
+        return $this;
     }
 
     /**
@@ -211,11 +249,25 @@ class Resource
     }
 
     /**
+     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
+     */
+    public function removeFileValue()
+    {
+        $this->fileValue = null;
+
+        return $this;
+    }
+
+    /**
      * @param string $fileKeyValue
+     *
+     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
      */
     public function setFileKeyValue($fileKeyValue)
     {
         $this->fileKeyValue = $fileKeyValue;
+
+        return $this;
     }
 
     /**
