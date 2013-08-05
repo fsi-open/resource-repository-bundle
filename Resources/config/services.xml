@@ -38,7 +38,7 @@
         <service id="fsi_resource_repository.resource.type.url" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\UrlType">
             <tag name="resource.type" alias="url"/>
         </service>
-        <service id="fsi_resource_repository.resource.type.url" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\EmailType">
+        <service id="fsi_resource_repository.resource.type.email" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\EmailType">
             <tag name="resource.type" alias="email"/>
         </service>
         <service id="fsi_resource_repository.resource.type.wysiwyg" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\WysiwygType">
