@@ -13,10 +13,10 @@
                     {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' control-label')|trim}) %}
                     <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
                 {% endif %}
+                {{ form_label(element) }}
                 <div class="controls">
-                    {{ form_label(element) }}
-                    {{ form_errors(element) }}
                     {{ form_widget(element) }}
+                    {{ form_errors(element) }}
                 </div>
             </div>
         {% endfor %}
