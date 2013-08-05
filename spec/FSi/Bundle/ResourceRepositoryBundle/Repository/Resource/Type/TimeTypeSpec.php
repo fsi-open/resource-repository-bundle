@@ -38,7 +38,7 @@ class TimeTypeSpec extends ObjectBehavior
     function it_return_form_builder(FormFactory $factory, FormBuilder $form)
     {
         $factory->createNamedBuilder('timeValue', 'time', null, array(
-            'label' => 'resource_group.resource_time.name',
+            'label' => false,
             'required' => false,
         ))->shouldBeCalled()->willReturn($form);
 
@@ -50,7 +50,7 @@ class TimeTypeSpec extends ObjectBehavior
         $this->addConstraint($constraint);
 
         $factory->createNamedBuilder('timeValue', 'time', null, array(
-            'label' => 'resource_group.resource_time.name',
+            'label' => false,
             'required' => false,
             'constraints' => array(
                 $constraint

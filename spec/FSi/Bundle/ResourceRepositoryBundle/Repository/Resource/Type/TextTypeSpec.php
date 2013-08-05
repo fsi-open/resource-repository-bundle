@@ -38,7 +38,7 @@ class TextTypeSpec extends ObjectBehavior
     function it_return_form_builder(FormFactory $factory, FormBuilder $form)
     {
         $factory->createNamedBuilder('textValue', 'text', null, array(
-            'label' => 'resource_group.resource_text.name',
+            'label' => false,
             'required' => false,
         ))->shouldBeCalled()->willReturn($form);
 
@@ -50,7 +50,7 @@ class TextTypeSpec extends ObjectBehavior
         $this->addConstraint($constraint);
 
         $factory->createNamedBuilder('textValue', 'text', null, array(
-            'label' => 'resource_group.resource_text.name',
+            'label' => false,
             'required' => false,
             'constraints' => array(
                 $constraint

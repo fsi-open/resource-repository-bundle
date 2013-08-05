@@ -77,10 +77,5 @@
             <tag name="form.type" alias="resource" />
             <argument type="service" id="fsi_resource_repository.map_builder"/>
         </service>
-
-        <service id="fsi_resource_repository.form.type.resource_collection" class="%fsi_resource_repository.form.type.resource_collection.class%">
-            <tag name="form.type" alias="resource_collection" />
-            <argument type="service" id="fsi_resource_repository.map_builder"/>
-        </service>
     </services>
 </container>

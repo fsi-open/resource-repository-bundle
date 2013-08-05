@@ -38,7 +38,7 @@ class IntegerTypeSpec extends ObjectBehavior
     function it_return_form_builder(FormFactory $factory, FormBuilder $form)
     {
         $factory->createNamedBuilder('integerValue', 'integer', null, array(
-            'label' => 'resource_group.resource_integer.name',
+            'label' => false,
             'required' => false,
         ))->shouldBeCalled()->willReturn($form);
 
@@ -50,7 +50,7 @@ class IntegerTypeSpec extends ObjectBehavior
         $this->addConstraint($notBlank);
 
         $factory->createNamedBuilder('integerValue', 'integer', null, array(
-            'label' => 'resource_group.resource_integer.name',
+            'label' => false,
             'required' => false,
             'constraints' => array(
                 $notBlank

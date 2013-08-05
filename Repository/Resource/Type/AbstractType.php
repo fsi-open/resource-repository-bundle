@@ -85,7 +85,7 @@ abstract class AbstractType implements ResourceInterface
     {
         $options = array(
             'required' => false,
-            'label' => sprintf('%s.name', $this->getName()),
+            'label' => false,
         );
 
         if (count($this->constraints)) {
