@@ -1,6 +1,23 @@
-{% block resource_widget %}
-{% spaceless %}
-    {{ form_errors(form) }}
-    {{ form_widget(form) }}
-{% endspaceless %}
+{% block resource_row %}
+    {% spaceless %}
+        {% for element in form %}
+            <div class="control-group{% if errors|length > 0 %} error{% endif %}">
+                {% if label is not sameas(false) %}
+                    {% set label_attr = label_attr|merge({'for': element.vars['id']}) %}
+                    {% if required %}
+                        {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+                    {% endif %}
+                    {% if label is empty %}
+                        {% set label = name|humanize %}
+                    {% endif %}
+                    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+                {% endif %}
+                <div class="controls">
+                    {{ form_label(element) }}
+                    {{ form_errors(element) }}
+                    {{ form_widget(element) }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endspaceless %}
 {% endblock %}
