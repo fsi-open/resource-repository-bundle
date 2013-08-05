@@ -38,7 +38,7 @@ class DatetimeTypeSpec extends ObjectBehavior
     function it_return_form_builder(FormFactory $factory, FormBuilder $form)
     {
         $factory->createNamedBuilder('datetimeValue', 'datetime', null, array(
-            'label' => 'resource_group.resource_datetime.name',
+            'label' => false,
             'required' => false,
         ))->shouldBeCalled()->willReturn($form);
 
@@ -50,7 +50,7 @@ class DatetimeTypeSpec extends ObjectBehavior
         $this->addConstraint($constraint);
 
         $factory->createNamedBuilder('datetimeValue', 'datetime', null, array(
-            'label' => 'resource_group.resource_datetime.name',
+            'label' => false,
             'required' => false,
             'constraints' => array(
                 $constraint

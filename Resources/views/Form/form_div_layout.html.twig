@@ -1,7 +1,6 @@
-{% block resource_collection_widget %}
+{% block resource_widget %}
 {% spaceless %}
-    {% for resourceElement in form %}
-        {{ form_widget(resourceElement) }}
-    {% endfor %}
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
 {% endspaceless %}
 {% endblock %}

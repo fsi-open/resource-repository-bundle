@@ -38,7 +38,7 @@ class FileTypeSpec extends ObjectBehavior
     function it_return_form_builder(FormFactory $factory, FormBuilder $form)
     {
         $factory->createNamedBuilder('fileValue', 'fsi_file', null, array(
-            'label' => 'resource_group.resource_fsi_file.name',
+            'label' => false,
             'required' => false,
         ))->shouldBeCalled()->willReturn($form);
 
@@ -50,7 +50,7 @@ class FileTypeSpec extends ObjectBehavior
         $this->addConstraint($notBlank);
 
         $factory->createNamedBuilder('fileValue', 'fsi_file', null, array(
-            'label' => 'resource_group.resource_fsi_file.name',
+            'label' => false,
             'required' => false,
             'constraints' => array(
                 $notBlank

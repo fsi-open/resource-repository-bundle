@@ -10,6 +10,7 @@
 namespace FSi\Bundle\ResourceRepositoryBundle\Form\Type;
 
 use FSi\Bundle\ResourceRepositoryBundle\Exception\ResourceFormTypeException;
+use FSi\Bundle\ResourceRepositoryBundle\Form\EventListener\AddResourceKeySubscriber;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,14 +21,14 @@ class ResourceType extends AbstractType
     /**
      * @var \FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder
      */
-    protected $map;
+    protected $mapBuilder;
 
     /**
      * @param MapBuilder $map
      */
-    function __construct(MapBuilder $map)
+    function __construct(MapBuilder $mapBuilder)
     {
-        $this->map = $map;
+        $this->mapBuilder = $mapBuilder;
     }
 
     /**
@@ -46,22 +47,22 @@ class ResourceType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'FSi\Bundle\ResourceRepositoryBundle\Entity\Resource',
         ));
+
+        $resolver->setRequired(array(
+            'resource_key'
+        ));
     }
 
-    /**
-     * @inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $data = $builder->getData();
-
-        if (!isset($data)) {
-            throw new ResourceFormTypeException('ResourceType form data can not be null');
+        if (!$this->mapBuilder->hasResource($options['resource_key'])) {
+            throw new ResourceFormTypeException(sprintf('"%s" is not a valid resource key', $options['resource_key']));
         }
 
-        $resource = $this->map->getResource($data->getKey());
-        $elementBuilder = $resource->getFormBuilder($builder->getFormFactory());
+        $resource = $this->mapBuilder->getResource($options['resource_key']);
+        $resourceFormBuilder = $resource->getFormBuilder($builder->getFormFactory());
 
-        $builder->add($elementBuilder);
+        $builder->add($resourceFormBuilder);
+        $builder->addEventSubscriber(new AddResourceKeySubscriber());
     }
 }

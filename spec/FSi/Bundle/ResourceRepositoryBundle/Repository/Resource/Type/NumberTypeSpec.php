@@ -38,7 +38,7 @@ class NumberTypeSpec extends ObjectBehavior
     function it_return_form_builder(FormFactory $factory, FormBuilder $form)
     {
         $factory->createNamedBuilder('numberValue', 'number', null, array(
-            'label' => 'resource_group.resource_number.name',
+            'label' => false,
             'required' => false,
             'precision' => 4
         ))->shouldBeCalled()->willReturn($form);
@@ -51,7 +51,7 @@ class NumberTypeSpec extends ObjectBehavior
         $this->addConstraint($notBlank);
 
         $factory->createNamedBuilder('numberValue', 'number', null, array(
-            'label' => 'resource_group.resource_number.name',
+            'label' => false,
             'required' => false,
             'constraints' => array(
                 $notBlank

@@ -99,13 +99,23 @@ resources:
             type: text
 ```
 
+Each resource can have own validators to prevent saving invalid data. Just like in following example:
+
+```
+resources:
+    type: group
+    resource_text:
+        type: text
+        constraints:
+            NotBlank: ~
+```
+
 That's all folks :) 
 
 # Usage
 
 First of all you need to remember few simple rules
 
-- You should never use Resource Entity repository.
 - To get resource content you should use only ``fsi_resource_repository.repository`` service, like in following example:
 
 ```php
@@ -122,16 +132,13 @@ public fucntion indexAction()
     // Single resource editor 
     public function indexAction(Request $request)
     {
-        /**
-         * Even if resources.resource_file does not exist in db resource entity repository will
-         * return Entity\Resource object. Form types resource and resource_collection do not accept null
-         * data. 
-         */
         $resource = $this->getDoctrine()
             ->getRepository('FSiResourceRepositoryBundle:Resource')
             ->get('resources.resource_text');
 
-        $form = $this->createForm('resource', $resource);
+        $form = $this->createForm('resource', $resource, array(
+            'resource_key' => 'resources.resource_text'
+        ));
 
         if ($request->isMethod('POST')) {
             $form->submit($request);
@@ -148,42 +155,9 @@ public fucntion indexAction()
             'form' => $form->createView()
         ));
     }
-    
-    // Multiple resource editor
-    public function indexAction(Request $request)
-    {
-        $form = $this->createForm('resource_collection', array(
-            $this->getDoctrine()->getRepository('FSiResourceRepositoryBundle:Resource')->get('resources.resource_text'),
-            $this->getDoctrine()->getRepository('FSiResourceRepositoryBundle:Resource')->get('resources.resource_integer'),
-            $this->getDoctrine()->getRepository('FSiResourceRepositoryBundle:Resource')->get('resources.resource_datetime'),
-        ));
-
-        if ($request->isMethod('POST')) {
-            $form->submit($request);
-
-            if ($form->isValid()) {
-                $data = $form->getData();
-                foreach ($data as $entity) {
-                    $this->getDoctrine()->getManager()->persist($entity);
-                }
-
-                $this->getDoctrine()->getManager()->flush();
-            } else {
-                var_dump($form->getErrors());
-            }
-        }
-
-        return $this->render('@FSiCompanySite/Default/index.html.twig', array(
-            'form' => $form->createView()
-        ));
-    }
-    
 ```
 
-- Resource edit form label is always created from resource key with suffix ``.name``
-To translate resource label with key ``resources.resource_text`` you need to create translation file with key
-``resources.resource_text.name`` and proper translation.
-- To access resources in Twig you should use ``get_resource`` and ``has_resource`` functions. 
+- To access resources in Twig you should use ``get_resource`` and ``has_resource`` functions.
 
 ```
 {# index.html.twig #}

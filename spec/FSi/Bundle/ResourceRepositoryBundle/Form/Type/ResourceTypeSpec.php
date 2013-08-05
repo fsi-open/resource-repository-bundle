@@ -40,30 +40,39 @@ class ResourceTypeSpec extends ObjectBehavior
             'data_class' => 'FSi\Bundle\ResourceRepositoryBundle\Entity\Resource',
         ))->shouldBeCalled();
 
+        $resolver->setRequired(array(
+            'resource_key'
+        ))->shouldBeCalled();
+
         $this->setDefaultOptions($resolver);
     }
 
-    function it_build_form_for_resource_type_text(MapBuilder $map, FormBuilder $formBuilder, TextType $resource,
-            FormFactory $formFactory, FormBuilder $elementBuilder, Resource $resourceEntity)
+    function it_should_throw_exception_during_build_form_when_resource_key_is_invalid(MapBuilder $map, FormBuilder $builder)
     {
-
-        $map->getResource(Argument::any())->willReturn($resource);
-        $resource->getFormBuilder(Argument::type('Symfony\Component\Form\FormFactory'))->shouldBeCalled()->willReturn($elementBuilder);
-
-        $formBuilder->getFormFactory()->willReturn($formFactory);
-        $formBuilder->add(Argument::type('Symfony\Component\Form\FormBuilder'))->shouldBeCalled();
-        $formBuilder->getData()->willReturn($resourceEntity);
-        $resourceEntity->getKey()->willReturn('resources.resource_a');
-
-        $this->buildForm($formBuilder, array());
-    }
-
-    function it_throw_exception_when_form_data_is_null(FormBuilder $formBuilder)
-    {
-        $formBuilder->getData()->willReturn(null);
+        $map->hasResource('resources.invalid_resource')->willReturn(false);
 
         $this->shouldThrow(
-            new ResourceFormTypeException('ResourceType form data can not be null')
-        )->during('buildForm', array($formBuilder, array()));
+            new ResourceFormTypeException('"resources.invalid_resource" is not a valid resource key')
+        )->duringBuildForm($builder, array(
+            'resource_key' => 'resources.invalid_resource'
+        ));
+    }
+
+    function it_add_form_builder_specified_by_resource_definition(MapBuilder $map, FormBuilder $builder, TextType $resource,
+            FormFactory $factory, FormBuilder $textBuilder)
+    {
+        $map->hasResource('resources.resource_text')->willReturn(true);
+        $map->getResource('resources.resource_text')->shouldBeCalled()->willReturn($resource);
+        $builder->getFormFactory()->willReturn($factory);
+        $resource->getFormBuilder($factory)->shouldBeCalled()->willReturn($textBuilder);
+
+        $builder->add($textBuilder)->shouldBeCalled();
+
+        $builder->addEventSubscriber(Argument::type('FSi\Bundle\ResourceRepositoryBundle\Form\EventListener\AddResourceKeySubscriber'))
+            ->shouldBeCalled();
+
+        $this->buildForm($builder, array(
+            'resource_key' => 'resources.resource_text'
+        ));
     }
 }

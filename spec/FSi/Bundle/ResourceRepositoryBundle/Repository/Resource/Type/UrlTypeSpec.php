@@ -39,7 +39,7 @@ class UrlTypeSpec extends ObjectBehavior
     function it_return_form_builder(FormFactory $factory, FormBuilder $form)
     {
         $factory->createNamedBuilder('textValue', 'url', null, array(
-            'label' => 'resource_group.resource_url.name',
+            'label' => false,
             'required' => false,
             'constraints' => array(
                 new Url()
@@ -54,7 +54,7 @@ class UrlTypeSpec extends ObjectBehavior
         $this->addConstraint($notBlank);
 
         $factory->createNamedBuilder('textValue', 'url', null, array(
-            'label' => 'resource_group.resource_url.name',
+            'label' => false,
             'required' => false,
             'constraints' => array(
                 new Url(),

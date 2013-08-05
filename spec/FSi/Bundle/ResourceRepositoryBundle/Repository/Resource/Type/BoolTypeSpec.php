@@ -38,7 +38,7 @@ class BoolTypeSpec extends ObjectBehavior
     function it_return_form_builder(FormFactory $factory, FormBuilder $form)
     {
         $factory->createNamedBuilder('boolValue', 'checkbox', null, array(
-            'label' => 'resource_group.resource_bool.name',
+            'label' => false,
             'required' => false,
         ))->shouldBeCalled()->willReturn($form);
 
@@ -50,7 +50,7 @@ class BoolTypeSpec extends ObjectBehavior
         $this->addConstraint($constraint);
 
         $factory->createNamedBuilder('boolValue', 'checkbox', null, array(
-            'label' => 'resource_group.resource_bool.name',
+            'label' => false,
             'required' => false,
             'constraints' => array(
                 $constraint
