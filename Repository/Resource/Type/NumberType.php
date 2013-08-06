@@ -9,8 +9,6 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
-use Symfony\Component\Form\FormFactoryInterface;
-
 class NumberType extends AbstractType
 {
     /**

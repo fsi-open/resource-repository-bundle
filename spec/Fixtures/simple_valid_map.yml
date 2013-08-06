@@ -6,5 +6,3 @@ main_resource_group:
             type: text
         resource_b:
             type: text
-            name: Resource B
-            type: text

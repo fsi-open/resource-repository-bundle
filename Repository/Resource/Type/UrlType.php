@@ -9,7 +9,6 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Validator\Constraints\Url;
 
 class UrlType extends AbstractType

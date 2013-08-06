@@ -120,8 +120,11 @@ class MapBuilder
                 continue;
             }
 
+            $this->validateResourceConfiguration($configuration);
+
             $resource = $this->createResource($configuration, $path);
             $this->addConstraints($resource, $configuration);
+            $this->setFormOptions($resource, $configuration);
 
             $map[$key] = $resource;
             $this->resources[$path] = $map[$key];
@@ -170,6 +173,13 @@ class MapBuilder
         }
     }
 
+    protected function setFormOptions(ResourceInterface $resource, $configuration)
+    {
+        if (isset($configuration['form_options']) && is_array($configuration['form_options'])) {
+            $resource->setFormOptions($configuration['form_options']);
+        }
+    }
+
     /**
      * @param $configuration
      * @param $path
@@ -187,6 +197,31 @@ class MapBuilder
             throw new ConfigurationException(
                 sprintf('Missing "type" declaration in "%s" element configuration', $path)
             );
+        }
+
+    }
+
+    /**
+     * @param $configuration
+     * @throws \FSi\Bundle\ResourceRepositoryBundle\Exception\ConfigurationException
+     */
+    protected function validateResourceConfiguration($configuration)
+    {
+        $validKeys = array(
+            'form_options',
+            'constraints'
+        );
+
+        foreach ($configuration as $key => $options) {
+            if ($key === 'type') {
+                continue;
+            }
+
+            if (!in_array($key, $validKeys)) {
+                throw new ConfigurationException(
+                    sprintf('"%s" is not a valid resource type option. Try one from: %s', $key, implode(', ', $validKeys))
+                );
+            }
         }
     }
 }
