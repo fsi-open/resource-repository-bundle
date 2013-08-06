@@ -1,0 +1,8 @@
+resources:
+    type: group
+    resource_text:
+        type: text
+        form_options:
+            attr:
+                class: class-name
+

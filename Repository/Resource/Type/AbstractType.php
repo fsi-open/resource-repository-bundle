@@ -25,12 +25,18 @@ abstract class AbstractType implements ResourceInterface
     protected $constraints;
 
     /**
+     * @var array
+     */
+    protected $formOptions;
+
+    /**
      * @param $name
      */
     public function __construct($name)
     {
         $this->name = $name;
         $this->constraints = array();
+        $this->formOptions = array();
     }
 
     /**
@@ -67,6 +73,15 @@ abstract class AbstractType implements ResourceInterface
     }
 
     /**
+     * @param array $options
+     * @return \FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\ResourceInterface
+     */
+    public function setFormOptions(array $options)
+    {
+        $this->formOptions = $options;
+    }
+
+    /**
      * {@inheritdoc}
      */
     abstract public function getResourceProperty();
@@ -87,6 +102,8 @@ abstract class AbstractType implements ResourceInterface
             'required' => false,
             'label' => false,
         );
+
+        $options = array_merge($options, $this->formOptions);
 
         if (count($this->constraints)) {
             $options = array_merge(

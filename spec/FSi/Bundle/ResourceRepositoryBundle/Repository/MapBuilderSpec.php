@@ -94,6 +94,29 @@ class MapBuilderSpec extends ObjectBehavior
         $this->getResource('resources.resource_text')->shouldBeLike($text);
     }
 
+    function it_should_create_resource_with_form_options()
+    {
+        $text = new TextType('resources.resource_text');
+        $text->setFormOptions(array(
+            'attr' => array(
+                'class' => 'class-name'
+            )
+        ));
+
+        $this->beConstructedWith(__DIR__ . '/../../../../Fixtures/simple_valid_map_with_form_options.yml', $this->resources);
+        $this->getResource('resources.resource_text')->shouldBeLike($text);
+    }
+
+    function it_should_throw_exception_when_resource_type_have_invalid_option()
+    {
+        $this->shouldThrow(
+            new ConfigurationException('"form-options" is not a valid resource type option. Try one from: form_options, constraints')
+        )->during('__construct', array(
+                __DIR__ . '/../../../../Fixtures/simple_valid_map_with_invalid_type_options.yml',
+                $this->resources
+            ));
+    }
+
     public function getMatchers()
     {
         return array(

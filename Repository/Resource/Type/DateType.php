@@ -9,9 +9,6 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
-use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Validator\Constraints\Email;
-
 class DateType extends AbstractType
 {
     /**
