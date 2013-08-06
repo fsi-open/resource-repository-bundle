@@ -35,6 +35,12 @@ interface ResourceInterface
     public function addConstraint(Constraint $constraint);
 
     /**
+     * @param array $options
+     * @return \FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\ResourceInterface
+     */
+    public function setFormOptions(array $options);
+
+    /**
      * @param FormFactoryInterface $factory
      * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormBuilder
      */

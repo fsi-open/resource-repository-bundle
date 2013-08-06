@@ -61,4 +61,24 @@ class NumberTypeSpec extends ObjectBehavior
 
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf('Symfony\Component\Form\FormBuilder');
     }
+
+    function it_return_form_builder_with_form_options_added_to_resource_definition(FormFactory $factory, FormBuilder $form)
+    {
+        $this->setFormOptions(array(
+            'attr' => array(
+                'class' => 'class-name'
+            )
+        ));
+
+        $factory->createNamedBuilder('numberValue', 'number', null, array(
+            'label' => false,
+            'required' => false,
+            'attr' => array(
+                'class' => 'class-name'
+            ),
+            'precision' => 4
+        ))->shouldBeCalled()->willReturn($form);
+
+        $this->getFormBuilder($factory)->shouldReturnAnInstanceOf('Symfony\Component\Form\FormBuilder');
+    }
 }
