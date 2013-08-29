@@ -2,12 +2,11 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xmlns:fsi="http://fsi.pl/schemas/orm/doctrine-extensions-mapping"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="FSi\Bundle\ResourceRepositoryBundle\Entity\Resource" table="resource"
-            repository-class="FSi\Bundle\ResourceRepositoryBundle\Entity\Repository\Resource">
+    <mapped-superclass name="FSi\Bundle\ResourceRepositoryBundle\Model\Resource"
+            repository-class="FSi\Bundle\ResourceRepositoryBundle\Entity\ResourceRepository">
         <id name="key" column="id" type="string" length="255" />
         <field name="textValue" column="text_value" type="text" nullable="true"/>
         <field name="datetimeValue" column="datetime_value" type="datetime" nullable="true"/>
@@ -16,9 +15,6 @@
         <field name="numberValue" column="number_value" type="decimal" precision="20" scale="4" nullable="true"/>
         <field name="integerValue" column="integer_value" type="integer" nullable="true"/>
         <field name="boolValue" column="bool_value" type="boolean" />
-        <field name="fileKeyValue" column="file_key_value" type="string" length="256" nullable="true">
-            <fsi:uploadable targetField="fileValue"/>
-        </field>
+    </mapped-superclass>
 
-    </entity>
 </doctrine-mapping>

@@ -1,24 +1,29 @@
 <?php
 
-namespace spec\FSi\Bundle\ResourceRepositoryBundle\Entity\Repository;
+namespace spec\FSi\Bundle\ResourceRepositoryBundle\Entity;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use FSi\Bundle\ResourceRepositoryBundle\Entity\Resource;
+use FSi\Bundle\ResourceRepositoryBundle\Model\Resource as BaseResource;
 use FSi\Bundle\ResourceRepositoryBundle\Exception\EntityRepositoryException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class ResourceSpec extends ObjectBehavior
+class Resource extends BaseResource
+{
+}
+
+class ResourceRepositorySpec extends ObjectBehavior
 {
     function let(EntityManager $em, ClassMetadata $class)
     {
+        $class->name = 'spec\\FSi\\Bundle\\ResourceRepositoryBundle\\Entity\\Resource';
         $this->beConstructedWith($em, $class);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('FSi\Bundle\ResourceRepositoryBundle\Entity\Repository\Resource');
+        $this->shouldHaveType('FSi\Bundle\ResourceRepositoryBundle\Entity\ResourceRepository');
     }
 
     function it_is_doctrine_entity_repository()

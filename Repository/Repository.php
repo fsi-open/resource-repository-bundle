@@ -10,7 +10,7 @@
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use FSi\Bundle\ResourceRepositoryBundle\Entity\Repository\Resource;
+use FSi\Bundle\ResourceRepositoryBundle\Entity\ResourceRepository;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class Repository
@@ -27,9 +27,9 @@ class Repository
 
     /**
      * @param MapBuilder $builder
-     * @param \FSi\Bundle\ResourceRepositoryBundle\Entity\Repository\Resource $er
+     * @param \FSi\Bundle\ResourceRepositoryBundle\Entity\ResourceRepository $er
      */
-    public function __construct(MapBuilder $builder, Resource $er)
+    public function __construct(MapBuilder $builder, ResourceRepository $er)
     {
         $this->builder = $builder;
         $this->er = $er;
