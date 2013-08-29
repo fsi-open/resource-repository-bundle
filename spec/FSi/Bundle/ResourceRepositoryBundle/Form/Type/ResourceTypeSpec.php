@@ -2,7 +2,7 @@
 
 namespace spec\FSi\Bundle\ResourceRepositoryBundle\Form\Type;
 
-use FSi\Bundle\ResourceRepositoryBundle\Entity\Resource;
+use FSi\Bundle\ResourceRepositoryBundle\Model\Resource;
 use FSi\Bundle\ResourceRepositoryBundle\Exception\ResourceFormTypeException;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType;
@@ -36,10 +36,6 @@ class ResourceTypeSpec extends ObjectBehavior
 
     function it_should_have_default_data_class_and_resource_key_option(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'FSi\Bundle\ResourceRepositoryBundle\Entity\Resource',
-        ))->shouldBeCalled();
-
         $resolver->setRequired(array(
             'resource_key'
         ))->shouldBeCalled();

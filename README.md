@@ -110,6 +110,29 @@ resources:
             NotBlank: ~
 ```
 
+### 4. Entity
+
+Create entity that extends from BaseResource mapped superclass.
+
+```php
+<?php
+
+namespace FSi\Bundle\DemoBundle\Entity;
+
+use FSi\Bundle\ResourceRepositoryBundle\Model\Resource as BaseResource;
+
+class Resource extends BaseResource
+{
+}
+```
+### 5. Update db schema
+
+Update your database schema
+
+```
+$ php app/console doctrine:schema:update --force
+```
+
 That's all folks :) 
 
 # Usage
