@@ -13,7 +13,7 @@ Add to composer.json following lines
 
 ```
     "require": {
-        "fsi/resource-repository-bundle": "0.9.*"
+        "fsi/resource-repository-bundle": "1.0.*@dev"
     },
 ```
 
@@ -48,7 +48,6 @@ Create resource map file. (This file is required and you need to create it even 
 
 ```
 # app/config/resource_map.yml
-
 ```
 
 By default resource map is loaded from ``app/config/resource_map.yml`` file but you can change
@@ -70,7 +69,6 @@ Lets assume you want to have all resources under ``resources`` group.
 
 resources:
     type: group
-
 ```
 
 Now when you have empty resource group its time to add at least one resource into it.
@@ -125,6 +123,7 @@ class Resource extends BaseResource
 {
 }
 ```
+
 ### 5. Update db schema
 
 Update your database schema
@@ -190,7 +189,7 @@ public fucntion indexAction()
 
 ```
 
-- Available resource types 
+- Available resource types  
 text  
 integer  
 number  
@@ -198,10 +197,8 @@ datetime
 date  
 time  
 bool  
-file  
 url  
-email  
-wysiwyg  
+email    
 
 # Adding new resource types.
 
@@ -211,8 +208,9 @@ First you need to create resource type class that implements ``ResourceInterface
 ```php
 <?php
 
-namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
+namespace FSi\Bundle\DemoBundle\Repository\Resource\Type;
 
+use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\AbstractType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Validator\Constraints\Email;
 
@@ -232,15 +230,15 @@ Here is a list of choices you have:
 - numberValue
 - integerValue
 - boolValue
-- fileValue
 
 For EmailType the best choice is probably ``textValue``
 
 ```php
 <?php
 
-namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
+namespace FSi\Bundle\DemoBundle\Repository\Resource\Type;
 
+use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\AbstractType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Validator\Constraints\Email;
 
@@ -262,8 +260,9 @@ form type.
 ```php
 <?php
 
-namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
+namespace FSi\Bundle\DemoBundle\Repository\Resource\Type;
 
+use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\AbstractType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Validator\Constraints\Email;
 
@@ -290,7 +289,7 @@ class EmailType extends AbstractType
 Now the last thing is to create service with ``resource.type`` tag and ``email`` alias.
 
 ```
-    <service id="fsi_resource_repository.resource.type.url" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\EmailType">
+    <service id="fsi_demo_bundle.resource.type.url" class="FSi\Bundle\DemoBundle\Repository\Resource\Type\EmailType">
         <tag name="resource.type" alias="email"/>
     </service>
 ```
