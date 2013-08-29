@@ -2,12 +2,16 @@
 
 namespace spec\FSi\Bundle\ResourceRepositoryBundle\Repository;
 
-use FSi\Bundle\ResourceRepositoryBundle\Entity\Repository\Resource as ResourceRepository;
-use FSi\Bundle\ResourceRepositoryBundle\Entity\Resource as ResourceEntity;
+use FSi\Bundle\ResourceRepositoryBundle\Entity\ResourceRepository;
+use FSi\Bundle\ResourceRepositoryBundle\Model\Resource;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+
+class ResourceEntity extends Resource
+{
+}
 
 class RepositorySpec extends ObjectBehavior
 {

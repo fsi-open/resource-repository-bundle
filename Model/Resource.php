@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-namespace FSi\Bundle\ResourceRepositoryBundle\Entity;
+namespace FSi\Bundle\ResourceRepositoryBundle\Model;
 
-class Resource
+class Resource implements ResourceInterface
 {
     /**
      * @var string
@@ -51,25 +51,13 @@ class Resource
      */
     private $boolValue;
 
-    /**
-     * @var string
-     */
-    private $fileKeyValue;
-
-    /**
-     * @var \FSi\DoctrineExtensions\Uploadable\File|null
-     */
-    private $fileValue;
-
     public function __construct()
     {
         $this->boolValue = false;
     }
 
     /**
-     * @param string $key
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
+     * {@inheritdoc}
      */
     public function setKey($key)
     {
@@ -79,7 +67,7 @@ class Resource
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getKey()
     {
@@ -87,9 +75,7 @@ class Resource
     }
 
     /**
-     * @param string $textValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
+     * {@inheritdoc}
      */
     public function setTextValue($textValue)
     {
@@ -99,7 +85,7 @@ class Resource
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getTextValue()
     {
@@ -107,9 +93,7 @@ class Resource
     }
 
     /**
-     * @param mixed $dateValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
+     * {@inheritdoc}
      */
     public function setDateValue($dateValue)
     {
@@ -119,7 +103,7 @@ class Resource
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getDateValue()
     {
@@ -127,9 +111,7 @@ class Resource
     }
 
     /**
-     * @param \DateTime $datetimeValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
+     * {@inheritdoc}
      */
     public function setDatetimeValue($datetimeValue)
     {
@@ -139,7 +121,7 @@ class Resource
     }
 
     /**
-     * @return \DateTime
+     * {@inheritdoc}
      */
     public function getDatetimeValue()
     {
@@ -147,9 +129,7 @@ class Resource
     }
 
     /**
-     * @param mixed $timeValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
+     * {@inheritdoc}
      */
     public function setTimeValue($timeValue)
     {
@@ -159,7 +139,7 @@ class Resource
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getTimeValue()
     {
@@ -167,9 +147,7 @@ class Resource
     }
 
     /**
-     * @param mixed $numberValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
+     * {@inheritdoc}
      */
     public function setNumberValue($numberValue)
     {
@@ -179,7 +157,7 @@ class Resource
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getNumberValue()
     {
@@ -187,9 +165,7 @@ class Resource
     }
 
     /**
-     * @param int $integerValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
+     * {@inheritdoc}
      */
     public function setIntegerValue($integerValue)
     {
@@ -199,7 +175,7 @@ class Resource
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getIntegerValue()
     {
@@ -207,9 +183,7 @@ class Resource
     }
 
     /**
-     * @param boolean $boolValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
+     * {@inheritdoc}
      */
     public function setBoolValue($boolValue)
     {
@@ -219,62 +193,10 @@ class Resource
     }
 
     /**
-     * @return boolean
+     * {@inheritdoc}
      */
     public function getBoolValue()
     {
         return $this->boolValue;
-    }
-
-    /**
-     * @param \FSi\DoctrineExtensions\Uploadable\File|null $file
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
-     */
-    public function setFileValue($file)
-    {
-        if (!empty($file)) {
-            $this->fileValue = $file;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return \FSi\DoctrineExtensions\Uploadable\File|null
-     */
-    public function getFileValue()
-    {
-        return $this->fileValue;
-    }
-
-    /**
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
-     */
-    public function removeFileValue()
-    {
-        $this->fileValue = null;
-
-        return $this;
-    }
-
-    /**
-     * @param string $fileKeyValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Entity\Resource
-     */
-    public function setFileKeyValue($fileKeyValue)
-    {
-        $this->fileKeyValue = $fileKeyValue;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFileKeyValue()
-    {
-        return $this->fileKeyValue;
     }
 }

@@ -7,27 +7,27 @@
  * file that was distributed with this source code.
  */
 
-namespace FSi\Bundle\ResourceRepositoryBundle\Entity\Repository;
+namespace FSi\Bundle\ResourceRepositoryBundle\Entity;
 
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityRepository;
-use FSi\Bundle\ResourceRepositoryBundle\Entity\Resource as ResourceEntity;
 use FSi\Bundle\ResourceRepositoryBundle\Exception\EntityRepositoryException;
 
-class Resource extends EntityRepository
+class ResourceRepository extends EntityRepository
 {
     /**
      * @param mixed $id
      * @param int $lockMode
      * @param null $lockVersion
-     * @return ResourceEntity
+     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceInterface
      */
     public function find($id, $lockMode = LockMode::NONE, $lockVersion = null)
     {
         $resource = parent::find($id, $lockMode, $lockVersion);
 
         if (!isset($resource)) {
-            $resource = new ResourceEntity();
+            $resourceClass = $this->getClassName();
+            $resource = new $resourceClass();
             $resource->setKey($id);
         }
 
@@ -36,7 +36,7 @@ class Resource extends EntityRepository
 
     /**
      * @param $key
-     * @return ResourceEntity
+     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceInterface
      */
     public function get($key)
     {

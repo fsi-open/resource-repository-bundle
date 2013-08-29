@@ -2,7 +2,7 @@
 
 namespace spec\FSi\Bundle\ResourceRepositoryBundle\Form\EventListener;
 
-use FSi\Bundle\ResourceRepositoryBundle\Entity\Resource;
+use FSi\Bundle\ResourceRepositoryBundle\Model\Resource;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\Form;
@@ -36,7 +36,7 @@ class AddResourceKeySubscriberSpec extends ObjectBehavior
         $event->getForm()->shouldBeCalled()->willReturn($form);
         $event->getData()->shouldBeCalled()->willReturn($entity);
 
-        $event->setData(Argument::type('FSi\Bundle\ResourceRepositoryBundle\Entity\Resource'))->shouldBeCalled();
+        $event->setData(Argument::type('FSi\Bundle\ResourceRepositoryBundle\Model\ResourceInterface'))->shouldBeCalled();
         $this->postSubmit($event);
     }
 }
