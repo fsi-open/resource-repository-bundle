@@ -41,9 +41,6 @@
         <service id="fsi_resource_repository.resource.type.email" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\EmailType">
             <tag name="resource.type" alias="email"/>
         </service>
-        <service id="fsi_resource_repository.resource.type.wysiwyg" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\WysiwygType">
-            <tag name="resource.type" alias="wysiwyg"/>
-        </service>
         <service id="fsi_resource_repository.resource.type.datetime" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\DatetimeType">
             <tag name="resource.type" alias="datetime"/>
         </service>
@@ -61,9 +58,6 @@
         </service>
         <service id="fsi_resource_repository.resource.type.bool" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\BoolType">
             <tag name="resource.type" alias="bool"/>
-        </service>
-        <service id="fsi_resource_repository.resource.type.file" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\FileType">
-            <tag name="resource.type" alias="file"/>
         </service>
 
         <!-- Twig Extension -->
