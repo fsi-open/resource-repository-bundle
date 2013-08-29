@@ -10,9 +10,6 @@
             "email": "norbert@fsi.pl"
         }
     ],
-    "repositories": [
-        { "type": "composer", "url": "http://git.fsi.pl" }
-    ],
     "require": {
         "php": ">=5.3.3",
         "twig/twig": "1.13.*",
