@@ -30,6 +30,11 @@ class FSIResourceRepositoryExtensionSpec extends ObjectBehavior
         $builder->getParameterBag()->shouldBeCalled()->willReturn($parameterBag);
 
         $builder->setParameter('fsi_resource_repository.map_path', '%kernel.root_dir%/config/resource_map.yml')->shouldBeCalled();
-        $this->load(array(), $builder);
+        $builder->setParameter('fsi_resource_repository.resource_class', 'FSi\DemoBundle\Entity\Resource')->shouldBeCalled();
+        $this->load(array(
+            0 => array(
+                'resource_class' => 'FSi\DemoBundle\Entity\Resource'
+            )
+        ), $builder);
     }
 }
