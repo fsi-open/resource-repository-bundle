@@ -118,9 +118,20 @@ Create entity that extends from BaseResource mapped superclass.
 namespace FSi\Bundle\DemoBundle\Entity;
 
 use FSi\Bundle\ResourceRepositoryBundle\Model\Resource as BaseResource;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity(repositoryClass="FSi\Bundle\ResourceRepositoryBundle\Entity\ResourceRepository")
+ * @ORM\Table(name="fsi_resource")
+ */
 class Resource extends BaseResource
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
 }
 ```
 
