@@ -143,6 +143,15 @@ Update your database schema
 $ php app/console doctrine:schema:update --force
 ```
 
+### 6. Application config
+
+```
+# app/config/config.yml
+
+fsi_resource_repository:
+    resource_class: FSi\Bundle\DemoBundle\Entity\Resource
+```
+
 That's all folks :) 
 
 # Usage

@@ -7,7 +7,7 @@
     <parameters>
         <parameter key="fsi_resource_repository.map_builder.class">FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder</parameter>
         <parameter key="fsi_resource_repository.repository.class">FSi\Bundle\ResourceRepositoryBundle\Repository\Repository</parameter>
-        <parameter key="fsi_resource_repository.entity.repository.class">FSi\Bundle\ResourceRepositoryBundle\Entity\Repository\Resource</parameter>
+        <parameter key="fsi_resource_repository.entity.repository.class">FSi\Bundle\ResourceRepositoryBundle\Entity\ResourceRepository</parameter>
         <parameter key="fsi_resource_repository.twig.extension.resource_repository.class">FSi\Bundle\ResourceRepositoryBundle\Twig\Extension\ResourceRepository</parameter>
         <parameter key="fsi_resource_repository.form.type.resource.class">FSi\Bundle\ResourceRepositoryBundle\Form\Type\ResourceType</parameter>
         <parameter key="fsi_resource_repository.form.type.resource_collection.class">FSi\Bundle\ResourceRepositoryBundle\Form\Type\ResourceCollectionType</parameter>
@@ -18,7 +18,7 @@
                  factory-service="doctrine.orm.default_entity_manager"
                  factory-method="getRepository"
                  class="%fsi_resource_repository.entity.repository.class%">
-            <argument>FSiResourceRepositoryBundle:Resource</argument>
+            <argument>%fsi_resource_repository.resource_class%</argument>
         </service>
 
         <service id="fsi_resource_repository.map_builder" class="%fsi_resource_repository.map_builder.class%">
@@ -34,6 +34,9 @@
         <!-- Resouce Types -->
         <service id="fsi_resource_repository.resource.type.text" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType">
             <tag name="resource.type" alias="text"/>
+        </service>
+        <service id="fsi_resource_repository.resource.type.textarea" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextareaType">
+            <tag name="resource.type" alias="textarea"/>
         </service>
         <service id="fsi_resource_repository.resource.type.url" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\UrlType">
             <tag name="resource.type" alias="url"/>
