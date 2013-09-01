@@ -23,8 +23,8 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('fsi_resource_repository');
 
         $rootNode->children()
-                ->scalarNode('map_path')->defaultValue('%kernel.root_dir%/config/resource_map.yml')
-            ->end();
+            ->scalarNode('map_path')->defaultValue('%kernel.root_dir%/config/resource_map.yml')->end()
+            ->scalarNode('resource_class')->isRequired()->cannotBeEmpty()->end();
 
         return $treeBuilder;
     }
