@@ -30,8 +30,6 @@ class FSiResourceRepositoryBundleSpec extends ObjectBehavior
         $container->addCompilerPass(Argument::type('FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourcePass'))
             ->shouldBeCalled();
 
-        $container->addCompilerPass(Argument::type('Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass'))
-            ->shouldBeCalled();
 
         $this->build($container);
     }

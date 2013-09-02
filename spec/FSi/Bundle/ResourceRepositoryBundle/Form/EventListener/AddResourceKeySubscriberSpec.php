@@ -26,6 +26,7 @@ class AddResourceKeySubscriberSpec extends ObjectBehavior
 
     function it_set_key_taken_from_form_to_data_entity(FormEvent $event, Form $form, Resource $entity, FormConfigInterface $config)
     {
+        $form->getName()->shouldBeCalled()->willReturn('resource');
         $form->getConfig()->willReturn($config);
         $config->getOptions()->willReturn(array(
             'resource_key' => 'resources.resource_a'
