@@ -16,7 +16,7 @@ class ResourceTypeSpec extends ObjectBehavior
 {
     function let(MapBuilder $map)
     {
-        $this->beConstructedWith($map);
+        $this->beConstructedWith($map, 'FSi\Bundle\DemoBundle\Entity\Resource');
     }
 
     function it_is_initializable()
@@ -36,6 +36,10 @@ class ResourceTypeSpec extends ObjectBehavior
 
     function it_should_have_default_data_class_and_resource_key_option(OptionsResolver $resolver)
     {
+        $resolver->setDefaults(array(
+            'data_class' => 'FSi\Bundle\DemoBundle\Entity\Resource'
+        ))->shouldBeCalled();
+
         $resolver->setRequired(array(
             'resource_key'
         ))->shouldBeCalled();
