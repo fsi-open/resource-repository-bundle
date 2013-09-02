@@ -115,10 +115,11 @@ Create entity that extends from BaseResource mapped superclass.
 ```php
 <?php
 
-namespace FSi\Bundle\DemoBundle\Entity;
+namespace Omino\Bundle\CoreBundle\Entity;
 
-use FSi\Bundle\ResourceRepositoryBundle\Model\Resource as BaseResource;
 use Doctrine\ORM\Mapping as ORM;
+use FSi\DoctrineExtensions\Uploadable\Mapping\Annotation as FSi;
+use FSi\Bundle\ResourceRepositoryBundle\Model\Resource as BaseResource;
 
 /**
  * @ORM\Entity(repositoryClass="FSi\Bundle\ResourceRepositoryBundle\Entity\ResourceRepository")
@@ -126,12 +127,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Resource extends BaseResource
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
 }
 ```
 

@@ -9,6 +9,7 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle;
 
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourcePass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\TwigFormPass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\FSIResourceRepositoryExtension;
@@ -24,8 +25,13 @@ class FSiResourceRepositoryBundle extends Bundle
     {
         $container->addCompilerPass(new TwigFormPass());
         $container->addCompilerPass(new ResourcePass());
-    }
 
+        $mappings = array(
+            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'FSi\Bundle\ResourceRepositoryBundle\Model',
+        );
+
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('doctrine.orm.entity_manager')));
+    }
 
     public function getContainerExtension()
     {
