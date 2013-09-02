@@ -25,15 +25,12 @@ class AddResourceKeySubscriber implements EventSubscriberInterface
     {
         $data = $event->getData();
         $form = $event->getForm();
+        $options = $form->getConfig()->getOptions();
 
-        if ($form->getName() === 'resource') {
-            $options = $form->getConfig()->getOptions();
+        if ($data instanceof ResourceInterface && array_key_exists('resource_key', $options)) {
+            $data->setKey($options['resource_key']);
 
-            if ($data instanceof ResourceInterface && array_key_exists('resource_key', $options)) {
-                $data->setKey($options['resource_key']);
-
-                $event->setData($data);
-            }
+            $event->setData($data);
         }
     }
 }

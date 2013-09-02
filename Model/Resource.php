@@ -14,42 +14,42 @@ class Resource implements ResourceInterface
     /**
      * @var string
      */
-    private $key;
+    protected $key;
 
     /**
      * @var string
      */
-    private $textValue;
+    protected $textValue;
 
     /**
      * @var \DateTime
      */
-    private $datetimeValue;
+    protected $datetimeValue;
 
     /**
      * @var
      */
-    private $dateValue;
+    protected $dateValue;
 
     /**
      * @var
      */
-    private $timeValue;
+    protected $timeValue;
 
     /**
      * @var
      */
-    private $numberValue;
+    protected $numberValue;
 
     /**
      * @var int
      */
-    private $integerValue;
+    protected $integerValue;
 
     /**
      * @var bool
      */
-    private $boolValue;
+    protected $boolValue;
 
     public function __construct()
     {
