@@ -24,11 +24,17 @@ class ResourceType extends AbstractType
     protected $mapBuilder;
 
     /**
+     * @var string
+     */
+    protected $resourceClass;
+
+    /**
      * @param MapBuilder $map
      */
-    function __construct(MapBuilder $mapBuilder)
+    function __construct(MapBuilder $mapBuilder, $resourceClass)
     {
         $this->mapBuilder = $mapBuilder;
+        $this->resourceClass = $resourceClass;
     }
 
     /**
@@ -44,6 +50,10 @@ class ResourceType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        $resolver->setDefaults(array(
+            'data_class' => $this->resourceClass
+        ));
+
         $resolver->setRequired(array(
             'resource_key'
         ));
