@@ -157,7 +157,7 @@ First of all you need to remember few simple rules
 
 ```php
 
-public fucntion indexAction()
+public function indexAction()
 {
     $this->get('fsi_resource_repository.repository')->get('resources.resource_text');
 }
