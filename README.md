@@ -115,7 +115,7 @@ Create entity that extends from BaseResource mapped superclass.
 ```php
 <?php
 
-namespace Omino\Bundle\CoreBundle\Entity;
+namespace FSi\Bundle\DemoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FSi\DoctrineExtensions\Uploadable\Mapping\Annotation as FSi;
