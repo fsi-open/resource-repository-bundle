@@ -7,8 +7,8 @@ templates or in controller. Resources are stored in database but you should not 
 Resource is accessible only through ``Resource\Repository`` object that is registered as Symfony2 service.
 
 Build Status:
-[![Build Status](https://travis-ci.org/fsi-open/resource-repository-bundle.png?branch=master)](https://travis-ci.org/fsi-open/resource-repository-bundle) - Master
-[![Build Status](https://travis-ci.org/fsi-open/resource-repository-bundle.png?branch=1.0)](https://travis-ci.org/fsi-open/resource-repository-bundle) - 1.0
+[![Build Status](https://travis-ci.org/fsi-open/resource-repository-bundle.png?branch=master)](https://travis-ci.org/fsi-open/resource-repository-bundle) - Master  
+[![Build Status](https://travis-ci.org/fsi-open/resource-repository-bundle.png?branch=1.0)](https://travis-ci.org/fsi-open/resource-repository-bundle) - 1.0  
 
 [![Latest Stable Version](https://poser.pugx.org/fsi/resource-repository-bundle/v/stable.png)](https://packagist.org/packages/fsi/resource-repository-bundle)
 
