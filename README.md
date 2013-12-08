@@ -6,7 +6,7 @@ Then you should use ResourceRepositoryBundle that allows you to define resources
 templates or in controller. Resources are stored in database but you should not use them as normal Entity.
 Resource is accessible only through ``Resource\Repository`` object that is registered as Symfony2 service.
 
-Build Status:
+Build Status:  
 [![Build Status](https://travis-ci.org/fsi-open/resource-repository-bundle.png?branch=master)](https://travis-ci.org/fsi-open/resource-repository-bundle) - Master  
 [![Build Status](https://travis-ci.org/fsi-open/resource-repository-bundle.png?branch=1.0)](https://travis-ci.org/fsi-open/resource-repository-bundle) - 1.0  
 
