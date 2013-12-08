@@ -4,7 +4,11 @@ First of all you need to remember few simple rules
 
 ## Get resource object in controller
 
-To get resource object you should use only ``fsi_resource_repository.repository`` service, like in following example:
+To get resource content you should use only ``fsi_resource_repository.repository`` service,
+like in following example:
+
+> **Important** - fsi_resource_repository.repository is not a Doctrine ORM repository!
+> It's instance of ``FSi\Bundle\ResourceRepositoryBundle\Repository\Repository`` class
 
 ```php
 
@@ -23,8 +27,7 @@ To modify resource/resources you should use ``resource`` form type.
 // Single resource editor
 public function indexAction(Request $request)
 {
-    $resource = $this->getDoctrine()
-        ->getRepository('FSiResourceRepositoryBundle:Resource')
+    $resource = $this->get('fsi_resource_repository.entity.repository')
         ->get('resources.resource_text');
 
     $form = $this->createForm('resource', $resource, array(
@@ -58,5 +61,3 @@ Display resources in Twig you should use ``get_resource`` and ``has_resource`` f
     Text content: {{ get_resource('resources.resource_text') }}
 {% endif %}
 ```
-
-
