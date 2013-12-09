@@ -23,8 +23,11 @@ class FSiResourceRepositoryBundleSpec extends ObjectBehavior
         $this->getContainerExtension()->shouldReturnAnInstanceOf('FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\FSIResourceRepositoryExtension');
     }
 
-    function it_add_complier_pass_during_build(ContainerBuilder $container)
+    function it_add_compiler_pass_during_build(ContainerBuilder $container)
     {
+        $container->hasExtension('fsi_doctrine_extensions')->shouldBeCalled()->willReturn(true);
+        $container->addCompilerPass(Argument::type('FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceFSiFilePass'))
+            ->shouldBeCalled();
         $container->addCompilerPass(Argument::type('FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\TwigFormPass'))
             ->shouldBeCalled();
         $container->addCompilerPass(Argument::type('FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourcePass'))
