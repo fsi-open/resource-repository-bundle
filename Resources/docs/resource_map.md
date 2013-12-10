@@ -47,6 +47,7 @@ Available resource types
 * ``bool``
 * ``url``
 * ``email``
+* [fsi_file (not available default)](file_upload.md)
 
 [Instruction how to add new resource type](adding_new_resource_type.md)
 
