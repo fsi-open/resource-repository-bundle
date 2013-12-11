@@ -14,8 +14,8 @@ Add to composer.json following lines
 ```
 
 ## 2. Application Kernel
-
-Register bundle in AppKernel
+ 
+Register bundle in AppKernel  
 **IMPORTANT!!** make sure that ``FSi\Bundle\FormExtensionsBundle\FSiFormExtensionsBundle()`` is registered
 **before** ``FSi\Bundle\ResourceRepositoryBundle\FSiResourceRepositoryBundle()``. In other way you will not be able
 to use fsi_ckeditor resource type.
