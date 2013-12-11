@@ -14,7 +14,7 @@ Add to composer.json following lines
 
 ## 2. Application Kernel
 
-Register bundle in AppKernel
+Register bundle in AppKernel  
 **IMPORTANT!!** make sure that ``FSi\Bundle\DoctrineExtensionsBundle\FSiDoctrineExtensionsBundle()`` is registered
 **before** ``FSi\Bundle\ResourceRepositoryBundle\FSiResourceRepositoryBundle()``. In other way you will not be able
 to use file resource type.
