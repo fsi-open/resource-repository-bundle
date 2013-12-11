@@ -48,6 +48,7 @@ Available resource types
 * ``url``
 * ``email``
 * [fsi_file (not available default)](file_upload.md)
+* [fsi_ckeditor (not available default)](fsi_ckeditor.md)
 
 [Instruction how to add new resource type](adding_new_resource_type.md)
 
