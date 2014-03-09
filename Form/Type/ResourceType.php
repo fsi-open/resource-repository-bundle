@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ResourceType extends AbstractType
 {
     /**
-     * @var \FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder
+     * @var MapBuilder
      */
     protected $mapBuilder;
 
@@ -29,7 +29,8 @@ class ResourceType extends AbstractType
     protected $resourceClass;
 
     /**
-     * @param MapBuilder $map
+     * @param MapBuilder $mapBuilder
+     * @param $resourceClass
      */
     function __construct(MapBuilder $mapBuilder, $resourceClass)
     {
@@ -38,7 +39,7 @@ class ResourceType extends AbstractType
     }
 
     /**
-     * @inheritdoc}
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -46,7 +47,7 @@ class ResourceType extends AbstractType
     }
 
     /**
-     * @inheritdoc}
+     * {@inheritdoc}
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
@@ -59,6 +60,9 @@ class ResourceType extends AbstractType
         ));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if (!$this->mapBuilder->hasResource($options['resource_key'])) {

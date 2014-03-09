@@ -30,6 +30,11 @@ abstract class AbstractType implements ResourceInterface
     protected $formOptions;
 
     /**
+     * @var null|\Symfony\Component\Form\FormBuilderInterface
+     */
+    protected $formBuilder;
+
+    /**
      * @param $name
      */
     public function __construct($name)
@@ -52,8 +57,8 @@ abstract class AbstractType implements ResourceInterface
      */
     public function getFormBuilder(FormFactoryInterface $factory)
     {
-        if (!isset($this->formBulder)) {
-            $this->formBulder = $factory->createNamedBuilder(
+        if (!isset($this->formBuilder)) {
+            $this->formBuilder = $factory->createNamedBuilder(
                 $this->getResourceProperty(),
                 $this->getFormType(),
                 null,
@@ -61,7 +66,7 @@ abstract class AbstractType implements ResourceInterface
             );
         }
 
-        return $this->formBulder;
+        return $this->formBuilder;
     }
 
     /**
