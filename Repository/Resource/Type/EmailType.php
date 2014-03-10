@@ -14,10 +14,8 @@ use Symfony\Component\Validator\Constraints\Email;
 class EmailType extends AbstractType
 {
     /**
-     * @var \Symfony\Component\Form\FormBuilder
+     * @param $name
      */
-    protected $formBulder;
-
     public function __construct($name)
     {
         parent::__construct($name);

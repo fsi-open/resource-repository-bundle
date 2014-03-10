@@ -5,7 +5,8 @@ Add to composer.json following lines
 
 ```
 "require": {
-    "doctrine/doctrine-bundle": "~1.2@dev",
+    "doctrine/doctrine-bundle": "dev-master",
+    "doctrine/doctrine-cache-bundle": "dev-master"
     "fsi/resource-repository-bundle": "1.0.*"
 }
 ```

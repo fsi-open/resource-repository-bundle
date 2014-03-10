@@ -14,10 +14,8 @@ use Symfony\Component\Validator\Constraints\Url;
 class UrlType extends AbstractType
 {
     /**
-     * @var \Symfony\Component\Form\FormBuilder
+     * @param string $name
      */
-    protected $formBulder;
-
     public function __construct($name)
     {
         parent::__construct($name);

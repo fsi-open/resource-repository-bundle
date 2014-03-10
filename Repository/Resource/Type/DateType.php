@@ -12,11 +12,6 @@ namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 class DateType extends AbstractType
 {
     /**
-     * @var \Symfony\Component\Form\FormBuilder
-     */
-    protected $formBulder;
-
-    /**
      * {@inheritdoc}
      */
     public function getResourceProperty()

@@ -12,6 +12,8 @@ Build Status:
 
 [![Latest Stable Version](https://poser.pugx.org/fsi/resource-repository-bundle/v/stable.png)](https://packagist.org/packages/fsi/resource-repository-bundle)
 
+Code quality:
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/fsi-open/resource-repository-bundle/badges/quality-score.png?s=d40261524da1024a92e98b410d97a6568745b06a)](https://scrutinizer-ci.com/g/fsi-open/resource-repository-bundle/)
 
 Documentation:
 
