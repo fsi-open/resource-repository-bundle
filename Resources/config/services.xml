@@ -7,7 +7,7 @@
     <parameters>
         <parameter key="fsi_resource_repository.map_builder.class">FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder</parameter>
         <parameter key="fsi_resource_repository.repository.class">FSi\Bundle\ResourceRepositoryBundle\Repository\Repository</parameter>
-        <parameter key="fsi_resource_repository.entity.repository.class">FSi\Bundle\ResourceRepositoryBundle\Entity\ResourceRepository</parameter>
+        <parameter key="fsi_resource_repository.entity.repository.class">FSi\Bundle\ResourceRepositoryBundle\Doctrine\ResourceRepository</parameter>
         <parameter key="fsi_resource_repository.twig.extension.resource_repository.class">FSi\Bundle\ResourceRepositoryBundle\Twig\Extension\ResourceRepository</parameter>
         <parameter key="fsi_resource_repository.form.type.resource.class">FSi\Bundle\ResourceRepositoryBundle\Form\Type\ResourceType</parameter>
         <parameter key="fsi_resource_repository.form.type.resource_collection.class">FSi\Bundle\ResourceRepositoryBundle\Form\Type\ResourceCollectionType</parameter>
