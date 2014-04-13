@@ -36,7 +36,7 @@ class AddResourceKeySubscriberSpec extends ObjectBehavior
         $event->getForm()->shouldBeCalled()->willReturn($form);
         $event->getData()->shouldBeCalled()->willReturn($entity);
 
-        $event->setData(Argument::type('FSi\Bundle\ResourceRepositoryBundle\Model\ResourceInterface'))->shouldBeCalled();
+        $event->setData(Argument::type('FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue'))->shouldBeCalled();
         $this->postSubmit($event);
     }
 }
