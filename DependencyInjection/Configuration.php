@@ -26,12 +26,12 @@ class Configuration implements ConfigurationInterface
 
         $rootNode->children()
             ->scalarNode('db_driver')
+                ->defaultValue('orm')
                 ->validate()
                     ->ifNotInArray($supportedDrivers)
                     ->thenInvalid('The driver %s is not supported. Please choose one of ' . implode(', ', $supportedDrivers))
                 ->end()
                 ->cannotBeOverwritten()
-                ->isRequired()
                 ->cannotBeEmpty()
             ->end()
             ->scalarNode('map_path')->defaultValue('%kernel.root_dir%/config/resource_map.yml')->end()

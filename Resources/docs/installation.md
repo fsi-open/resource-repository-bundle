@@ -61,6 +61,9 @@ fsi_resource_repository:
     resource_class: FSi\Bundle\DemoBundle\Entity\Resource
 ```
 
+**Heads up!** Although ``db_driver`` option has its default value ``orm``, you should put it in your
+config file to prevent problems with future releases of fsi/resource-repository-bundle.
+
 ### 5. Update db schema
 
 Update your database schema
