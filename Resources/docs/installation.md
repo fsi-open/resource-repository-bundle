@@ -57,8 +57,12 @@ class Resource extends BaseResource
 # app/config/config.yml
 
 fsi_resource_repository:
+    db_driver: orm
     resource_class: FSi\Bundle\DemoBundle\Entity\Resource
 ```
+
+**Heads up!** Although ``db_driver`` option has its default value ``orm``, you should put it in your
+config file to prevent problems with future releases of fsi/resource-repository-bundle.
 
 ### 5. Update db schema
 

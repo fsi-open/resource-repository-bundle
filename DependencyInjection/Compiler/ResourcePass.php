@@ -30,6 +30,6 @@ class ResourcePass implements CompilerPassInterface
             $resources[$tag[0]['alias']] = $resourceService->getClass();
         }
 
-        $container->setParameter('fsi_resource_repository.resource_types', $resources);
+        $container->setParameter('fsi_resource_repository.resource.types', $resources);
     }
 }

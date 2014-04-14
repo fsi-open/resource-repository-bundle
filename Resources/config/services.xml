@@ -5,31 +5,27 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="fsi_resource_repository.map_builder.class">FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder</parameter>
-        <parameter key="fsi_resource_repository.repository.class">FSi\Bundle\ResourceRepositoryBundle\Repository\Repository</parameter>
-        <parameter key="fsi_resource_repository.entity.repository.class">FSi\Bundle\ResourceRepositoryBundle\Doctrine\ResourceRepository</parameter>
+        <parameter key="fsi_resource_repository.resource.map_builder.class">FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder</parameter>
+        <parameter key="fsi_resource_repository.resource.repository.class">FSi\Bundle\ResourceRepositoryBundle\Repository\Repository</parameter>
         <parameter key="fsi_resource_repository.twig.extension.resource_repository.class">FSi\Bundle\ResourceRepositoryBundle\Twig\Extension\ResourceRepository</parameter>
         <parameter key="fsi_resource_repository.form.type.resource.class">FSi\Bundle\ResourceRepositoryBundle\Form\Type\ResourceType</parameter>
         <parameter key="fsi_resource_repository.form.type.resource_collection.class">FSi\Bundle\ResourceRepositoryBundle\Form\Type\ResourceCollectionType</parameter>
     </parameters>
 
     <services>
-        <service id="fsi_resource_repository.entity.repository"
-                 factory-service="doctrine.orm.default_entity_manager"
-                 factory-method="getRepository"
-                 class="%fsi_resource_repository.entity.repository.class%">
-            <argument>%fsi_resource_repository.resource_class%</argument>
+        <service id="fsi_resource_repository.resource.map_builder" class="%fsi_resource_repository.resource.map_builder.class%">
+            <argument>%fsi_resource_repository.resource.map_path%</argument>
+            <argument>%fsi_resource_repository.resource.types%</argument>
         </service>
 
-        <service id="fsi_resource_repository.map_builder" class="%fsi_resource_repository.map_builder.class%">
-            <argument>%fsi_resource_repository.map_path%</argument>
-            <argument>%fsi_resource_repository.resource_types%</argument>
-        </service>
+        <service id="fsi_resource_repository.map_builder" alias="fsi_resource_repository.resource.map_builder" />
 
-        <service id="fsi_resource_repository.repository" class="%fsi_resource_repository.repository.class%">
+        <service id="fsi_resource_repository.resource.repository" class="%fsi_resource_repository.resource.repository.class%">
             <argument type="service" id="fsi_resource_repository.map_builder" />
             <argument type="service" id="fsi_resource_repository.entity.repository"/>
         </service>
+
+        <service id="fsi_resource_repository.repository" alias="fsi_resource_repository.resource.repository" />
 
         <!-- Resouce Types -->
         <service id="fsi_resource_repository.resource.type.text" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType">
@@ -66,14 +62,14 @@
         <!-- Twig Extension -->
         <service id="fsi_resource_repository.twig.extension.resource_repository" class="%fsi_resource_repository.twig.extension.resource_repository.class%">
             <tag name="twig.extension" />
-            <argument type="service" id="fsi_resource_repository.repository"></argument>
+            <argument type="service" id="fsi_resource_repository.resource.repository"></argument>
         </service>
 
         <!-- Symfony Form Types -->
         <service id="fsi_resource_repository.form.type.resource" class="%fsi_resource_repository.form.type.resource.class%">
             <tag name="form.type" alias="resource" />
-            <argument type="service" id="fsi_resource_repository.map_builder"/>
-            <argument>%fsi_resource_repository.resource_class%</argument>
+            <argument type="service" id="fsi_resource_repository.resource.map_builder"/>
+            <argument>%fsi_resource_repository.resource.value.class%</argument>
         </service>
     </services>
 </container>

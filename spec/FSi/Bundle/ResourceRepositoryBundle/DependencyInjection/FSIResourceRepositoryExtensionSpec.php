@@ -29,10 +29,16 @@ class FSIResourceRepositoryExtensionSpec extends ObjectBehavior
         $builder->setDefinition(Argument::type('string'), Argument::type('Symfony\Component\DependencyInjection\Definition'))->shouldBeCalled();
         $builder->getParameterBag()->shouldBeCalled()->willReturn($parameterBag);
 
-        $builder->setParameter('fsi_resource_repository.map_path', '%kernel.root_dir%/config/resource_map.yml')->shouldBeCalled();
-        $builder->setParameter('fsi_resource_repository.resource_class', 'FSi\DemoBundle\Entity\Resource')->shouldBeCalled();
+        $builder->setParameter('fsi_resource_repository.resource.map_path', '%kernel.root_dir%/config/resource_map.yml')->shouldBeCalled();
+        $builder->setParameter('fsi_resource_repository.resource.value.class', 'FSi\DemoBundle\Entity\Resource')->shouldBeCalled();
+
+        $builder->setAlias('fsi_resource_repository.map_builder', Argument::type('Symfony\Component\DependencyInjection\Alias'))->shouldBeCalled();
+        $builder->setAlias('fsi_resource_repository.entity.repository', Argument::type('Symfony\Component\DependencyInjection\Alias'))->shouldBeCalled();
+        $builder->setAlias('fsi_resource_repository.repository', Argument::type('Symfony\Component\DependencyInjection\Alias'))->shouldBeCalled();
+
         $this->load(array(
             0 => array(
+                'db_driver' => 'orm',
                 'resource_class' => 'FSi\DemoBundle\Entity\Resource'
             )
         ), $builder);
