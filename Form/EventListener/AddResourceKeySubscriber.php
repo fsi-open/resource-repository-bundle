@@ -11,7 +11,7 @@ namespace FSi\Bundle\ResourceRepositoryBundle\Form\EventListener;
 
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceInterface;
+use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class AddResourceKeySubscriber implements EventSubscriberInterface
@@ -27,7 +27,7 @@ class AddResourceKeySubscriber implements EventSubscriberInterface
         $form = $event->getForm();
         $options = $form->getConfig()->getOptions();
 
-        if ($data instanceof ResourceInterface && array_key_exists('resource_key', $options)) {
+        if ($data instanceof ResourceValue && array_key_exists('resource_key', $options)) {
             $data->setKey($options['resource_key']);
 
             $event->setData($data);

@@ -2,7 +2,7 @@
 
 namespace spec\FSi\Bundle\ResourceRepositoryBundle\Repository;
 
-use FSi\Bundle\ResourceRepositoryBundle\Entity\ResourceRepository;
+use FSi\Bundle\ResourceRepositoryBundle\Doctrine\ResourceRepository;
 use FSi\Bundle\ResourceRepositoryBundle\Model\Resource;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType;

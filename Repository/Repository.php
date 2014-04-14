@@ -9,9 +9,7 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository;
 
-use Doctrine\Common\Persistence\ObjectRepository;
-use Doctrine\ORM\EntityRepository;
-use FSi\Bundle\ResourceRepositoryBundle\Entity\ResourceRepository;
+use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class Repository
@@ -22,18 +20,18 @@ class Repository
     protected $builder;
 
     /**
-     * @var \Doctrine\ORM\EntityRepository
+     * @var \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository
      */
-    protected $er;
+    protected $resourceValueRepository;
 
     /**
      * @param MapBuilder $builder
-     * @param \FSi\Bundle\ResourceRepositoryBundle\Entity\ResourceRepository $er
+     * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository $valueRepository
      */
-    public function __construct(MapBuilder $builder, ObjectRepository $er)
+    public function __construct(MapBuilder $builder, ResourceValueRepository $valueRepository)
     {
         $this->builder = $builder;
-        $this->er = $er;
+        $this->resourceValueRepository = $valueRepository;
     }
 
     /**
@@ -44,7 +42,7 @@ class Repository
      */
     public function get($key)
     {
-        $entity = $this->er->get( $key);
+        $entity = $this->resourceValueRepository->get($key);
 
         if (!isset($entity)) {
             return null;
