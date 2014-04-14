@@ -22,16 +22,16 @@ class Repository
     /**
      * @var \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository
      */
-    protected $rvr;
+    protected $resourceValueRepository;
 
     /**
      * @param MapBuilder $builder
-     * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository $rvr
+     * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository $valueRepository
      */
-    public function __construct(MapBuilder $builder, ResourceValueRepository $rvr)
+    public function __construct(MapBuilder $builder, ResourceValueRepository $valueRepository)
     {
         $this->builder = $builder;
-        $this->rvr = $rvr;
+        $this->resourceValueRepository = $valueRepository;
     }
 
     /**
@@ -42,7 +42,7 @@ class Repository
      */
     public function get($key)
     {
-        $entity = $this->rvr->get($key);
+        $entity = $this->resourceValueRepository->get($key);
 
         if (!isset($entity)) {
             return null;

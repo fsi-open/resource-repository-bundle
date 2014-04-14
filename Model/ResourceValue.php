@@ -11,7 +11,6 @@ namespace FSi\Bundle\ResourceRepositoryBundle\Model;
 
 Interface ResourceValue
 {
-
     /**
      * @param string $key
      *
