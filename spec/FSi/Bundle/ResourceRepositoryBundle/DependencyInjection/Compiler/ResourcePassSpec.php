@@ -36,7 +36,7 @@ class ResourcePassSpec extends ObjectBehavior
             ->willReturn('FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType');
 
 
-        $container->setParameter('fsi_resource_repository.resource_types', array(
+        $container->setParameter('fsi_resource_repository.resource.types', array(
             'text' => 'FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType'
         ))->shouldBeCalled();
 
