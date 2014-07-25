@@ -81,4 +81,17 @@ class NumberTypeSpec extends ObjectBehavior
 
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf('Symfony\Component\Form\FormBuilder');
     }
+
+    function it_should_allow_override_form_options(FormFactory $factory, FormBuilder $form)
+    {
+        $this->setFormOptions(array('precision' => 8));
+
+        $factory->createNamedBuilder('numberValue', 'number', null, array(
+            'label' => false,
+            'required' => false,
+            'precision' => 8
+        ))->shouldBeCalled();
+
+        $this->getFormBuilder($factory)->shouldReturnAnInstanceOf('Symfony\Component\Form\FormBuilder');
+    }
 }
