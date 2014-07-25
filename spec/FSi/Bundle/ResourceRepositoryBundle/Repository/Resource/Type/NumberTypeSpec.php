@@ -90,7 +90,7 @@ class NumberTypeSpec extends ObjectBehavior
             'label' => false,
             'required' => false,
             'precision' => 8
-        ))->shouldBeCalled();
+        ))->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf('Symfony\Component\Form\FormBuilder');
     }
