@@ -32,10 +32,10 @@ class NumberType extends AbstractType
         $options = parent::buildFormOptions();
 
         $options = array_merge(
-            $options,
             array(
                 'precision' => 4
-            )
+            ),
+            $options
         );
 
         return $options;
