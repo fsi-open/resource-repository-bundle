@@ -23,6 +23,7 @@
         <service id="fsi_resource_repository.resource.repository" class="%fsi_resource_repository.resource.repository.class%">
             <argument type="service" id="fsi_resource_repository.map_builder" />
             <argument type="service" id="fsi_resource_repository.entity.repository"/>
+            <argument type="string">%fsi_resource_repository.resource.value.class%</argument>
         </service>
 
         <service id="fsi_resource_repository.repository" alias="fsi_resource_repository.resource.repository" />

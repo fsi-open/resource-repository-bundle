@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use FSi\Bundle\ResourceRepositoryBundle\Model\Resource as BaseResource;
 use FSi\Bundle\ResourceRepositoryBundle\Exception\EntityRepositoryException;
+use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -62,6 +63,22 @@ class ResourceRepositorySpec extends ObjectBehavior
     {
         $em->find(Argument::any(), 'resources.resource_a', Argument::any(), Argument::any())->willReturn(null);
         $this->get('resources.resource_a')->shouldReturnResourceWithKey('resources.resource_a');
+    }
+
+    function it_saves_new_resource_value_entity(EntityManager $em, ResourceValue $resourceValue)
+    {
+        $em->persist($resourceValue)->shouldBeCalled();
+        $em->flush()->shouldBeCalled();
+
+        $this->add($resourceValue);
+    }
+
+    function it_removes_resource_value_entity(EntityManager $em, ResourceValue $resourceValue)
+    {
+        $em->remove($resourceValue)->shouldBeCalled();
+        $em->flush()->shouldBeCalled();
+
+        $this->remove($resourceValue);
     }
 
     public function getMatchers()

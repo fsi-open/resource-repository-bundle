@@ -25,13 +25,20 @@ class Repository
     protected $resourceValueRepository;
 
     /**
+     * @var string
+     */
+    protected $resourceValueClass;
+
+    /**
      * @param MapBuilder $builder
      * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository $valueRepository
+     * @param string $resourceValueClass
      */
-    public function __construct(MapBuilder $builder, ResourceValueRepository $valueRepository)
+    public function __construct(MapBuilder $builder, ResourceValueRepository $valueRepository, $resourceValueClass)
     {
         $this->builder = $builder;
         $this->resourceValueRepository = $valueRepository;
+        $this->resourceValueClass = $resourceValueClass;
     }
 
     /**
@@ -57,5 +64,29 @@ class Repository
         }
 
         return null;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed
+     */
+    public function set($key, $value)
+    {
+        $entity = $this->resourceValueRepository->get($key);
+        $resource = $this->builder->getResource($key);
+        $accessor = PropertyAccess::createPropertyAccessor();
+
+        if (isset($entity) && !isset($value)) {
+            $this->resourceValueRepository->remove($entity);
+            return;
+        }
+
+        if (isset($entity)) {
+            $accessor->setValue($entity, $resource->getResourceProperty(), $value);
+        } else {
+            $entity = new $this->resourceValueClass();
+            $accessor->setValue($entity, $resource->getResourceProperty(), $value);
+            $this->resourceValueRepository->add($entity);
+        }
     }
 }
