@@ -17,7 +17,7 @@ class RepositorySpec extends ObjectBehavior
 {
     function let(MapBuilder $builder, ResourceRepository $repository)
     {
-        $this->beConstructedWith($builder, $repository);
+        $this->beConstructedWith($builder, $repository, 'spec\FSi\Bundle\ResourceRepositoryBundle\Repository\ResourceEntity');
     }
 
     function it_is_initializable()
@@ -63,5 +63,41 @@ class RepositorySpec extends ObjectBehavior
         $resource->getResourceProperty()->shouldBeCalled()->willReturn('textValue');
 
         $this->get('resources_group.resource_a')->shouldReturn(0);
+    }
+
+    function it_sets_entity_field_on_existing_value(MapBuilder $builder, ResourceRepository $repository,
+        TextType $resource, ResourceEntity $entity)
+    {
+        $repository->get('resources_group.resource_a')->willReturn($entity);
+        $builder->getResource(Argument::type('string'))->willReturn($resource);
+        $resource->getResourceProperty()->willReturn('textValue');
+        $entity->setTextValue('text')->shouldBeCalled();
+
+        $this->set('resources_group.resource_a', 'text');
+    }
+
+    function it_adds_new_entity_with_field_set(MapBuilder $builder, ResourceRepository $repository,
+        TextType $resource)
+    {
+        $repository->get('resources_group.resource_a')->willReturn(null);
+        $builder->getResource(Argument::type('string'))->willReturn($resource);
+        $resource->getResourceProperty()->willReturn('textValue');
+        $repository->add(Argument::allOf(
+            Argument::type('spec\FSi\Bundle\ResourceRepositoryBundle\Repository\ResourceEntity'),
+            Argument::which('getTextValue', 'text')
+        ))->shouldBeCalled();
+
+        $this->set('resources_group.resource_a', 'text');
+    }
+
+    function it_removes_entity_when_setting_empty_value(MapBuilder $builder, ResourceRepository $repository,
+        TextType $resource, ResourceEntity $entity)
+    {
+        $repository->get('resources_group.resource_a')->willReturn($entity);
+        $builder->getResource(Argument::type('string'))->willReturn($resource);
+        $resource->getResourceProperty()->willReturn('textValue');
+        $repository->remove($entity)->shouldBeCalled();
+
+        $this->set('resources_group.resource_a', null);
     }
 }

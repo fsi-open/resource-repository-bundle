@@ -61,3 +61,18 @@ Display resources in Twig you should use ``get_resource`` and ``has_resource`` f
     Text content: {{ get_resource('resources.resource_text') }}
 {% endif %}
 ```
+
+## Get / set resource value from php
+
+Sometimes it's useful to get value of a resource in your PHP code, e.g. when it holds some configuration variable.
+You can do it by directly accessing the ``fsi_resource_repository.repository`` service:
+
+```php
+$text = $container->get('fsi_resource_repository.repository')->get('resources.resource_text');
+```
+
+It's also possible to set value of a resource e.g. when loading database fixtures during application deploy:
+
+```php
+$container->get('fsi_resource_repository.repository')->set('resources.resource_text', 'some text');
+```

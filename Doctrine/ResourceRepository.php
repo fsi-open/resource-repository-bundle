@@ -12,6 +12,7 @@ namespace FSi\Bundle\ResourceRepositoryBundle\Doctrine;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityRepository;
 use FSi\Bundle\ResourceRepositoryBundle\Exception\EntityRepositoryException;
+use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue;
 use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository;
 
 class ResourceRepository extends EntityRepository implements ResourceValueRepository
@@ -42,6 +43,24 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
     public function get($key)
     {
         return $this->find($key);
+    }
+
+    /**
+     * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue $resourceValue
+     */
+    public function add(ResourceValue $resourceValue)
+    {
+        $this->_em->persist($resourceValue);
+        $this->_em->flush();
+    }
+
+    /**
+     * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue $resourceValue
+     */
+    public function remove(ResourceValue $resourceValue)
+    {
+        $this->_em->remove($resourceValue);
+        $this->_em->flush();
     }
 
     /**
