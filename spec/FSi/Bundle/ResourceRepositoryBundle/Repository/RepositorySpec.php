@@ -71,7 +71,9 @@ class RepositorySpec extends ObjectBehavior
         $repository->get('resources_group.resource_a')->willReturn($entity);
         $builder->getResource(Argument::type('string'))->willReturn($resource);
         $resource->getResourceProperty()->willReturn('textValue');
-        $entity->setTextValue('text')->shouldBeCalled();
+        $repository->save(
+            Argument::type('spec\FSi\Bundle\ResourceRepositoryBundle\Repository\ResourceEntity')
+        )->shouldBeCalled();
 
         $this->set('resources_group.resource_a', 'text');
     }

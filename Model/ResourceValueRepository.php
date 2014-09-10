@@ -22,6 +22,12 @@ interface ResourceValueRepository
      */
     public function add(ResourceValue $resourceValue);
 
+
+    /**
+     * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue $resourceValue
+     */
+    public function save(ResourceValue $resourceValue);
+
     /**
      * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue $resourceValue
      */

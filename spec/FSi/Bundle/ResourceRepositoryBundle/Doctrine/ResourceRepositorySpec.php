@@ -65,12 +65,20 @@ class ResourceRepositorySpec extends ObjectBehavior
         $this->get('resources.resource_a')->shouldReturnResourceWithKey('resources.resource_a');
     }
 
-    function it_saves_new_resource_value_entity(EntityManager $em, ResourceValue $resourceValue)
+    function it_adds_new_resource_value_entity(EntityManager $em, ResourceValue $resourceValue)
     {
         $em->persist($resourceValue)->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
         $this->add($resourceValue);
+    }
+
+    function it_saves_new_resource_value_entity(EntityManager $em, ResourceValue $resourceValue)
+    {
+        $em->persist($resourceValue)->shouldBeCalled();
+        $em->flush()->shouldBeCalled();
+
+        $this->save($resourceValue);
     }
 
     function it_removes_resource_value_entity(EntityManager $em, ResourceValue $resourceValue)
