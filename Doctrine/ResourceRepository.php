@@ -48,7 +48,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
     /**
      * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue $resourceValue
      */
-    public function add(ResourceValue $resourceValue)
+    public function save(ResourceValue $resourceValue)
     {
         $this->_em->persist($resourceValue);
         $this->_em->flush();
@@ -57,10 +57,9 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
     /**
      * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue $resourceValue
      */
-    public function save(ResourceValue $resourceValue)
+    public function add(ResourceValue $resourceValue)
     {
-        $this->_em->persist($resourceValue);
-        $this->_em->flush();
+        $this->save($resourceValue);
     }
 
     /**
