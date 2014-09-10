@@ -57,6 +57,15 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
     /**
      * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue $resourceValue
      */
+    public function save(ResourceValue $resourceValue)
+    {
+        $this->_em->persist($resourceValue);
+        $this->_em->flush();
+    }
+
+    /**
+     * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue $resourceValue
+     */
     public function remove(ResourceValue $resourceValue)
     {
         $this->_em->remove($resourceValue);

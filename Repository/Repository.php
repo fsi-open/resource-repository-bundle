@@ -83,6 +83,7 @@ class Repository
 
         if (isset($entity)) {
             $accessor->setValue($entity, $resource->getResourceProperty(), $value);
+            $this->resourceValueRepository->save($entity);
         } else {
             $entity = new $this->resourceValueClass();
             $accessor->setValue($entity, $resource->getResourceProperty(), $value);
