@@ -68,7 +68,11 @@ Update your database schema
 $ php app/console doctrine:schema:update --force
 ```
 
-And now you should be able to use ``fsi_file`` resource type in your [Resource Map](resource_map.md)
+And now you should be able to use new resource types in your [Resource Map](resource_map.md). These types are:
+
+- ``fsi_file`` - any file uploaded through uploadable doctrine extension
+- ``fsi_image`` - only images uploaded through uploadable doctrine extension
+- ``fsi_removable_file`` - one of the above with additional option to delete uploaded files
 
 Example:
 
@@ -79,16 +83,22 @@ resources:
     type: group
     home_page:
         type: group
-        advertisement:
-            type: fsi_file
+        header:
+            type: fsi_image
             form_options:
-                label: Advertisement
+                label: Header background
             constraints:
                 FSi\Bundle\DoctrineExtensionsBundle\Validator\Constraints\Image:
-                    maxWidth: 400
-                    maxHeight: 500
+                    maxWidth: 1650
+                    maxHeight: 600
+        advertisement:
+            type: fsi_removable_file
+            form_options:
+                label: Advertisement
+                file_type: fsi_image
+                file_options:
+                    constraints:
+                        FSi\Bundle\DoctrineExtensionsBundle\Validator\Constraints\Image:
+                            maxWidth: 400
+                            maxHeight: 500
 ```
-
-Remember to use FQCN in fsi_file constraints!
-- ``FSi\Bundle\DoctrineExtensionsBundle\Validator\Constraints\Image``
-- ``FSi\Bundle\DoctrineExtensionsBundle\Validator\Constraints\File``
