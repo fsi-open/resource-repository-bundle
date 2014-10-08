@@ -21,5 +21,6 @@ Documentation:
 * [Resource Map](Resources/docs/resource_map.md)
 * [Basic Usage](Resources/docs/basic_usage.md)
 * [File Upload](Resources/docs/file_upload.md)
-* [CKEditor](Resources/docs/fsi_ckeditor.md)
+* [FSI CKEditor (deprecated)](Resources/docs/fsi_ckeditor.md)
+* [CKEditor](Resources/docs/ckeditor.md)
 * [Adding new resource type](Resources/docs/adding_new_resource_type.md)
