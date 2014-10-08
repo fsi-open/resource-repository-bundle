@@ -10,6 +10,7 @@
 namespace FSi\Bundle\ResourceRepositoryBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceCKEditorPass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceFSiCKEditorPass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceFSiFilePass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourcePass;
@@ -33,11 +34,17 @@ class FSiResourceRepositoryBundle extends Bundle
             $container->addCompilerPass(new ResourceFSiCKEditorPass());
         }
 
+        if ($container->hasExtension('egeloen_ckeditor')) {
+            $container->addCompilerPass(new ResourceCKEditorPass());
+        }
+
         $container->addCompilerPass(new TwigFormPass());
         $container->addCompilerPass(new ResourcePass());
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver(
-            $this->getDoctrineMappings(),
-            array('doctrine.orm.entity_manager'))
+        $container->addCompilerPass(
+            DoctrineOrmMappingsPass::createXmlMappingDriver(
+                $this->getDoctrineMappings(),
+                array('doctrine.orm.entity_manager')
+            )
         );
     }
 

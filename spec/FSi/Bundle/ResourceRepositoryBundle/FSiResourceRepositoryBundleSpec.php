@@ -27,7 +27,10 @@ class FSiResourceRepositoryBundleSpec extends ObjectBehavior
     {
         $container->hasExtension('fsi_doctrine_extensions')->shouldBeCalled()->willReturn(true);
         $container->hasExtension('fsi_form_extensions')->shouldBeCalled()->willReturn(true);
+        $container->hasExtension('egeloen_ckeditor')->shouldBeCalled()->willReturn(true);
         $container->addCompilerPass(Argument::type('FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceFSiFilePass'))
+            ->shouldBeCalled();
+        $container->addCompilerPass(Argument::type('FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceCKEditorPass'))
             ->shouldBeCalled();
         $container->addCompilerPass(Argument::type('FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceFSiCKEditorPass'))
             ->shouldBeCalled();
