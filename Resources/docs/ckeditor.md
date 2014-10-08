@@ -37,15 +37,6 @@ public function registerBundles()
 }
 ```
 
-## 3. Populate assets
-
-Simply run this command to populate CKEditor assets (JS and CSS) to your web asset directory.
-
-``` bash
-$ php app/console assets:install --symlink
-```
-
-
 Example:
 
 ```yaml

@@ -27,7 +27,6 @@
     },
     "suggest": {
         "fsi/doctrine-extensions-bundle": "For using fsi_file resource type",
-        "fsi/form-extensions-bundle": "For using fsi_ckeditor resource type",
         "egeloen/ckeditor-bundle": "For using ckeditor resource type"
     },
     "config": {
