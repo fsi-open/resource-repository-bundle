@@ -34,7 +34,7 @@ class FSiResourceRepositoryBundle extends Bundle
             $container->addCompilerPass(new ResourceFSiCKEditorPass());
         }
 
-        if ($container->hasExtension('egeloen_ckeditor')) {
+        if ($container->hasExtension('ivory_ck_editor')) {
             $container->addCompilerPass(new ResourceCKEditorPass());
         }
 
