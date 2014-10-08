@@ -1,5 +1,7 @@
 # FSi Wysiwyg (deprecated)
 
+**IMPORTANT!!** This way of integrating CKEditor with Resource Repository Bundle is deprecated, use [ckeditor](ckeditor.md) instead.
+
 WYSIWYG (What you see is what you get) editor.
 To use ``fsi_ckeditor`` resource type you need to register ``fsi/form-extensions-bundle`` that provide ``fsi_ckeditor``
 form type.
