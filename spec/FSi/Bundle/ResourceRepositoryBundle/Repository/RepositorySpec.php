@@ -25,9 +25,8 @@ class RepositorySpec extends ObjectBehavior
         $this->shouldHaveType('FSi\Bundle\ResourceRepositoryBundle\Repository\Repository');
     }
 
-    function it_return_null_if_resource_entity_does_not_exist(ResourceRepository $repository)
-    {
-        $repository->get('resources_group.resource_a')->shouldBeCalled()->willReturn(null);
+    function it_return_null_if_resource_entity_does_not_exist(MapBuilder $builder) {
+        $builder->getResource('resources_group.resource_a')->shouldBeCalled()->willReturn(null);
 
         $this->get('resources_group.resource_a')->shouldReturn(null);
     }
@@ -36,6 +35,7 @@ class RepositorySpec extends ObjectBehavior
             TextType $resource, ResourceEntity $entity)
     {
         $entity->getTextValue()->shouldBeCalled()->willReturn(null);
+        $resource->getName()->shouldBeCalled()->willReturn('resources_group.resource_a');
         $repository->get('resources_group.resource_a')->shouldBeCalled()->willReturn($entity);
         $builder->getResource(Argument::type('string'))->shouldBeCalled()->willReturn($resource);
         $resource->getResourceProperty()->shouldBeCalled()->willReturn('textValue');
@@ -47,6 +47,7 @@ class RepositorySpec extends ObjectBehavior
              TextType $resource, ResourceEntity $entity)
     {
         $entity->getTextValue()->shouldBeCalled()->willReturn('');
+        $resource->getName()->shouldBeCalled()->willReturn('resources_group.resource_a');
         $repository->get('resources_group.resource_a')->shouldBeCalled()->willReturn($entity);
         $builder->getResource(Argument::type('string'))->shouldBeCalled()->willReturn($resource);
         $resource->getResourceProperty()->shouldBeCalled()->willReturn('textValue');
@@ -58,6 +59,7 @@ class RepositorySpec extends ObjectBehavior
              TextType $resource, ResourceEntity $entity)
     {
         $entity->getTextValue()->shouldBeCalled()->willReturn(0);
+        $resource->getName()->shouldBeCalled()->willReturn('resources_group.resource_a');
         $repository->get('resources_group.resource_a')->shouldBeCalled()->willReturn($entity);
         $builder->getResource(Argument::type('string'))->shouldBeCalled()->willReturn($resource);
         $resource->getResourceProperty()->shouldBeCalled()->willReturn('textValue');
@@ -69,6 +71,7 @@ class RepositorySpec extends ObjectBehavior
         TextType $resource, ResourceEntity $entity)
     {
         $repository->get('resources_group.resource_a')->willReturn($entity);
+        $resource->getName()->shouldBeCalled()->willReturn('resources_group.resource_a');
         $builder->getResource(Argument::type('string'))->willReturn($resource);
         $resource->getResourceProperty()->willReturn('textValue');
         $repository->save(
@@ -82,6 +85,7 @@ class RepositorySpec extends ObjectBehavior
         TextType $resource)
     {
         $repository->get('resources_group.resource_a')->willReturn(null);
+        $resource->getName()->shouldBeCalled()->willReturn('resources_group.resource_a');
         $builder->getResource(Argument::type('string'))->willReturn($resource);
         $resource->getResourceProperty()->willReturn('textValue');
         $repository->add(Argument::allOf(
@@ -96,6 +100,7 @@ class RepositorySpec extends ObjectBehavior
         TextType $resource, ResourceEntity $entity)
     {
         $repository->get('resources_group.resource_a')->willReturn($entity);
+        $resource->getName()->shouldBeCalled()->willReturn('resources_group.resource_a');
         $builder->getResource(Argument::type('string'))->willReturn($resource);
         $resource->getResourceProperty()->willReturn('textValue');
         $repository->remove($entity)->shouldBeCalled();
