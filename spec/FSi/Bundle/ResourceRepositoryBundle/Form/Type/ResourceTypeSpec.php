@@ -68,8 +68,6 @@ class ResourceTypeSpec extends ObjectBehavior
 
         $builder->add($textBuilder)->shouldBeCalled();
 
-        $builder->addEventSubscriber(Argument::type('FSi\Bundle\ResourceRepositoryBundle\Form\EventListener\AddResourceKeySubscriber'))
-            ->shouldBeCalled();
 
         $this->buildForm($builder, array(
             'resource_key' => 'resources.resource_text'

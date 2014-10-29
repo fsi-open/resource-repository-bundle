@@ -10,7 +10,6 @@
 namespace FSi\Bundle\ResourceRepositoryBundle\Form\Type;
 
 use FSi\Bundle\ResourceRepositoryBundle\Exception\ResourceFormTypeException;
-use FSi\Bundle\ResourceRepositoryBundle\Form\EventListener\AddResourceKeySubscriber;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,7 +31,7 @@ class ResourceType extends AbstractType
      * @param MapBuilder $mapBuilder
      * @param $resourceClass
      */
-    function __construct(MapBuilder $mapBuilder, $resourceClass)
+    public function __construct(MapBuilder $mapBuilder, $resourceClass)
     {
         $this->mapBuilder = $mapBuilder;
         $this->resourceClass = $resourceClass;
@@ -51,13 +50,17 @@ class ResourceType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => $this->resourceClass
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => $this->resourceClass
+            )
+        );
 
-        $resolver->setRequired(array(
-            'resource_key'
-        ));
+        $resolver->setRequired(
+            array(
+                'resource_key'
+            )
+        );
     }
 
     /**
@@ -73,6 +76,5 @@ class ResourceType extends AbstractType
         $resourceFormBuilder = $resource->getFormBuilder($builder->getFormFactory());
 
         $builder->add($resourceFormBuilder);
-        $builder->addEventSubscriber(new AddResourceKeySubscriber());
     }
 }
