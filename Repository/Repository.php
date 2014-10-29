@@ -49,13 +49,18 @@ class Repository
      */
     public function get($key)
     {
-        $entity = $this->resourceValueRepository->get($key);
+        $resource = $this->builder->getResource($key);
+
+        if (!isset($resource)) {
+            return null;
+        }
+
+        $entity = $this->resourceValueRepository->get($resource->getName());
 
         if (!isset($entity)) {
             return null;
         }
 
-        $resource = $this->builder->getResource($key);
         $accessor = PropertyAccess::createPropertyAccessor();
         $value = $accessor->getValue($entity, $resource->getResourceProperty());
 
@@ -72,8 +77,10 @@ class Repository
      */
     public function set($key, $value)
     {
-        $entity = $this->resourceValueRepository->get($key);
         $resource = $this->builder->getResource($key);
+
+        $entity = $this->resourceValueRepository->get($resource->getName());
+
         $accessor = PropertyAccess::createPropertyAccessor();
 
         if (isset($entity) && !isset($value)) {
