@@ -23,8 +23,11 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
      * @param null $lockVersion
      * @return \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue
      */
-    public function find($id, $lockMode = LockMode::NONE, $lockVersion = null)
+    public function find($id, $lockMode = null, $lockVersion = null)
     {
+        if (\Doctrine\ORM\Version::compare('2.5.0-dev') < 1) {
+            $lockMode = LockMode::NONE;
+        }
         $resource = parent::find($id, $lockMode, $lockVersion);
 
         if (!isset($resource)) {
