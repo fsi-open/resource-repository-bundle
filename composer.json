@@ -17,7 +17,7 @@
         "symfony/form" : "~2.2",
         "symfony/validator": "~2.2",
         "symfony/event-dispatcher": "~2.2",
-        "doctrine/doctrine-bundle": "dev-master"
+        "doctrine/doctrine-bundle": "~1.4"
     },
     "require-dev": {
         "doctrine/orm": "~2.3",
