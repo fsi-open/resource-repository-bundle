@@ -26,4 +26,19 @@ class FSiRemovableFileType extends AbstractType
     {
         return 'fsi_removable_file';
     }
+
+    protected function buildFormOptions()
+    {
+        $options = parent::buildFormOptions();
+
+        if (isset($options['constraints'])) {
+            $options['file_options'] = array_merge(
+                isset($options['file_options']) ? $options['file_options'] : array(),
+                array('constraints' => $options['constraints'])
+            );
+            unset($options['constraints']);
+        }
+
+        return $options;
+    }
 }
