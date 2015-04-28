@@ -25,7 +25,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
      */
     public function find($id, $lockMode = null, $lockVersion = null)
     {
-        if (\Doctrine\ORM\Version::compare('2.5.0-dev') > -1) {
+        if ($lockMode === null && \Doctrine\ORM\Version::compare('2.5.0-dev') === -1) {
             $lockMode = LockMode::NONE;
         }
         $resource = parent::find($id, $lockMode, $lockVersion);
