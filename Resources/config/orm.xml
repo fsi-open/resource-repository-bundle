@@ -7,10 +7,8 @@
     </parameters>
 
     <services>
-        <service id="fsi_resource_repository.resource.value.repository"
-                 factory-service="doctrine.orm.default_entity_manager"
-                 factory-method="getRepository"
-                 class="%fsi_resource_repository.resource.value.repository.class%">
+        <service id="fsi_resource_repository.resource.value.repository" class="%fsi_resource_repository.resource.value.repository.class%">
+            <factory service="doctrine.orm.default_entity_manager" method="getRepository"/>
             <argument>%fsi_resource_repository.resource.value.class%</argument>
         </service>
 

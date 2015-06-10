@@ -57,7 +57,7 @@ class MapBuilder
             $this->resourceTypes[$type] = $class;
         }
 
-        $this->map = $this->recursiveParseRawMap(Yaml::parse($mapPath));
+        $this->map = $this->recursiveParseRawMap(Yaml::parse(file_get_contents($mapPath)));
     }
 
     /**
