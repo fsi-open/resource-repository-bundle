@@ -47,6 +47,19 @@ class ResourceTypeSpec extends ObjectBehavior
         $this->setDefaultOptions($resolver);
     }
 
+    function it_configures_options(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'FSi\Bundle\DemoBundle\Entity\Resource'
+        ))->shouldBeCalled();
+
+        $resolver->setRequired(array(
+            'resource_key'
+        ))->shouldBeCalled();
+
+        $this->configureOptions($resolver);
+    }
+
     function it_should_throw_exception_during_build_form_when_resource_key_is_invalid(MapBuilder $map, FormBuilder $builder)
     {
         $map->hasResource('resources.invalid_resource')->willReturn(false);
