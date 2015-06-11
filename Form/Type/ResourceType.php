@@ -13,6 +13,7 @@ use FSi\Bundle\ResourceRepositoryBundle\Exception\ResourceFormTypeException;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ResourceType extends AbstractType
@@ -49,6 +50,14 @@ class ResourceType extends AbstractType
      * {@inheritdoc}
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $this->configureOptions($resolver);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
