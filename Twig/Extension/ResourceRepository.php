@@ -62,11 +62,6 @@ class ResourceRepository extends \Twig_Extension
     public function getResource($key, $default = null)
     {
         $value = $this->repository->get($key);
-
-        if (is_null($value)) {
-            return $default;
-        }
-
-        return $value;
+        return is_null($value) ? $default : $value;
     }
 }
