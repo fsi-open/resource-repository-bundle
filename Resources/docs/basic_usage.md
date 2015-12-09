@@ -55,11 +55,19 @@ public function indexAction(Request $request)
 
 Display resources in Twig you should use ``get_resource`` and ``has_resource`` functions.
 
-```
+```twig
 {# index.html.twig #}
 {% if has_resource('resources.resource_text') %}
     Text content: {{ get_resource('resources.resource_text') }}
 {% endif %}
+```
+
+### Default value
+
+You can use second argument as a default value in case that resource is not filled.
+
+```twig
+{{ get_resource('resources.resource_text', 'in construction...') }}
 ```
 
 ## Get / set resource value from php
