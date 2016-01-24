@@ -59,6 +59,13 @@ class ResourceRepositorySpec extends ObjectBehavior
         $this->getResource('resources.resource_a')->shouldReturn('resource_value');
     }
 
+    function it_return_default_if_value_not_exists(Repository $repository)
+    {
+        $repository->get('resources.resource_a')->willReturn(null);
+
+        $this->getResource('resources.resource_a', 'my_default')->shouldReturn('my_default');
+    }
+
     public function getMatchers()
     {
         return array(
