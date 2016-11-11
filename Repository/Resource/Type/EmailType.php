@@ -35,6 +35,6 @@ class EmailType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'email';
+        return $this->isFqcnRequiredAsFormType() ? 'Symfony\Component\Form\Extension\Core\Type\EmailType' : 'email';
     }
 }

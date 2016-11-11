@@ -24,6 +24,6 @@ class DateType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'date';
+        return $this->isFqcnRequiredAsFormType() ? 'Symfony\Component\Form\Extension\Core\Type\DateType' : 'date';
     }
 }

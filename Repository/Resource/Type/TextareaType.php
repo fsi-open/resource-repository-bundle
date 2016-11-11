@@ -24,6 +24,6 @@ class TextareaType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'textarea';
+        return $this->isFqcnRequiredAsFormType() ? 'Symfony\Component\Form\Extension\Core\Type\TextareaType' : 'textarea';
     }
 }

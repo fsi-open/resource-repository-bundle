@@ -24,6 +24,6 @@ class FSiFileType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'fsi_file';
+        return $this->isFqcnRequiredAsFormType() ? 'FSi\Bundle\DoctrineExtensionsBundle\Form\Type\FSi\FileType' : 'fsi_file';
     }
 }

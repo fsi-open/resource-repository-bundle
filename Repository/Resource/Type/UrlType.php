@@ -35,6 +35,6 @@ class UrlType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'url';
+        return $this->isFqcnRequiredAsFormType() ? 'Symfony\Component\Form\Extension\Core\Type\UrlType' : 'url';
     }
 }

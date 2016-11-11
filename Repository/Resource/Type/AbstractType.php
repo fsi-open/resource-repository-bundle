@@ -10,6 +10,7 @@
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Validator\Constraint;
 
 abstract class AbstractType implements ResourceInterface
@@ -120,5 +121,13 @@ abstract class AbstractType implements ResourceInterface
         }
 
         return $options;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isFqcnRequiredAsFormType()
+    {
+        return version_compare(Kernel::VERSION, '3.0.0', '>=');
     }
 }

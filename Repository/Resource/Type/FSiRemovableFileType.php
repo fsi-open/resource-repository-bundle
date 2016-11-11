@@ -24,7 +24,9 @@ class FSiRemovableFileType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'fsi_removable_file';
+        return $this->isFqcnRequiredAsFormType()
+            ? 'FSi\Bundle\DoctrineExtensionsBundle\Form\Type\FSi\RemovableFileTypeType'
+            : 'fsi_removable_file';
     }
 
     protected function buildFormOptions()

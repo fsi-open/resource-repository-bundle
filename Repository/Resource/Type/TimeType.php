@@ -24,6 +24,6 @@ class TimeType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'time';
+        return $this->isFqcnRequiredAsFormType() ? 'Symfony\Component\Form\Extension\Core\Type\TimeType' : 'time';
     }
 }

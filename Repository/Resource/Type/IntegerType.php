@@ -24,6 +24,6 @@ class IntegerType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'integer';
+        return $this->isFqcnRequiredAsFormType() ? 'Symfony\Component\Form\Extension\Core\Type\IntegerType' : 'integer';
     }
 }

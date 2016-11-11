@@ -24,6 +24,6 @@ class BoolType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'checkbox';
+        return $this->isFqcnRequiredAsFormType() ? 'Symfony\Component\Form\Extension\Core\Type\CheckboxType' : 'checkbox';
     }
 }

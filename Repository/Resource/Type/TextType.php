@@ -24,6 +24,6 @@ class TextType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'text';
+        return $this->isFqcnRequiredAsFormType() ? 'Symfony\Component\Form\Extension\Core\Type\TextType' : 'text';
     }
 }

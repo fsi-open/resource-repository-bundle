@@ -24,6 +24,6 @@ class FSiCKEditorType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'fsi_ckeditor';
+        return $this->isFqcnRequiredAsFormType() ? 'FSi\Bundle\FormExtensionsBundle\Form\Type\FSiCKEditorType' : 'fsi_ckeditor';
     }
 }

@@ -24,6 +24,6 @@ class FSiImageType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'fsi_image';
+        return $this->isFqcnRequiredAsFormType() ? 'FSi\Bundle\DoctrineExtensionsBundle\Form\Type\FSi\ImageType' : 'fsi_image';
     }
 }

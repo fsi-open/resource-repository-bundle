@@ -24,6 +24,6 @@ class CKEditorType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'ckeditor';
+        return $this->isFqcnRequiredAsFormType() ? 'Ivory\CKEditorBundle\Form\Type\CKEditorType' : 'ckeditor';
     }
 }

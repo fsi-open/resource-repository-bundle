@@ -24,7 +24,7 @@ class NumberType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'number';
+        return $this->isFqcnRequiredAsFormType() ? 'Symfony\Component\Form\Extension\Core\Type\NumberType' : 'number';
     }
 
     protected function buildFormOptions()
