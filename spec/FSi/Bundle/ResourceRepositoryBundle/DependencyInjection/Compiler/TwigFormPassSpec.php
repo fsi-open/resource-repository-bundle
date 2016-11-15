@@ -22,8 +22,8 @@ class TwigFormPassSpec extends ObjectBehavior
     {
         $container->hasParameter('twig.form.resources')->shouldBeCalled()->willReturn(true);
 
-        $container->getParameter('twig.form.resources')->willReturn(array());
-        $container->setParameter('twig.form.resources', array('@FSiResourceRepository/Form/form_div_layout.html.twig'))
+        $container->getParameter('twig.form.resources')->willReturn([]);
+        $container->setParameter('twig.form.resources', ['@FSiResourceRepository/Form/form_div_layout.html.twig'])
             ->shouldBeCalled();
 
         $this->process($container);

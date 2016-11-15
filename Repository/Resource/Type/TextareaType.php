@@ -9,6 +9,8 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\TextareaType as TextareaFormType;
+
 class TextareaType extends AbstractType
 {
     /**
@@ -24,6 +26,6 @@ class TextareaType extends AbstractType
      */
     protected function getFormType()
     {
-        return $this->isFqcnRequiredAsFormType() ? 'Symfony\Component\Form\Extension\Core\Type\TextareaType' : 'textarea';
+        return TextareaFormType::class;
     }
 }

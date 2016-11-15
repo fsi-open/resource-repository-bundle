@@ -4,6 +4,7 @@ namespace spec\FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -37,11 +38,11 @@ class NumberTypeSpec extends ObjectBehavior
 
     function it_return_form_builder(FormFactory $factory, FormBuilder $form)
     {
-        $factory->createNamedBuilder('numberValue', 'number', null, array(
+        $factory->createNamedBuilder('numberValue', NumberType::class, null, [
             'label' => false,
             'required' => false,
             'precision' => 4
-        ))->shouldBeCalled()->willReturn($form);
+        ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf('Symfony\Component\Form\FormBuilder');
     }
@@ -50,47 +51,47 @@ class NumberTypeSpec extends ObjectBehavior
     {
         $this->addConstraint($notBlank);
 
-        $factory->createNamedBuilder('numberValue', 'number', null, array(
+        $factory->createNamedBuilder('numberValue', NumberType::class, null, [
             'label' => false,
             'required' => false,
-            'constraints' => array(
+            'constraints' => [
                 $notBlank
-            ),
+            ],
             'precision' => 4
-        ))->shouldBeCalled()->willReturn($form);
+        ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf('Symfony\Component\Form\FormBuilder');
     }
 
     function it_return_form_builder_with_form_options_added_to_resource_definition(FormFactory $factory, FormBuilder $form)
     {
-        $this->setFormOptions(array(
-            'attr' => array(
+        $this->setFormOptions([
+            'attr' => [
                 'class' => 'class-name'
-            )
-        ));
+            ]
+        ]);
 
-        $factory->createNamedBuilder('numberValue', 'number', null, array(
+        $factory->createNamedBuilder('numberValue', NumberType::class, null, [
             'label' => false,
             'required' => false,
-            'attr' => array(
+            'attr' => [
                 'class' => 'class-name'
-            ),
+            ],
             'precision' => 4
-        ))->shouldBeCalled()->willReturn($form);
+        ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf('Symfony\Component\Form\FormBuilder');
     }
 
     function it_should_allow_override_form_options(FormFactory $factory, FormBuilder $form)
     {
-        $this->setFormOptions(array('precision' => 8));
+        $this->setFormOptions(['precision' => 8]);
 
-        $factory->createNamedBuilder('numberValue', 'number', null, array(
+        $factory->createNamedBuilder('numberValue', NumberType::class, null, [
             'label' => false,
             'required' => false,
             'precision' => 8
-        ))->willReturn($form);
+        ])->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf('Symfony\Component\Form\FormBuilder');
     }

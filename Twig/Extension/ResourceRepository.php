@@ -39,10 +39,10 @@ class ResourceRepository extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
-            new \Twig_SimpleFunction('has_resource', array($this, 'hasResource')),
-            new \Twig_SimpleFunction('get_resource', array($this, 'getResource'))
-        );
+        return [
+            new \Twig_SimpleFunction('has_resource', [$this, 'hasResource']),
+            new \Twig_SimpleFunction('get_resource', [$this, 'getResource'])
+        ];
     }
 
     /**

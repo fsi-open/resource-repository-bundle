@@ -21,15 +21,15 @@ class ResourceFSiFilePass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $definition = new Definition('FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\FSiFileType');
-        $definition->addTag('resource.type', array('alias' => 'fsi_file'));
+        $definition->addTag('resource.type', ['alias' => 'fsi_file']);
         $container->setDefinition('fsi_resource_repository.resource.type.fsi_file', $definition);
 
         $definition = new Definition('FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\FSiImageType');
-        $definition->addTag('resource.type', array('alias' => 'fsi_image'));
+        $definition->addTag('resource.type', ['alias' => 'fsi_image']);
         $container->setDefinition('fsi_resource_repository.resource.type.fsi_image', $definition);
 
         $definition = new Definition('FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\FSiRemovableFileType');
-        $definition->addTag('resource.type', array('alias' => 'fsi_removable_file'));
+        $definition->addTag('resource.type', ['alias' => 'fsi_removable_file']);
         $container->setDefinition('fsi_resource_repository.resource.type.fsi_removable_file', $definition);
     }
 }

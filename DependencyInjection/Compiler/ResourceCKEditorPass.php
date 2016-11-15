@@ -18,7 +18,7 @@ class ResourceCKEditorPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $definition = new Definition('FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\CKEditorType');
-        $definition->addTag('resource.type', array('alias' => 'ckeditor'));
+        $definition->addTag('resource.type', ['alias' => 'ckeditor']);
 
         $container->setDefinition('fsi_resource_repository.resource.type.ckeditor', $definition);
     }

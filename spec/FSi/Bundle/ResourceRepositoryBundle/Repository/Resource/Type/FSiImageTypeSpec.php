@@ -2,6 +2,7 @@
 
 namespace spec\FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
+use FSi\Bundle\DoctrineExtensionsBundle\Form\Type\FSi\ImageType;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilder;
@@ -32,10 +33,10 @@ class FSiImageTypeSpec extends ObjectBehavior
 
     function it_return_form_builder(FormFactory $factory, FormBuilder $form)
     {
-        $factory->createNamedBuilder('fileValue', 'fsi_image', null, array(
+        $factory->createNamedBuilder('fileValue', ImageType::class, null, [
             'label' => false,
             'required' => false,
-        ))->shouldBeCalled()->willReturn($form);
+        ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturn($form);
     }
@@ -44,32 +45,32 @@ class FSiImageTypeSpec extends ObjectBehavior
     {
         $this->addConstraint($constraint);
 
-        $factory->createNamedBuilder('fileValue', 'fsi_image', null, array(
+        $factory->createNamedBuilder('fileValue', ImageType::class, null, [
             'label' => false,
             'required' => false,
-            'constraints' => array(
+            'constraints' => [
                 $constraint
-            )
-        ))->shouldBeCalled()->willReturn($form);
+            ]
+        ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturn($form);
     }
 
     function it_return_form_builder_with_form_options_added_to_resource_definition(FormFactory $factory, FormBuilder $form)
     {
-        $this->setFormOptions(array(
-            'attr' => array(
+        $this->setFormOptions([
+            'attr' => [
                 'class' => 'class-name'
-            )
-        ));
+            ]
+        ]);
 
-        $factory->createNamedBuilder('fileValue', 'fsi_image', null, array(
+        $factory->createNamedBuilder('fileValue', ImageType::class, null, [
             'label' => false,
             'required' => false,
-            'attr' => array(
+            'attr' => [
                 'class' => 'class-name'
-            )
-        ))->shouldBeCalled()->willReturn($form);
+            ]
+        ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturn($form);
     }

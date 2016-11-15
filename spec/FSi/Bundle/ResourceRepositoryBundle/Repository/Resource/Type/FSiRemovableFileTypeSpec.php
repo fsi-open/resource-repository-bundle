@@ -2,6 +2,7 @@
 
 namespace spec\FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
+use FSi\Bundle\DoctrineExtensionsBundle\Form\Type\FSi\RemovableFileType;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilder;
@@ -32,10 +33,10 @@ class FSiRemovableFileTypeSpec extends ObjectBehavior
 
     function it_return_form_builder(FormFactory $factory, FormBuilder $form)
     {
-        $factory->createNamedBuilder('fileValue', 'fsi_removable_file', null, array(
+        $factory->createNamedBuilder('fileValue', RemovableFileType::class, null, [
             'label' => false,
             'required' => false,
-        ))->shouldBeCalled()->willReturn($form);
+        ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturn($form);
     }
@@ -44,30 +45,30 @@ class FSiRemovableFileTypeSpec extends ObjectBehavior
     {
         $this->addConstraint($constraint);
 
-        $factory->createNamedBuilder('fileValue', 'fsi_removable_file', null, array(
+        $factory->createNamedBuilder('fileValue', RemovableFileType::class, null, [
             'label' => false,
             'required' => false,
-            'file_options' => array(
-                'constraints' => array(
+            'file_options' => [
+                'constraints' => [
                     $constraint
-                )
-            )
-        ))->shouldBeCalled()->willReturn($form);
+                ]
+            ]
+        ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturn($form);
     }
 
     function it_return_form_builder_with_form_options_added_to_resource_definition(FormFactory $factory, FormBuilder $form)
     {
-        $this->setFormOptions(array(
+        $this->setFormOptions([
             'file_type' => 'fsi_image'
-        ));
+        ]);
 
-        $factory->createNamedBuilder('fileValue', 'fsi_removable_file', null, array(
+        $factory->createNamedBuilder('fileValue', RemovableFileType::class, null, [
             'label' => false,
             'required' => false,
             'file_type' => 'fsi_image'
-        ))->shouldBeCalled()->willReturn($form);
+        ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturn($form);
     }
@@ -79,20 +80,20 @@ class FSiRemovableFileTypeSpec extends ObjectBehavior
     ) {
         $this->addConstraint($constraint);
 
-        $this->setFormOptions(array(
+        $this->setFormOptions([
             'file_type' => 'fsi_image',
-            'file_options' => array('file_option' => 'value')
-        ));
+            'file_options' => ['file_option' => 'value']
+        ]);
 
-        $factory->createNamedBuilder('fileValue', 'fsi_removable_file', null, array(
+        $factory->createNamedBuilder('fileValue', RemovableFileType::class, null, [
             'label' => false,
             'required' => false,
             'file_type' => 'fsi_image',
-            'file_options' => array(
+            'file_options' => [
                 'file_option' => 'value',
-                'constraints' => array($constraint)
-            ),
-        ))->shouldBeCalled()->willReturn($form);
+                'constraints' => [$constraint]
+            ],
+        ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturn($form);
     }

@@ -9,6 +9,8 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
+use FSi\Bundle\DoctrineExtensionsBundle\Form\Type\FSi\ImageType as FSiImageFormType;
+
 class FSiImageType extends AbstractType
 {
     /**
@@ -24,6 +26,6 @@ class FSiImageType extends AbstractType
      */
     protected function getFormType()
     {
-        return $this->isFqcnRequiredAsFormType() ? 'FSi\Bundle\DoctrineExtensionsBundle\Form\Type\FSi\ImageType' : 'fsi_image';
+        return FSiImageFormType::class;
     }
 }

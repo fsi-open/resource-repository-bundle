@@ -9,6 +9,8 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
+use FSi\Bundle\DoctrineExtensionsBundle\Form\Type\FSi\FileType as FSiFileFormType;
+
 class FSiFileType extends AbstractType
 {
     /**
@@ -24,6 +26,6 @@ class FSiFileType extends AbstractType
      */
     protected function getFormType()
     {
-        return $this->isFqcnRequiredAsFormType() ? 'FSi\Bundle\DoctrineExtensionsBundle\Form\Type\FSi\FileType' : 'fsi_file';
+        return FSiFileFormType::class;
     }
 }

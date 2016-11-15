@@ -9,6 +9,7 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\EmailType as EmailFormType;
 use Symfony\Component\Validator\Constraints\Email;
 
 class EmailType extends AbstractType
@@ -35,6 +36,6 @@ class EmailType extends AbstractType
      */
     protected function getFormType()
     {
-        return $this->isFqcnRequiredAsFormType() ? 'Symfony\Component\Form\Extension\Core\Type\EmailType' : 'email';
+        return EmailFormType::class;
     }
 }

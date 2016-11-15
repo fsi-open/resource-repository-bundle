@@ -10,10 +10,10 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class MapBuilderSpec extends ObjectBehavior
 {
-    protected $resources = array(
+    protected $resources = [
         'text' => 'FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType',
         'integer' => 'FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\TypeIntegerType'
-    );
+    ];
 
     function let(TextType $text)
     {
@@ -27,15 +27,15 @@ class MapBuilderSpec extends ObjectBehavior
 
     function it_should_have_valid_simple_map()
     {
-        $this->getMap()->shouldHaveMap(array(
-            'main_resource_group' => array(
-                'resource_block' => array(
+        $this->getMap()->shouldHaveMap([
+            'main_resource_group' => [
+                'resource_block' => [
                     'resource_a' => 'FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType',
                     'resource_b' => 'FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType',
                     'resource_c' => 'FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType'
-                )
-            )
-        ));
+                ]
+            ]
+        ]);
     }
 
     function it_should_return_text_type_object()
@@ -53,36 +53,36 @@ class MapBuilderSpec extends ObjectBehavior
     {
         $this->shouldThrow(
             new ConfigurationException('Missing "type" declaration in "main_resource_group.resource_block" element configuration')
-        )->during('__construct', array(
+        )->during('__construct', [
                 __DIR__ . '/../../../../Fixtures/simple_map_with_missing_group_type.yml',
                 $this->resources
-            ));
+        ]);
     }
 
     function it_should_throw_exception_when_element_have_invalid_type()
     {
         $this->shouldThrow(
             new ConfigurationException('"this_is_not_a_valid_type" is not a valid resource type. Try one from: text, integer')
-        )->during('__construct', array(
+        )->during('__construct', [
                 __DIR__ . '/../../../../Fixtures/simple_map_with_invalid_resource_type.yml',
                 $this->resources
-            ));
+        ]);
     }
 
     function it_should_throw_exception_when_resource_path_is_longer_than_255_characters()
     {
         $this->shouldThrow(
             new ConfigurationException('"main_resource_group.this_is_long..." key is too long. Maximum key length is 255 characters')
-        )->during('__construct', array(
+        )->during('__construct', [
                 __DIR__ . '/../../../../Fixtures/simple_map_with_too_long_path.yml',
                 $this->resources
-            ));
+        ]);
     }
 
     function it_should_parse_empty_file_witht_resource_map()
     {
         $this->beConstructedWith(__DIR__ . '/../../../../Fixtures/empty_map.yml', $this->resources);
-        $this->getMap()->shouldReturn(array());
+        $this->getMap()->shouldReturn([]);
     }
 
     function it_should_create_resource_with_validator()
@@ -97,11 +97,11 @@ class MapBuilderSpec extends ObjectBehavior
     function it_should_create_resource_with_form_options()
     {
         $text = new TextType('resources.resource_text');
-        $text->setFormOptions(array(
-            'attr' => array(
+        $text->setFormOptions([
+            'attr' => [
                 'class' => 'class-name'
-            )
-        ));
+            ]
+        ]);
 
         $this->beConstructedWith(__DIR__ . '/../../../../Fixtures/simple_valid_map_with_form_options.yml', $this->resources);
         $this->getResource('resources.resource_text')->shouldBeLike($text);
@@ -111,15 +111,15 @@ class MapBuilderSpec extends ObjectBehavior
     {
         $this->shouldThrow(
             new ConfigurationException('"form-options" is not a valid resource type option. Try one from: form_options, constraints')
-        )->during('__construct', array(
+        )->during('__construct', [
                 __DIR__ . '/../../../../Fixtures/simple_valid_map_with_invalid_type_options.yml',
                 $this->resources
-            ));
+        ]);
     }
 
     public function getMatchers()
     {
-        return array(
+        return [
             'haveMap' => function($map, $expectedMap) {
 
                 $walker = function ($map, $expectedMap) use (&$walker) {
@@ -146,7 +146,7 @@ class MapBuilderSpec extends ObjectBehavior
 
                 return $walker($map, $expectedMap);
             },
-        );
+        ];
 
         return false;
     }
