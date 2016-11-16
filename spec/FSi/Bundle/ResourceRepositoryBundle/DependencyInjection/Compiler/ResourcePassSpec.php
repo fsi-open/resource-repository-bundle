@@ -22,13 +22,13 @@ class ResourcePassSpec extends ObjectBehavior
     function it_should_replace_resource_types_parameters_with_array_of_resources(ContainerBuilder $container,
          Definition $resourceDefinition)
     {
-        $container->findTaggedServiceIds('resource.type')->shouldBeCalled()->willReturn(array(
-            'fsi_resource_repository.resource.type.text' => array(
-                0 => array(
+        $container->findTaggedServiceIds('resource.type')->shouldBeCalled()->willReturn([
+            'fsi_resource_repository.resource.type.text' => [
+                0 => [
                     'alias' => 'text'
-                )
-            )
-        ));
+                ]
+            ]
+        ]);
 
         $container->getDefinition('fsi_resource_repository.resource.type.text')->willReturn($resourceDefinition);
         $resourceDefinition->getClass()
@@ -36,9 +36,9 @@ class ResourcePassSpec extends ObjectBehavior
             ->willReturn('FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType');
 
 
-        $container->setParameter('fsi_resource_repository.resource.types', array(
+        $container->setParameter('fsi_resource_repository.resource.types', [
             'text' => 'FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType'
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
         $this->process($container);
     }

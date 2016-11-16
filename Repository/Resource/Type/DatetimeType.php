@@ -9,6 +9,8 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType as DateTimeFormType;
+
 class DatetimeType extends AbstractType
 {
     /**
@@ -24,6 +26,6 @@ class DatetimeType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'datetime';
+        return DateTimeFormType::class;
     }
 }

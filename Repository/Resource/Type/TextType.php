@@ -9,6 +9,8 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType as TextFormType;
+
 class TextType extends AbstractType
 {
     /**
@@ -24,6 +26,6 @@ class TextType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'text';
+        return TextFormType::class;
     }
 }

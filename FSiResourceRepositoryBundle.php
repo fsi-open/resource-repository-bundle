@@ -30,10 +30,6 @@ class FSiResourceRepositoryBundle extends Bundle
             $container->addCompilerPass(new ResourceFSiFilePass());
         }
 
-        if ($container->hasExtension('fsi_form_extensions')) {
-            $container->addCompilerPass(new ResourceFSiCKEditorPass());
-        }
-
         if ($container->hasExtension('ivory_ck_editor')) {
             $container->addCompilerPass(new ResourceCKEditorPass());
         }
@@ -43,7 +39,7 @@ class FSiResourceRepositoryBundle extends Bundle
         $container->addCompilerPass(
             DoctrineOrmMappingsPass::createXmlMappingDriver(
                 $this->getDoctrineMappings(),
-                array('doctrine.orm.entity_manager')
+                ['doctrine.orm.entity_manager']
             )
         );
     }
@@ -62,8 +58,8 @@ class FSiResourceRepositoryBundle extends Bundle
      */
     private function getDoctrineMappings()
     {
-        return array(
+        return [
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'FSi\Bundle\ResourceRepositoryBundle\Model',
-        );
+        ];
     }
 }

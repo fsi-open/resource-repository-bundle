@@ -36,21 +36,21 @@ class ResourceRepositorySpec extends ObjectBehavior
     {
         $this->shouldThrow(
             new EntityRepositoryException('Method "findBy" is not supported in "FSiResourceRepository:Resource" entity repository')
-        )->during('findBy', array(array()));
+        )->during('findBy', [[]]);
     }
 
     function it_throw_exception_during_findAll_method()
     {
         $this->shouldThrow(
             new EntityRepositoryException('Method "findAll" is not supported in "FSiResourceRepository:Resource" entity repository')
-        )->during('findAll', array());
+        )->during('findAll', []);
     }
 
     function it_throw_exception_during_findOneBy_method()
     {
         $this->shouldThrow(
             new EntityRepositoryException('Method "findOneBy" is not supported in "FSiResourceRepository:Resource" entity repository')
-        )->during('findOneBy', array(array()));
+        )->during('findOneBy', [[]]);
     }
 
     function it_return_entity_even_if_it_not_exist_in_db(EntityManager $em)
@@ -91,7 +91,7 @@ class ResourceRepositorySpec extends ObjectBehavior
 
     public function getMatchers()
     {
-        return array(
+        return [
             'returnResourceWithKey' => function($subject, $key) {
                 if (!$subject instanceof Resource) {
                     return false;
@@ -103,6 +103,6 @@ class ResourceRepositorySpec extends ObjectBehavior
 
                 return true;
             }
-        );
+        ];
     }
 }

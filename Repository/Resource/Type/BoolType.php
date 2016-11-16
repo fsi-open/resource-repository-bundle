@@ -9,6 +9,8 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+
 class BoolType extends AbstractType
 {
     /**
@@ -24,6 +26,6 @@ class BoolType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'checkbox';
+        return CheckboxType::class;
     }
 }

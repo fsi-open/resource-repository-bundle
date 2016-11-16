@@ -9,6 +9,8 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
+use FSi\Bundle\DoctrineExtensionsBundle\Form\Type\FSi\RemovableFileType as FSiRemovableFileFormType;
+
 class FSiRemovableFileType extends AbstractType
 {
     /**
@@ -24,7 +26,7 @@ class FSiRemovableFileType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'fsi_removable_file';
+        return FSiRemovableFileFormType::class;
     }
 
     protected function buildFormOptions()
@@ -33,8 +35,8 @@ class FSiRemovableFileType extends AbstractType
 
         if (isset($options['constraints'])) {
             $options['file_options'] = array_merge(
-                isset($options['file_options']) ? $options['file_options'] : array(),
-                array('constraints' => $options['constraints'])
+                isset($options['file_options']) ? $options['file_options'] : [],
+                ['constraints' => $options['constraints']]
             );
             unset($options['constraints']);
         }

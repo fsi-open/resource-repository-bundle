@@ -68,7 +68,7 @@ class ResourceRepositorySpec extends ObjectBehavior
 
     public function getMatchers()
     {
-        return array(
+        return [
             'haveFunction' => function($subject, $key) {
                 foreach ($subject as $function) {
                     if ($function instanceof \Twig_SimpleFunction) {
@@ -80,6 +80,6 @@ class ResourceRepositorySpec extends ObjectBehavior
 
                 return false;
             }
-        );
+        ];
     }
 }

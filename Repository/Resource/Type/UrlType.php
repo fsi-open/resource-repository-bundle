@@ -10,6 +10,7 @@
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
 use Symfony\Component\Validator\Constraints\Url;
+use Symfony\Component\Form\Extension\Core\Type\UrlType as UrlFormType;
 
 class UrlType extends AbstractType
 {
@@ -35,6 +36,6 @@ class UrlType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'url';
+        return UrlFormType::class;
     }
 }

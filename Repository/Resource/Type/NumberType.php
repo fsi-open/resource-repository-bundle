@@ -9,6 +9,8 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\NumberType as NumberFormType;
+
 class NumberType extends AbstractType
 {
     /**
@@ -24,7 +26,7 @@ class NumberType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'number';
+        return NumberFormType::class;
     }
 
     protected function buildFormOptions()
@@ -32,9 +34,9 @@ class NumberType extends AbstractType
         $options = parent::buildFormOptions();
 
         $options = array_merge(
-            array(
+            [
                 'precision' => 4
-            ),
+            ],
             $options
         );
 

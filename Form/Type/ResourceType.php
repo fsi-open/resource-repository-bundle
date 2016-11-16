@@ -60,15 +60,15 @@ class ResourceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class' => $this->resourceClass
-            )
+            ]
         );
 
         $resolver->setRequired(
-            array(
+            [
                 'resource_key'
-            )
+            ]
         );
     }
 

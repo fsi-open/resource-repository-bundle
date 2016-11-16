@@ -9,6 +9,8 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\IntegerType as IntegerFormType;
+
 class IntegerType extends AbstractType
 {
     /**
@@ -24,6 +26,6 @@ class IntegerType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'integer';
+        return IntegerFormType::class;
     }
 }

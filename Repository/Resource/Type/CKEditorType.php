@@ -9,6 +9,8 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
+use Ivory\CKEditorBundle\Form\Type\CKEditorType as CKEditorFormType;
+
 class CKEditorType extends AbstractType
 {
     /**
@@ -24,6 +26,6 @@ class CKEditorType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'ckeditor';
+        return CKEditorFormType::class;
     }
 }

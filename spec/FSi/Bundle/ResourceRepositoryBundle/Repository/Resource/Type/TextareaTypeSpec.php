@@ -4,6 +4,7 @@ namespace spec\FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -37,10 +38,10 @@ class TextareaTypeSpec extends ObjectBehavior
 
     function it_return_form_builder(FormFactory $factory, FormBuilder $form)
     {
-        $factory->createNamedBuilder('textValue', 'textarea', null, array(
+        $factory->createNamedBuilder('textValue', TextareaType::class, null, [
             'label' => false,
             'required' => false,
-        ))->shouldBeCalled()->willReturn($form);
+        ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf('Symfony\Component\Form\FormBuilder');
     }
@@ -49,32 +50,32 @@ class TextareaTypeSpec extends ObjectBehavior
     {
         $this->addConstraint($constraint);
 
-        $factory->createNamedBuilder('textValue', 'textarea', null, array(
+        $factory->createNamedBuilder('textValue', TextareaType::class, null, [
             'label' => false,
             'required' => false,
-            'constraints' => array(
+            'constraints' => [
                 $constraint
-            )
-        ))->shouldBeCalled()->willReturn($form);
+            ]
+        ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf('Symfony\Component\Form\FormBuilder');
     }
 
     function it_return_form_builder_with_form_options_added_to_resource_definition(FormFactory $factory, FormBuilder $form)
     {
-        $this->setFormOptions(array(
-            'attr' => array(
+        $this->setFormOptions([
+            'attr' => [
                 'class' => 'class-name'
-            )
-        ));
+            ]
+        ]);
 
-        $factory->createNamedBuilder('textValue', 'textarea', null, array(
+        $factory->createNamedBuilder('textValue', TextareaType::class, null, [
             'label' => false,
             'required' => false,
-            'attr' => array(
+            'attr' => [
                 'class' => 'class-name'
-            )
-        ))->shouldBeCalled()->willReturn($form);
+            ]
+        ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf('Symfony\Component\Form\FormBuilder');
     }

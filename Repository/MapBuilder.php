@@ -48,10 +48,10 @@ class MapBuilder
      * @param string $mapPath
      * @param string[] $resourceTypes
      */
-    public function __construct($mapPath, $resourceTypes = array())
+    public function __construct($mapPath, $resourceTypes = [])
     {
-        $this->resourceTypes = array();
-        $this->resources = array();
+        $this->resourceTypes = [];
+        $this->resources = [];
 
         foreach ($resourceTypes as $type => $class) {
             $this->resourceTypes[$type] = $class;
@@ -99,9 +99,9 @@ class MapBuilder
      * @throws \FSi\Bundle\ResourceRepositoryBundle\Exception\ConfigurationException
      * @return array
      */
-    protected function recursiveParseRawMap($rawMap = array(), $parentPath = null)
+    protected function recursiveParseRawMap($rawMap = [], $parentPath = null)
     {
-        $map = array();
+        $map = [];
 
         if (!is_array($rawMap)) {
             return $map;
@@ -207,10 +207,10 @@ class MapBuilder
      */
     protected function validateResourceConfiguration($configuration)
     {
-        $validKeys = array(
+        $validKeys = [
             'form_options',
             'constraints'
-        );
+        ];
 
         foreach ($configuration as $key => $options) {
             if ($key === 'type') {

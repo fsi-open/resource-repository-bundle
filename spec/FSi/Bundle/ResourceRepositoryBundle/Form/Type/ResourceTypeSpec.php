@@ -34,28 +34,15 @@ class ResourceTypeSpec extends ObjectBehavior
         $this->getName()->shouldReturn('resource');
     }
 
-    function it_should_have_default_data_class_and_resource_key_option(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'FSi\Bundle\DemoBundle\Entity\Resource'
-        ))->shouldBeCalled();
-
-        $resolver->setRequired(array(
-            'resource_key'
-        ))->shouldBeCalled();
-
-        $this->setDefaultOptions($resolver);
-    }
-
     function it_configures_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'FSi\Bundle\DemoBundle\Entity\Resource'
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
-        $resolver->setRequired(array(
+        $resolver->setRequired([
             'resource_key'
-        ))->shouldBeCalled();
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }
@@ -66,9 +53,9 @@ class ResourceTypeSpec extends ObjectBehavior
 
         $this->shouldThrow(
             new ResourceFormTypeException('"resources.invalid_resource" is not a valid resource key')
-        )->duringBuildForm($builder, array(
+        )->duringBuildForm($builder, [
             'resource_key' => 'resources.invalid_resource'
-        ));
+        ]);
     }
 
     function it_add_form_builder_specified_by_resource_definition(MapBuilder $map, FormBuilder $builder, TextType $resource,
@@ -82,8 +69,8 @@ class ResourceTypeSpec extends ObjectBehavior
         $builder->add($textBuilder)->shouldBeCalled();
 
 
-        $this->buildForm($builder, array(
+        $this->buildForm($builder, [
             'resource_key' => 'resources.resource_text'
-        ));
+        ]);
     }
 }

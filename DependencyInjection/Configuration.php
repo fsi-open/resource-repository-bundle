@@ -22,7 +22,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('fsi_resource_repository');
 
-        $supportedDrivers = array('orm');
+        $supportedDrivers = ['orm'];
 
         $rootNode->children()
             ->scalarNode('db_driver')

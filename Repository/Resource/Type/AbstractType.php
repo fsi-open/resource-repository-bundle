@@ -40,8 +40,8 @@ abstract class AbstractType implements ResourceInterface
     public function __construct($name)
     {
         $this->name = $name;
-        $this->constraints = array();
-        $this->formOptions = array();
+        $this->constraints = [];
+        $this->formOptions = [];
     }
 
     /**
@@ -103,19 +103,19 @@ abstract class AbstractType implements ResourceInterface
      */
     protected function buildFormOptions()
     {
-        $options = array(
+        $options = [
             'required' => false,
             'label' => false,
-        );
+        ];
 
         $options = array_merge($options, $this->formOptions);
 
         if (count($this->constraints)) {
             $options = array_merge(
                 $options,
-                array(
+                [
                     'constraints' => $this->constraints
-                )
+                ]
             );
         }
 

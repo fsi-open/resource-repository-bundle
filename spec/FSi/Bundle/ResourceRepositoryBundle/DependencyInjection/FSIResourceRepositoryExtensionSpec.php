@@ -36,11 +36,11 @@ class FSIResourceRepositoryExtensionSpec extends ObjectBehavior
         $builder->setAlias('fsi_resource_repository.entity.repository', Argument::type('Symfony\Component\DependencyInjection\Alias'))->shouldBeCalled();
         $builder->setAlias('fsi_resource_repository.repository', Argument::type('Symfony\Component\DependencyInjection\Alias'))->shouldBeCalled();
 
-        $this->load(array(
-            0 => array(
+        $this->load([
+            0 => [
                 'db_driver' => 'orm',
                 'resource_class' => 'FSi\DemoBundle\Entity\Resource'
-            )
-        ), $builder);
+            ]
+        ], $builder);
     }
 }
