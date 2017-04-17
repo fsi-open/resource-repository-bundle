@@ -72,5 +72,12 @@
             <argument type="service" id="fsi_resource_repository.resource.map_builder"/>
             <argument>%fsi_resource_repository.resource.value.class%</argument>
         </service>
+
+        <!-- Fixtures -->
+        <service id="fsi_resource_repository.alice.populator.resource" class="FSi\Bundle\ResourceRepositoryBundle\DataFixtures\Populator\ResourcePopulator">
+            <argument type="service" id="fsi_resource_repository.resource.repository"></argument>
+            <argument type="service" id="fsi_doctrine_extensions.listener.translatable"></argument>
+            <tag name="fsi_doctrine_extensions.alice.populator" />
+        </service>
     </services>
 </container>
