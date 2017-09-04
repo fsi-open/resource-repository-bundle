@@ -46,7 +46,7 @@ class ResourceRepository extends \Twig_Extension
     }
 
     /**
-     * @param $key
+     * @param string $key
      * @return bool
      */
     public function hasResource($key)
@@ -56,8 +56,8 @@ class ResourceRepository extends \Twig_Extension
     }
 
     /**
-     * @param $key
-     * @return mixed|null
+     * @param string $key
+     * @return mixed
      */
     public function getResource($key, $default = null)
     {
