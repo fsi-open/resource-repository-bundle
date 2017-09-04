@@ -55,19 +55,19 @@ Interface ResourceValue
     public function setDatetimeValue($datetimeValue);
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      */
     public function getDatetimeValue();
 
     /**
-     * @param mixed $timeValue
+     * @param \DateTime $timeValue
      *
      * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */
     public function setTimeValue($timeValue);
 
     /**
-     * @return mixed
+     * @return \DateTimeImmutable
      */
     public function getTimeValue();
 

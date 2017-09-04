@@ -12,9 +12,6 @@ matrix:
 sudo: false
 
 before_script:
-  - composer update $COMPOSER_FLAGS
-
-before_script:
   - phpenv config-rm xdebug.ini
   - composer update $COMPOSER_FLAGS
 
