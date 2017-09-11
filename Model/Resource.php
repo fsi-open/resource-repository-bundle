@@ -12,7 +12,7 @@ namespace FSi\Bundle\ResourceRepositoryBundle\Model;
 use DateTime;
 use DateTimeImmutable;
 
-class Resource implements ResourceInterface
+class Resource implements ResourceValue
 {
     /**
      * @var string
