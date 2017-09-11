@@ -3,7 +3,7 @@
 ## DateTimeImmutable is returned for date and time value
 
 To prevent the value from being modified, a `\DateTimeImmutable` instance is being
-return for `date` and `time` types of resources.
+return for `date`, `time` and `datetime` types of resources.
 
 ## Removed deprecated interface
 

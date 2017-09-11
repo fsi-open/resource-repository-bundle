@@ -36,19 +36,19 @@ Interface ResourceValue
     public function getTextValue();
 
     /**
-     * @param mixed $dateValue
+     * @param \DateTimeInterface $dateValue
      *
      * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */
     public function setDateValue($dateValue);
 
     /**
-     * @return mixed
+     * @return \DateTimeImmutable
      */
     public function getDateValue();
 
     /**
-     * @param \DateTime $datetimeValue
+     * @param \DateTimeInterface $datetimeValue
      *
      * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */
@@ -60,7 +60,7 @@ Interface ResourceValue
     public function getDatetimeValue();
 
     /**
-     * @param \DateTime $timeValue
+     * @param \DateTimeInterface $timeValue
      *
      * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */

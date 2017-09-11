@@ -9,8 +9,8 @@
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Model;
 
-use DateTime;
 use DateTimeImmutable;
+use DateTimeInterface;
 
 class Resource implements ResourceValue
 {
@@ -25,22 +25,22 @@ class Resource implements ResourceValue
     protected $textValue;
 
     /**
-     * @var DateTime
+     * @var DateTimeInterface
      */
     protected $datetimeValue;
 
     /**
-     * @var
+     * @var DateTimeInterface
      */
     protected $dateValue;
 
     /**
-     * @var
+     * @var DateTimeInterface
      */
     protected $timeValue;
 
     /**
-     * @var
+     * @var int
      */
     protected $numberValue;
 
@@ -110,7 +110,7 @@ class Resource implements ResourceValue
      */
     public function getDateValue()
     {
-        return $this->dateValue;
+        return $this->convertDateToImmutable($this->dateValue);
     }
 
     /**
@@ -204,10 +204,10 @@ class Resource implements ResourceValue
     }
 
     /**
-     * @param DateTime $value
+     * @param DateTimeInterface $value
      * @return DateTimeImmutable
      */
-    private function convertDateToImmutable(DateTime $value)
+    private function convertDateToImmutable(DateTimeInterface $value)
     {
         return new DateTimeImmutable($value->getTimestamp(), $value->getTimezone());
     }
