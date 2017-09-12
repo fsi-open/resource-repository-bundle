@@ -40,7 +40,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
     }
 
     /**
-     * @param $key
+     * @param string $key
      * @return \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue
      */
     public function get($key)

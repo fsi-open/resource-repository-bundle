@@ -25,7 +25,11 @@ class FSIResourceRepositoryExtensionSpec extends ObjectBehavior
     function it_should_add_resource_map_parameter_to_container(ContainerBuilder $builder, ParameterBagInterface $parameterBag)
     {
         $builder->hasExtension(Argument::type('string'))->willReturn(false);
-        $builder->addResource(Argument::type('\Symfony\Component\Config\Resource\FileResource'))->shouldBeCalled();
+        if (method_exists('Symfony\Component\DependencyInjection\ContainerBuilder', 'fileExists')) {
+            $builder->fileExists(Argument::type('string'))->willReturn(true);
+        } else {
+            $builder->addResource(Argument::type('\Symfony\Component\Config\Resource\FileResource'))->shouldBeCalled();
+        }
         $builder->setDefinition(Argument::type('string'), Argument::type('Symfony\Component\DependencyInjection\Definition'))->shouldBeCalled();
         $builder->getParameterBag()->shouldBeCalled()->willReturn($parameterBag);
 
