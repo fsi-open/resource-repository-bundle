@@ -111,12 +111,7 @@ abstract class AbstractType implements ResourceInterface
         $options = array_merge($options, $this->formOptions);
 
         if (count($this->constraints)) {
-            $options = array_merge(
-                $options,
-                [
-                    'constraints' => $this->constraints
-                ]
-            );
+            $options = array_merge($options, ['constraints' => $this->constraints]);
         }
 
         return $options;

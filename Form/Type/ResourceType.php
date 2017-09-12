@@ -14,7 +14,6 @@ use FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ResourceType extends AbstractType
 {
@@ -44,14 +43,6 @@ class ResourceType extends AbstractType
     public function getName()
     {
         return 'resource';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $this->configureOptions($resolver);
     }
 
     /**

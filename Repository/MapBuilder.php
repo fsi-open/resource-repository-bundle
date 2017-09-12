@@ -26,7 +26,7 @@ class MapBuilder
     protected $rawArray;
 
     /**
-     * Parser resources map
+     * Parsed resources map
      *
      * @var array
      */
@@ -37,22 +37,19 @@ class MapBuilder
      *
      * @var array
      */
-    protected $resources;
+    protected $resources = [];
 
     /**
      * @var string[]
      */
-    protected $resourceTypes;
+    protected $resourceTypes = [];
 
     /**
      * @param string $mapPath
      * @param string[] $resourceTypes
      */
-    public function __construct($mapPath, $resourceTypes = [])
+    public function __construct($mapPath, array $resourceTypes = [])
     {
-        $this->resourceTypes = [];
-        $this->resources = [];
-
         foreach ($resourceTypes as $type => $class) {
             $this->resourceTypes[$type] = $class;
         }
@@ -74,7 +71,7 @@ class MapBuilder
      * Get resource definition by key.
      * It can return resource definition object or array if key represents resources group
      *
-     * @param $key
+     * @param string $key
      * @return mixed
      */
     public function getResource($key)
@@ -85,7 +82,7 @@ class MapBuilder
     /**
      * Check if resource definition exists in map
      *
-     * @param $key
+     * @param string $key
      * @return bool
      */
     public function hasResource($key)
@@ -108,9 +105,7 @@ class MapBuilder
         }
 
         foreach ($rawMap as $key => $configuration) {
-            $path = (isset($parentPath))
-                ? $parentPath . '.' . $key
-                : $key;
+            $path = isset($parentPath) ? sprintf('%s.%s', $parentPath, $key) : $key;
 
             $this->validateConfiguration($configuration, $path);
 
@@ -139,14 +134,16 @@ class MapBuilder
      * @throws \FSi\Bundle\ResourceRepositoryBundle\Exception\ConfigurationException
      * @return ResourceInterface
      */
-    protected function createResource($configuration, $path)
+    protected function createResource(array $configuration, $path)
     {
         $type = $configuration['type'];
 
         if (!array_key_exists($type, $this->resourceTypes)) {
-            throw new ConfigurationException(
-                sprintf('"%s" is not a valid resource type. Try one from: %s', $type, implode(', ', array_keys($this->resourceTypes)))
-            );
+            throw new ConfigurationException(sprintf(
+                '"%s" is not a valid resource type. Try one from: %s',
+                $type,
+                implode(', ', array_keys($this->resourceTypes))
+            ));
         }
 
         $class = $this->resourceTypes[$type];
@@ -156,9 +153,9 @@ class MapBuilder
 
     /**
      * @param ResourceInterface $resource
-     * @param $configuration
+     * @param array $configuration
      */
-    protected function addConstraints(ResourceInterface $resource, $configuration)
+    protected function addConstraints(ResourceInterface $resource, array $configuration)
     {
         if (isset($configuration['constraints'])) {
             $constraints = $configuration['constraints'];
@@ -173,6 +170,10 @@ class MapBuilder
         }
     }
 
+    /**
+     * @param ResourceInterface $resource
+     * @param array $configuration
+     */
     protected function setFormOptions(ResourceInterface $resource, $configuration)
     {
         if (isset($configuration['form_options']) && is_array($configuration['form_options'])) {
@@ -181,46 +182,50 @@ class MapBuilder
     }
 
     /**
-     * @param $configuration
-     * @param $path
+     * @param array $configuration
+     * @param string $path
      * @throws \FSi\Bundle\ResourceRepositoryBundle\Exception\ConfigurationException
      */
-    protected function validateConfiguration($configuration, $path)
+    protected function validateConfiguration(array $configuration, $path)
     {
         if (strlen($path) > 255) {
-            throw new ConfigurationException(
-                sprintf('"%s..." key is too long. Maximum key length is 255 characters', substr($path, 0, 32))
-            );
+            throw new ConfigurationException(sprintf(
+                '"%s..." key is too long. Maximum key length is 255 characters',
+                substr($path, 0, 32)
+            ));
         }
 
         if (!array_key_exists('type', $configuration)) {
-            throw new ConfigurationException(
-                sprintf('Missing "type" declaration in "%s" element configuration', $path)
-            );
+            throw new ConfigurationException(sprintf(
+                'Missing "type" declaration in "%s" element configuration',
+                $path
+            ));
         }
 
     }
 
     /**
-     * @param $configuration
+     * @param array $configuration
      * @throws \FSi\Bundle\ResourceRepositoryBundle\Exception\ConfigurationException
      */
-    protected function validateResourceConfiguration($configuration)
+    protected function validateResourceConfiguration(array $configuration)
     {
         $validKeys = [
             'form_options',
             'constraints'
         ];
 
-        foreach ($configuration as $key => $options) {
+        foreach (array_keys($configuration) as $key) {
             if ($key === 'type') {
                 continue;
             }
 
             if (!in_array($key, $validKeys)) {
-                throw new ConfigurationException(
-                    sprintf('"%s" is not a valid resource type option. Try one from: %s', $key, implode(', ', $validKeys))
-                );
+                throw new ConfigurationException(sprintf(
+                    '"%s" is not a valid resource type option. Try one from: %s',
+                    $key,
+                    implode(', ', $validKeys)
+                ));
             }
         }
     }

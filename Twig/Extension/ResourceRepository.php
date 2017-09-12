@@ -10,11 +10,13 @@
 namespace FSi\Bundle\ResourceRepositoryBundle\Twig\Extension;
 
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Repository;
+use Twig_Extension;
+use Twig_SimpleFunction;
 
-class ResourceRepository extends \Twig_Extension
+class ResourceRepository extends Twig_Extension
 {
     /**
-     * @var \FSi\Bundle\ResourceRepositoryBundle\Repository\Repository
+     * @var Repository
      */
     protected $repository;
 
@@ -40,8 +42,8 @@ class ResourceRepository extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('has_resource', [$this, 'hasResource']),
-            new \Twig_SimpleFunction('get_resource', [$this, 'getResource'])
+            new Twig_SimpleFunction('has_resource', [$this, 'hasResource']),
+            new Twig_SimpleFunction('get_resource', [$this, 'getResource'])
         ];
     }
 

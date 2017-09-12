@@ -40,8 +40,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
     }
 
     /**
-     * @param string $key
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue
+     * {@inheritdoc}
      */
     public function get($key)
     {
@@ -49,7 +48,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
     }
 
     /**
-     * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue $resourceValue
+     * {@inheritdoc}
      */
     public function save(ResourceValue $resourceValue)
     {
@@ -58,7 +57,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
     }
 
     /**
-     * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue $resourceValue
+     * {@inheritdoc}
      */
     public function add(ResourceValue $resourceValue)
     {
@@ -66,7 +65,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
     }
 
     /**
-     * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue $resourceValue
+     * {@inheritdoc}
      */
     public function remove(ResourceValue $resourceValue)
     {
@@ -86,7 +85,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
      */
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
-        throw new EntityRepositoryException('Method "findBy" is not supported in "FSiResourceRepository:Resource" entity repository');
+        $this->throwBadMethodException('findBy');
     }
 
     /**
@@ -97,7 +96,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
      */
     public function findAll()
     {
-        throw new EntityRepositoryException('Method "findAll" is not supported in "FSiResourceRepository:Resource" entity repository');
+        $this->throwBadMethodException('findAll');
     }
 
     /**
@@ -110,6 +109,19 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
      */
     public function findOneBy(array $criteria, array $orderBy = null)
     {
-        throw new EntityRepositoryException('Method "findOneBy" is not supported in "FSiResourceRepository:Resource" entity repository');
+        $this->throwBadMethodException('findOneBy');
+    }
+
+    /**
+     * @param string $method
+     * @throws EntityRepositoryException
+     */
+    private function throwBadMethodException($method)
+    {
+        throw new EntityRepositoryException(sprintf(
+            'Method "%s" is not supported in "%s" entity repository',
+            $method,
+            $this->getEntityName()
+        ));
     }
 }
