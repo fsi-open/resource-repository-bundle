@@ -7,22 +7,19 @@
  * file that was distributed with this source code.
  */
 
-namespace FSi\Bundle\ResourceRepositoryBundle\Twig\Extension;
+namespace FSi\Bundle\ResourceRepositoryBundle\Twig;
 
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Repository;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
-class ResourceRepository extends Twig_Extension
+class ResourceRepositoryExtension extends Twig_Extension
 {
     /**
      * @var Repository
      */
     protected $repository;
 
-    /**
-     * @param Repository $repository
-     */
     public function __construct(Repository $repository)
     {
         $this->repository = $repository;

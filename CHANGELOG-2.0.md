@@ -9,3 +9,8 @@ return for `date`, `time` and `datetime` types of resources.
 
 `FSi\Bundle\ResourceRepositoryBundle\Model\ResourceInterface` has been deleted
 and replaced with `FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue`.
+
+## Moved the Twig extension up a directory
+
+`FSi\Bundle\ResourceRepositoryBundle\Twig\Extension\ResourceRepository` is now
+`FSi\Bundle\ResourceRepositoryBundle\Twig\ResourceRepositoryExtension`.
