@@ -4,3 +4,7 @@
 
 `FSi\Bundle\ResourceRepositoryBundle\Model\ResourceInterface` has been deleted,
 use `FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue` instead.
+
+## Upgrade to PHP 7.1 or higher
+
+In order to use this bundle, you will need PHP 7.1 or higher.

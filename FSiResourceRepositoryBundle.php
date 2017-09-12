@@ -11,7 +11,6 @@ namespace FSi\Bundle\ResourceRepositoryBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceCKEditorPass;
-use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceFSiCKEditorPass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceFSiFilePass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourcePass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\TwigFormPass;
@@ -22,7 +21,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 class FSiResourceRepositoryBundle extends Bundle
 {
     /**
-     * @param ContainerBuilder $container
+     * {@inheritdoc}
      */
     public function build(ContainerBuilder $container)
     {
@@ -44,6 +43,9 @@ class FSiResourceRepositoryBundle extends Bundle
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getContainerExtension()
     {
         if (null === $this->extension) {

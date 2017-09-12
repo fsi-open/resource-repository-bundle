@@ -14,3 +14,13 @@ and replaced with `FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue`.
 
 `FSi\Bundle\ResourceRepositoryBundle\Twig\Extension\ResourceRepository` is now
 `FSi\Bundle\ResourceRepositoryBundle\Twig\ResourceRepositoryExtension`.
+
+## ResourceValue interface no longer returns self in setters
+
+`FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue` no longer provides chain
+functionality, since it was never used anyway.
+
+## Dropped support for PHP below 7.1
+
+To be able to fully utilize new functionality introduced in 7.1, we have decided 
+to only support PHP versions equal or higher to it.
