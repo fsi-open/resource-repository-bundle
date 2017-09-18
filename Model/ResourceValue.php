@@ -13,8 +13,6 @@ Interface ResourceValue
 {
     /**
      * @param string $key
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */
     public function setKey($key);
 
@@ -25,8 +23,6 @@ Interface ResourceValue
 
     /**
      * @param string $textValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */
     public function setTextValue($textValue);
 
@@ -37,8 +33,6 @@ Interface ResourceValue
 
     /**
      * @param \DateTimeInterface $dateValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */
     public function setDateValue($dateValue);
 
@@ -49,8 +43,6 @@ Interface ResourceValue
 
     /**
      * @param \DateTimeInterface $datetimeValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */
     public function setDatetimeValue($datetimeValue);
 
@@ -61,8 +53,6 @@ Interface ResourceValue
 
     /**
      * @param \DateTimeInterface $timeValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */
     public function setTimeValue($timeValue);
 
@@ -73,8 +63,6 @@ Interface ResourceValue
 
     /**
      * @param mixed $numberValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */
     public function setNumberValue($numberValue);
 
@@ -85,8 +73,6 @@ Interface ResourceValue
 
     /**
      * @param int $integerValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */
     public function setIntegerValue($integerValue);
 
@@ -97,8 +83,6 @@ Interface ResourceValue
 
     /**
      * @param boolean $boolValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */
     public function setBoolValue($boolValue);
 

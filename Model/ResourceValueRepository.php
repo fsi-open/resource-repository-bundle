@@ -12,7 +12,7 @@ namespace FSi\Bundle\ResourceRepositoryBundle\Model;
 interface ResourceValueRepository
 {
     /**
-     * @param $key
+     * @param string $key
      * @return \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue
      */
     public function get($key);
@@ -21,7 +21,6 @@ interface ResourceValueRepository
      * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue $resourceValue
      */
     public function add(ResourceValue $resourceValue);
-
 
     /**
      * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue $resourceValue

@@ -65,8 +65,6 @@ class Resource implements ResourceValue
     public function setKey($key)
     {
         $this->key = $key;
-
-        return $this;
     }
 
     /**
@@ -83,8 +81,6 @@ class Resource implements ResourceValue
     public function setTextValue($textValue)
     {
         $this->textValue = $textValue;
-
-        return $this;
     }
 
     /**
@@ -101,8 +97,6 @@ class Resource implements ResourceValue
     public function setDateValue($dateValue)
     {
         $this->dateValue = $dateValue;
-
-        return $this;
     }
 
     /**
@@ -119,8 +113,6 @@ class Resource implements ResourceValue
     public function setDatetimeValue($datetimeValue)
     {
         $this->datetimeValue = $datetimeValue;
-
-        return $this;
     }
 
     /**
@@ -137,8 +129,6 @@ class Resource implements ResourceValue
     public function setTimeValue($timeValue)
     {
         $this->timeValue = $timeValue;
-
-        return $this;
     }
 
     /**
@@ -155,8 +145,6 @@ class Resource implements ResourceValue
     public function setNumberValue($numberValue)
     {
         $this->numberValue = $numberValue;
-
-        return $this;
     }
 
     /**
@@ -173,8 +161,6 @@ class Resource implements ResourceValue
     public function setIntegerValue($integerValue)
     {
         $this->integerValue = $integerValue;
-
-        return $this;
     }
 
     /**
@@ -191,8 +177,6 @@ class Resource implements ResourceValue
     public function setBoolValue($boolValue)
     {
         $this->boolValue = $boolValue;
-
-        return $this;
     }
 
     /**

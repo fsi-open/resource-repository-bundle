@@ -1,12 +1,11 @@
 <?php
 
-namespace spec\FSi\Bundle\ResourceRepositoryBundle\Twig\Extension;
+namespace spec\FSi\Bundle\ResourceRepositoryBundle\Twig;
 
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Repository;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
-class ResourceRepositorySpec extends ObjectBehavior
+class ResourceRepositoryExtensionSpec extends ObjectBehavior
 {
     function let(Repository $repository)
     {
@@ -15,7 +14,7 @@ class ResourceRepositorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('FSi\Bundle\ResourceRepositoryBundle\Twig\Extension\ResourceRepository');
+        $this->shouldHaveType('FSi\Bundle\ResourceRepositoryBundle\Twig\ResourceRepositoryExtension');
     }
 
     function it_is_twig_extension()
@@ -70,15 +69,13 @@ class ResourceRepositorySpec extends ObjectBehavior
     {
         return [
             'haveFunction' => function($subject, $key) {
-                foreach ($subject as $function) {
-                    if ($function instanceof \Twig_SimpleFunction) {
-                        if ($function->getName() == $key) {
-                            return true;
-                        }
-                    }
-                }
+                $filter = function ($function) use ($key) {
+                    return $function instanceof \Twig_SimpleFunction
+                        && $function->getName() == $key
+                    ;
+                };
 
-                return false;
+                return count(array_filter($subject, $filter)) > 0;
             }
         ];
     }
