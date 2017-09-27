@@ -1,9 +1,10 @@
 # List of changes in version 2.0
 
-## DateTimeImmutable is returned for date and time value
+## DateTimeImmutable is returned for datetime, date and time values
 
-To prevent the value from being modified, a `\DateTimeImmutable` instance is being
-return for `date`, `time` and `datetime` types of resources.
+These values now require and return an instance of `DateTimeImmutable`. To accomodate
+this change the database mappings for `FSi\Bundle\ResourceRepositoryBundle\Model\Resource`
+have been changed to immutable, so the conversion is handled by Doctrine.
 
 ## Removed deprecated interface
 
@@ -17,8 +18,8 @@ and replaced with `FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue`.
 
 ## ResourceValue interface no longer returns self in setters
 
-`FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue` no longer provides chain
-functionality, since it was never used anyway.
+`FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue` no longer provides chained
+setters functionality, since it was never used anyway.
 
 ## Dropped support for PHP below 7.1
 

@@ -8,9 +8,9 @@
     <mapped-superclass name="FSi\Bundle\ResourceRepositoryBundle\Model\Resource" table="fsi_resource">
         <id name="key" column="id" type="string" length="255" />
         <field name="textValue" column="text_value" type="text" nullable="true"/>
-        <field name="datetimeValue" column="datetime_value" type="datetime" nullable="true"/>
-        <field name="dateValue" column="date_value" type="date" nullable="true"/>
-        <field name="timeValue" column="time_value" type="time" nullable="true"/>
+        <field name="datetimeValue" column="datetime_value" type="datetime_immutable" nullable="true"/>
+        <field name="dateValue" column="date_value" type="date_immutable" nullable="true"/>
+        <field name="timeValue" column="time_value" type="time_immutable" nullable="true"/>
         <field name="numberValue" column="number_value" type="decimal" precision="20" scale="4" nullable="true"/>
         <field name="integerValue" column="integer_value" type="integer" nullable="true"/>
         <field name="boolValue" column="bool_value" type="boolean" />

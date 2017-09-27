@@ -10,7 +10,6 @@
 namespace FSi\Bundle\ResourceRepositoryBundle\Model;
 
 use DateTimeImmutable;
-use DateTimeInterface;
 
 class Resource implements ResourceValue
 {
@@ -25,17 +24,17 @@ class Resource implements ResourceValue
     protected $textValue;
 
     /**
-     * @var DateTimeInterface
+     * @var DateTimeImmutable
      */
     protected $datetimeValue;
 
     /**
-     * @var DateTimeInterface
+     * @var DateTimeImmutable
      */
     protected $dateValue;
 
     /**
-     * @var DateTimeInterface
+     * @var DateTimeImmutable
      */
     protected $timeValue;
 
@@ -104,7 +103,7 @@ class Resource implements ResourceValue
      */
     public function getDateValue()
     {
-        return $this->convertDateToImmutable($this->dateValue);
+        return $this->dateValue;
     }
 
     /**
@@ -120,7 +119,7 @@ class Resource implements ResourceValue
      */
     public function getDatetimeValue()
     {
-        return $this->convertDateToImmutable($this->datetimeValue);
+        return $this->datetimeValue;
     }
 
     /**
@@ -136,7 +135,7 @@ class Resource implements ResourceValue
      */
     public function getTimeValue()
     {
-        return $this->convertDateToImmutable($this->timeValue);
+        return $this->timeValue;
     }
 
     /**
@@ -185,14 +184,5 @@ class Resource implements ResourceValue
     public function getBoolValue()
     {
         return $this->boolValue;
-    }
-
-    /**
-     * @param DateTimeInterface $value
-     * @return DateTimeImmutable
-     */
-    private function convertDateToImmutable(DateTimeInterface $value)
-    {
-        return DateTimeImmutable::createFromMutable($value);
     }
 }
