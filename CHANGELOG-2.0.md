@@ -24,3 +24,8 @@ functionality, since it was never used anyway.
 
 To be able to fully utilize new functionality introduced in 7.1, we have decided 
 to only support PHP versions equal or higher to it.
+
+## Removed deprecated entity
+
+Class `FSi\Bundle\ResourceRepositoryBundle\Entity\ResourceRepository` has been
+removed due to being deprecated.
