@@ -193,6 +193,6 @@ class Resource implements ResourceValue
      */
     private function convertDateToImmutable(DateTimeInterface $value)
     {
-        return new DateTimeImmutable($value->getTimestamp(), $value->getTimezone());
+        return DateTimeImmutable::createFromMutable($value);
     }
 }
