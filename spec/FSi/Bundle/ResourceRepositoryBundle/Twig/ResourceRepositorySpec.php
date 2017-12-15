@@ -65,7 +65,7 @@ class ResourceRepositoryExtensionSpec extends ObjectBehavior
         $this->getResource('resources.resource_a', 'my_default')->shouldReturn('my_default');
     }
 
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'haveFunction' => function($subject, $key) {

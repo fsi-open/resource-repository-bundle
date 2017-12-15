@@ -89,7 +89,7 @@ class ResourceRepositorySpec extends ObjectBehavior
         $this->remove($resourceValue);
     }
 
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'returnResourceWithKey' => function($subject, $key) {

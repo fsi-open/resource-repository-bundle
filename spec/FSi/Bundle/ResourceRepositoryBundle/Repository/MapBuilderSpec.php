@@ -117,7 +117,7 @@ class MapBuilderSpec extends ObjectBehavior
         ]);
     }
 
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'haveMap' => function($map, $expectedMap) {
@@ -147,7 +147,5 @@ class MapBuilderSpec extends ObjectBehavior
                 return $walker($map, $expectedMap);
             },
         ];
-
-        return false;
     }
 }
