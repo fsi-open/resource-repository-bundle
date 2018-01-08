@@ -7,24 +7,20 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
 use FSi\Bundle\DoctrineExtensionsBundle\Form\Type\FSi\ImageType as FSiImageFormType;
 
 class FSiImageType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getResourceProperty()
+    public function getResourceProperty(): string
     {
         return 'fileValue';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getFormType()
+    protected function getFormType(): string
     {
         return FSiImageFormType::class;
     }

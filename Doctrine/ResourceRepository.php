@@ -39,34 +39,22 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
         return $resource;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function get($key)
     {
         return $this->find($key);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function save(ResourceValue $resourceValue)
     {
         $this->_em->persist($resourceValue);
         $this->_em->flush();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function add(ResourceValue $resourceValue)
     {
         $this->save($resourceValue);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function remove(ResourceValue $resourceValue)
     {
         $this->_em->remove($resourceValue);
@@ -116,7 +104,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
      * @param string $method
      * @throws EntityRepositoryException
      */
-    private function throwBadMethodException($method)
+    private function throwBadMethodException(string $method): void
     {
         throw new EntityRepositoryException(sprintf(
             'Method "%s" is not supported in "%s" entity repository',

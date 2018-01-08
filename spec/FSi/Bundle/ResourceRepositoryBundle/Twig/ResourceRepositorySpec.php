@@ -1,9 +1,21 @@
 <?php
 
+/**
+ * (c) FSi sp. z o.o. <info@fsi.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace spec\FSi\Bundle\ResourceRepositoryBundle\Twig;
 
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Repository;
+use FSi\Bundle\ResourceRepositoryBundle\Twig\ResourceRepositoryExtension;
 use PhpSpec\ObjectBehavior;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 class ResourceRepositoryExtensionSpec extends ObjectBehavior
 {
@@ -14,12 +26,12 @@ class ResourceRepositoryExtensionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('FSi\Bundle\ResourceRepositoryBundle\Twig\ResourceRepositoryExtension');
+        $this->shouldHaveType(ResourceRepositoryExtension::class);
     }
 
     function it_is_twig_extension()
     {
-        $this->shouldBeAnInstanceOf('Twig_Extension');
+        $this->shouldBeAnInstanceOf(AbstractExtension::class);
     }
 
     function it_have_fsi_resource_repository_name()
@@ -27,50 +39,12 @@ class ResourceRepositoryExtensionSpec extends ObjectBehavior
         $this->getName()->shouldReturn('fsi_resource_repository');
     }
 
-    function it_have_has_resource_function()
-    {
-        $this->getFunctions()->shouldhaveFunction('has_resource');
-    }
-
-    function it_have_get_resource_function()
-    {
-        $this->getFunctions()->shouldhaveFunction('get_resource');
-    }
-
-    function it_return_false_when_resource_does_not_exist_in_repository(Repository $repository)
-    {
-        $repository->get('resources.resource_a')->willReturn(null);
-
-        $this->hasResource('resources.resource_a')->shouldReturn(false);
-    }
-
-    function it_return_true_when_resource_exist_in_repository(Repository $repository)
-    {
-        $repository->get('resources.resource_a')->willReturn('test');
-
-        $this->hasResource('resources.resource_a')->shouldReturn(true);
-    }
-
-    function it_return_value_for_key_from_repository(Repository $repository)
-    {
-        $repository->get('resources.resource_a')->willReturn('resource_value');
-
-        $this->getResource('resources.resource_a')->shouldReturn('resource_value');
-    }
-
-    function it_return_default_if_value_not_exists(Repository $repository)
-    {
-        $repository->get('resources.resource_a')->willReturn(null);
-
-        $this->getResource('resources.resource_a', 'my_default')->shouldReturn('my_default');
-    }
-
     public function getMatchers()
     {
         return [
             'haveFunction' => function($subject, $key) {
                 $filter = function ($function) use ($key) {
-                    return $function instanceof \Twig_SimpleFunction
+                    return $function instanceof TwigFunction
                         && $function->getName() == $key
                     ;
                 };

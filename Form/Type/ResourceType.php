@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\Form\Type;
 
 use FSi\Bundle\ResourceRepositoryBundle\Exception\ResourceFormTypeException;
@@ -27,27 +29,17 @@ class ResourceType extends AbstractType
      */
     protected $resourceClass;
 
-    /**
-     * @param MapBuilder $mapBuilder
-     * @param $resourceClass
-     */
-    public function __construct(MapBuilder $mapBuilder, $resourceClass)
+    public function __construct(MapBuilder $mapBuilder, string $resourceClass)
     {
         $this->mapBuilder = $mapBuilder;
         $this->resourceClass = $resourceClass;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'resource';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(['data_class' => $this->resourceClass]);
@@ -55,9 +47,6 @@ class ResourceType extends AbstractType
         $resolver->setRequired(['resource_key']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if (!$this->mapBuilder->hasResource($options['resource_key'])) {

@@ -7,42 +7,28 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Validator\Constraint;
 
 interface ResourceInterface
 {
-    /**
-     * Return resource name.
-     *
-     * @return string
-     */
-    public function getName();
+    public function getName(): string;
 
     /**
      * Return property that is used in Resource entity to store resource value.
      *
      * @return string
      */
-    public function getResourceProperty();
+    public function getResourceProperty(): string;
 
-    /**
-     * @param Constraint $constraint
-     * @return mixed
-     */
-    public function addConstraint(Constraint $constraint);
+    public function addConstraint(Constraint $constraint): void;
 
-    /**
-     * @param array $options
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\ResourceInterface
-     */
-    public function setFormOptions(array $options);
+    public function setFormOptions(array $options): void;
 
-    /**
-     * @param FormFactoryInterface $factory
-     * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormBuilder
-     */
-    public function getFormBuilder(FormFactoryInterface $factory);
+    public function getFormBuilder(FormFactoryInterface $factory): FormBuilderInterface;
 }

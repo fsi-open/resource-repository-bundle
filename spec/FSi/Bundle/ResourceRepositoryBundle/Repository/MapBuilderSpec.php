@@ -1,28 +1,38 @@
 <?php
 
+/**
+ * (c) FSi sp. z o.o. <info@fsi.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace spec\FSi\Bundle\ResourceRepositoryBundle\Repository;
 
 use FSi\Bundle\ResourceRepositoryBundle\Exception\ConfigurationException;
+use FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder;
+use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\TypeIntegerType;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class MapBuilderSpec extends ObjectBehavior
 {
-    protected $resources = [
-        'text' => 'FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType',
-        'integer' => 'FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\TypeIntegerType'
-    ];
+    protected $resources = ['text' => TextType::class, 'integer' => TypeIntegerType::class];
 
-    function let(TextType $text)
+    function let()
     {
-        $this->beConstructedWith(__DIR__ . '/../../../../Fixtures/simple_valid_map.yml', $this->resources);
+        $this->beConstructedWith(
+            __DIR__ . '/../../../../Fixtures/simple_valid_map.yml',
+            $this->resources
+        );
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder');
+        $this->shouldHaveType(MapBuilder::class);
     }
 
     function it_should_have_valid_simple_map()
@@ -30,9 +40,9 @@ class MapBuilderSpec extends ObjectBehavior
         $this->getMap()->shouldHaveMap([
             'main_resource_group' => [
                 'resource_block' => [
-                    'resource_a' => 'FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType',
-                    'resource_b' => 'FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType',
-                    'resource_c' => 'FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType'
+                    'resource_a' => TextType::class,
+                    'resource_b' => TextType::class,
+                    'resource_c' => TextType::class
                 ]
             ]
         ]);
@@ -41,7 +51,7 @@ class MapBuilderSpec extends ObjectBehavior
     function it_should_return_text_type_object()
     {
         $this->getResource('main_resource_group.resource_block.resource_a')
-            ->shouldReturnAnInstanceOf('FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType');
+            ->shouldReturnAnInstanceOf(TextType::class);
     }
 
     function it_should_return_false_if_resource_key_does_not_exists()
@@ -97,11 +107,7 @@ class MapBuilderSpec extends ObjectBehavior
     function it_should_create_resource_with_form_options()
     {
         $text = new TextType('resources.resource_text');
-        $text->setFormOptions([
-            'attr' => [
-                'class' => 'class-name'
-            ]
-        ]);
+        $text->setFormOptions(['attr' => ['class' => 'class-name']]);
 
         $this->beConstructedWith(__DIR__ . '/../../../../Fixtures/simple_valid_map_with_form_options.yml', $this->resources);
         $this->getResource('resources.resource_text')->shouldBeLike($text);
@@ -117,11 +123,10 @@ class MapBuilderSpec extends ObjectBehavior
         ]);
     }
 
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             'haveMap' => function($map, $expectedMap) {
-
                 $walker = function ($map, $expectedMap) use (&$walker) {
                     foreach ($map as $key => $element) {
                         if (!array_key_exists($key, $expectedMap)) {
@@ -147,7 +152,5 @@ class MapBuilderSpec extends ObjectBehavior
                 return $walker($map, $expectedMap);
             },
         ];
-
-        return false;
     }
 }

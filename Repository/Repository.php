@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository;
 
 use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository;
@@ -35,15 +37,10 @@ class Repository
      */
     protected $accessor;
 
-    /**
-     * @param MapBuilder $builder
-     * @param ResourceValueRepository $valueRepository
-     * @param string $resourceValueClass
-     */
     public function __construct(
         MapBuilder $builder,
         ResourceValueRepository $valueRepository,
-        $resourceValueClass
+        string $resourceValueClass
     ) {
         $this->builder = $builder;
         $this->resourceValueRepository = $valueRepository;
@@ -52,25 +49,23 @@ class Repository
     }
 
     /**
-     * Get resource by key
-     *
      * @param string $key
      * @return null|mixed
      */
-    public function get($key)
+    public function get(string $key)
     {
         $resource = $this->builder->getResource($key);
-        if (!isset($resource)) {
+        if (null === $resource) {
             return null;
         }
 
         $entity = $this->resourceValueRepository->get($resource->getName());
-        if (!isset($entity)) {
+        if (null === $entity) {
             return null;
         }
 
         $value = $this->accessor->getValue($entity, $resource->getResourceProperty());
-        if (isset($value) && !(is_string($value) && empty($value))) {
+        if (null !== $value && !(is_string($value) && empty($value))) {
             return $value;
         }
 
@@ -79,9 +74,10 @@ class Repository
 
     /**
      * @param string $key
-     * @param mixed
+     * @param mixed $value
+     * @return void
      */
-    public function set($key, $value)
+    public function set(string $key, $value): void
     {
         $resource = $this->builder->getResource($key);
 

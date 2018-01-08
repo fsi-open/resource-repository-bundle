@@ -1,14 +1,26 @@
 <?php
 
+/**
+ * (c) FSi sp. z o.o. <info@fsi.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace spec\FSi\Bundle\ResourceRepositoryBundle\Doctrine;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use FSi\Bundle\ResourceRepositoryBundle\Model\Resource as BaseResource;
+use FSi\Bundle\ResourceRepositoryBundle\Doctrine\ResourceRepository;
 use FSi\Bundle\ResourceRepositoryBundle\Exception\EntityRepositoryException;
+use FSi\Bundle\ResourceRepositoryBundle\Model\Resource as BaseResource;
 use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use spec\FSi\Bundle\ResourceRepositoryBundle\Doctrine\Resource;
 
 class Resource extends BaseResource
 {
@@ -18,18 +30,18 @@ class ResourceRepositorySpec extends ObjectBehavior
 {
     function let(EntityManager $em, ClassMetadata $class)
     {
-        $class->name = 'spec\\FSi\\Bundle\\ResourceRepositoryBundle\\Doctrine\\Resource';
+        $class->name = Resource::class;
         $this->beConstructedWith($em, $class);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('FSi\Bundle\ResourceRepositoryBundle\Doctrine\ResourceRepository');
+        $this->shouldHaveType(ResourceRepository::class);
     }
 
     function it_is_doctrine_entity_repository()
     {
-        $this->shouldBeAnInstanceOf('Doctrine\ORM\EntityRepository');
+        $this->shouldBeAnInstanceOf(EntityRepository::class);
     }
 
     function it_throw_exception_during_findBy_method()
