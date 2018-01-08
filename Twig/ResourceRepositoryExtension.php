@@ -7,13 +7,15 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\Twig;
 
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Repository;
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
-class ResourceRepositoryExtension extends Twig_Extension
+class ResourceRepositoryExtension extends AbstractExtension
 {
     /**
      * @var Repository
@@ -25,42 +27,21 @@ class ResourceRepositoryExtension extends Twig_Extension
         $this->repository = $repository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'fsi_resource_repository';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getFunctions()
     {
         return [
-            new Twig_SimpleFunction('has_resource', [$this, 'hasResource']),
-            new Twig_SimpleFunction('get_resource', [$this, 'getResource'])
+            new TwigFunction('has_resource', function(string $key): bool {
+                return null !== $this->repository->get($key);
+            }),
+            new TwigFunction('get_resource', function(string $key, $default = null) {
+                $value = $this->repository->get($key);
+                return is_null($value) ? $default : $value;
+            })
         ];
-    }
-
-    /**
-     * @param string $key
-     * @return bool
-     */
-    public function hasResource($key)
-    {
-        $resource = $this->repository->get($key);
-        return isset($resource);
-    }
-
-    /**
-     * @param string $key
-     * @return mixed
-     */
-    public function getResource($key, $default = null)
-    {
-        $value = $this->repository->get($key);
-        return is_null($value) ? $default : $value;
     }
 }

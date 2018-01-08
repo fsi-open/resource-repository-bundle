@@ -7,15 +7,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler;
 
 use FSi\Bundle\ResourceRepositoryBundle\Exception\CompilerPassException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
-/**
- * @author Norbert Orzechowicz <norbert@fsi.pl>
- */
 class ResourcePass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)

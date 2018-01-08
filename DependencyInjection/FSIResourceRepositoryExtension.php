@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -16,9 +18,6 @@ use Symfony\Component\DependencyInjection\Loader;
 
 class FSIResourceRepositoryExtension extends Extension
 {
-    /**
-     * {@inheritDoc}
-     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();

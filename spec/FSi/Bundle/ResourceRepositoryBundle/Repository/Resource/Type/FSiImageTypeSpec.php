@@ -1,10 +1,19 @@
 <?php
 
+/**
+ * (c) FSi sp. z o.o. <info@fsi.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace spec\FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
 use FSi\Bundle\DoctrineExtensionsBundle\Form\Type\FSi\ImageType;
+use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\ResourceInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -18,7 +27,7 @@ class FSiImageTypeSpec extends ObjectBehavior
 
     function it_is_resource()
     {
-        $this->shouldImplement('FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\ResourceInterface');
+        $this->shouldImplement(ResourceInterface::class);
     }
 
     function it_return_text_entity_field()

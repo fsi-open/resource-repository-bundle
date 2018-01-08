@@ -1,13 +1,24 @@
 <?php
 
+/**
+ * (c) FSi sp. z o.o. <info@fsi.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace spec\FSi\Bundle\ResourceRepositoryBundle\Repository;
 
 use FSi\Bundle\ResourceRepositoryBundle\Doctrine\ResourceRepository;
 use FSi\Bundle\ResourceRepositoryBundle\Model\Resource;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder;
+use FSi\Bundle\ResourceRepositoryBundle\Repository\Repository;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use spec\FSi\Bundle\ResourceRepositoryBundle\Repository\ResourceEntity;
 
 class ResourceEntity extends Resource
 {
@@ -17,19 +28,17 @@ class RepositorySpec extends ObjectBehavior
 {
     function let(MapBuilder $builder, ResourceRepository $repository)
     {
-        $this->beConstructedWith($builder, $repository, 'spec\FSi\Bundle\ResourceRepositoryBundle\Repository\ResourceEntity');
+        $this->beConstructedWith($builder, $repository, ResourceEntity::class);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('FSi\Bundle\ResourceRepositoryBundle\Repository\Repository');
+        $this->shouldHaveType(Repository::class);
     }
 
-    function it_return_null_if_resource_entity_does_not_exist(
-        MapBuilder $builder
-    ) {
+    function it_return_null_if_resource_entity_does_not_exist(MapBuilder $builder)
+    {
         $builder->getResource('resources_group.resource_a')->willReturn(null);
-
         $this->get('resources_group.resource_a')->shouldReturn(null);
     }
 
@@ -88,9 +97,7 @@ class RepositorySpec extends ObjectBehavior
         $repository->get('resources_group.resource_a.en')->willReturn($entity);
         $builder->getResource(Argument::type('string'))->willReturn($resource);
         $resource->getResourceProperty()->willReturn('textValue');
-        $repository->save(
-            Argument::type('spec\FSi\Bundle\ResourceRepositoryBundle\Repository\ResourceEntity')
-        )->shouldBeCalled();
+        $repository->save(Argument::type(ResourceEntity::class))->shouldBeCalled();
 
         $this->set('resources_group.resource_a', 'text');
     }
@@ -106,7 +113,7 @@ class RepositorySpec extends ObjectBehavior
         $resource->getResourceProperty()->willReturn('textValue');
         $repository->add(
             Argument::allOf(
-                Argument::type('spec\FSi\Bundle\ResourceRepositoryBundle\Repository\ResourceEntity'),
+                Argument::type(ResourceEntity::class),
                 Argument::which('getTextValue', 'text')
             )
         )->shouldBeCalled();
