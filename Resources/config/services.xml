@@ -20,6 +20,8 @@
 
         <service id="fsi_resource_repository.map_builder" alias="fsi_resource_repository.resource.map_builder" />
 
+        <service id="%fsi_resource_repository.resource.map_builder.class%" alias="fsi_resource_repository.resource.map_builder" />
+
         <service id="fsi_resource_repository.resource.repository" class="%fsi_resource_repository.resource.repository.class%">
             <argument type="service" id="fsi_resource_repository.map_builder" />
             <argument type="service" id="fsi_resource_repository.entity.repository"/>
@@ -27,6 +29,8 @@
         </service>
 
         <service id="fsi_resource_repository.repository" alias="fsi_resource_repository.resource.repository" />
+
+        <service id="%fsi_resource_repository.resource.repository.class%" alias="fsi_resource_repository.resource.repository" />
 
         <!-- Resouce Types -->
         <service id="fsi_resource_repository.resource.type.text" class="FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType">
