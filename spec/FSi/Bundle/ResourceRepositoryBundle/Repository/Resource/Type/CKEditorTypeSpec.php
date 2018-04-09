@@ -37,7 +37,7 @@ class CKEditorTypeSpec extends ObjectBehavior
 
     function it_return_form_builder(FormFactory $factory, FormBuilder $form)
     {
-        $factory->createNamedBuilder('textValue', 'ckeditor', null, array(
+        $factory->createNamedBuilder('textValue', $this->getCKEditorFormType(), null, array(
             'label' => false,
             'required' => false,
         ))->shouldBeCalled()->willReturn($form);
@@ -49,7 +49,7 @@ class CKEditorTypeSpec extends ObjectBehavior
     {
         $this->addConstraint($constraint);
 
-        $factory->createNamedBuilder('textValue', 'ckeditor', null, array(
+        $factory->createNamedBuilder('textValue', $this->getCKEditorFormType(), null, array(
             'label' => false,
             'required' => false,
             'constraints' => array(
@@ -68,7 +68,7 @@ class CKEditorTypeSpec extends ObjectBehavior
             )
         ));
 
-        $factory->createNamedBuilder('textValue', 'ckeditor', null, array(
+        $factory->createNamedBuilder('textValue', $this->getCKEditorFormType(), null, array(
             'label' => false,
             'required' => false,
             'attr' => array(
@@ -77,5 +77,15 @@ class CKEditorTypeSpec extends ObjectBehavior
         ))->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf('Symfony\Component\Form\FormBuilder');
+    }
+
+    /**
+     * @return string
+     */
+    private function getCKEditorFormType()
+    {
+        return method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
+            ? 'Ivory\CKEditorBundle\Form\Type\CKEditorType'
+            : 'ckeditor';
     }
 }

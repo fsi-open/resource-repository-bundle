@@ -24,6 +24,8 @@ class CKEditorType extends AbstractType
      */
     protected function getFormType()
     {
-        return 'ckeditor';
+        return method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
+            ? 'Ivory\CKEditorBundle\Form\Type\CKEditorType'
+            : 'ckeditor';
     }
 }
