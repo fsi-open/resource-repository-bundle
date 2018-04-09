@@ -13,5 +13,7 @@
         </service>
 
         <service id="fsi_resource_repository.entity.repository" alias="fsi_resource_repository.resource.value.repository" />
+
+        <service id="FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository" alias="fsi_resource_repository.resource.value.repository" />
     </services>
 </container>

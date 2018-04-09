@@ -20,6 +20,7 @@ use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository;
 
 class FSIResourceRepositoryExtensionSpec extends ObjectBehavior
 {
@@ -48,8 +49,11 @@ class FSIResourceRepositoryExtensionSpec extends ObjectBehavior
         $builder->setParameter('fsi_resource_repository.resource.value.class', Resource::class)->shouldBeCalled();
 
         $builder->setAlias('fsi_resource_repository.map_builder', Argument::type(Alias::class))->shouldBeCalled();
+        $builder->setAlias('%fsi_resource_repository.resource.map_builder.class%', Argument::type(Alias::class))->shouldBeCalled();
         $builder->setAlias('fsi_resource_repository.entity.repository', Argument::type(Alias::class))->shouldBeCalled();
+        $builder->setAlias(ResourceValueRepository::class, Argument::type(Alias::class))->shouldBeCalled();
         $builder->setAlias('fsi_resource_repository.repository', Argument::type(Alias::class))->shouldBeCalled();
+        $builder->setAlias('%fsi_resource_repository.resource.repository.class%', Argument::type(Alias::class))->shouldBeCalled();
 
         $this->load([['db_driver' => 'orm', 'resource_class' => Resource::class]], $builder);
     }
