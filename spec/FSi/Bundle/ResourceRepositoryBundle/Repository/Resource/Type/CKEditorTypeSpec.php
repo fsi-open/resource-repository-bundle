@@ -85,7 +85,7 @@ class CKEditorTypeSpec extends ObjectBehavior
     private function getCKEditorFormType()
     {
         return method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
-            ? 'Ivory\CKEditorBundle\Form\Type\CKEditorType'
+            ? 'FOS\CKEditorBundle\Form\Type\CKEditorType'
             : 'ckeditor';
     }
 }
