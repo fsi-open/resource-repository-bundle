@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository;
 
 use FSi\Bundle\ResourceRepositoryBundle\Exception\ConfigurationException;
@@ -26,7 +28,7 @@ class MapBuilder
     protected $rawArray;
 
     /**
-     * Parser resources map
+     * Parsed resources map
      *
      * @var array
      */
@@ -37,22 +39,15 @@ class MapBuilder
      *
      * @var array
      */
-    protected $resources;
+    protected $resources = [];
 
     /**
      * @var string[]
      */
-    protected $resourceTypes;
+    protected $resourceTypes = [];
 
-    /**
-     * @param string $mapPath
-     * @param string[] $resourceTypes
-     */
-    public function __construct($mapPath, $resourceTypes = array())
+    public function __construct(string $mapPath, array $resourceTypes = [])
     {
-        $this->resourceTypes = array();
-        $this->resources = array();
-
         foreach ($resourceTypes as $type => $class) {
             $this->resourceTypes[$type] = $class;
         }
@@ -65,7 +60,7 @@ class MapBuilder
      *
      * @return array
      */
-    public function getMap()
+    public function getMap(): array
     {
         return $this->map;
     }
@@ -74,21 +69,15 @@ class MapBuilder
      * Get resource definition by key.
      * It can return resource definition object or array if key represents resources group
      *
-     * @param $key
+     * @param string $key
      * @return mixed
      */
-    public function getResource($key)
+    public function getResource(string $key)
     {
         return $this->resources[$key];
     }
 
-    /**
-     * Check if resource definition exists in map
-     *
-     * @param $key
-     * @return bool
-     */
-    public function hasResource($key)
+    public function hasResource($key): bool
     {
         return array_key_exists($key, $this->resources);
     }
@@ -99,18 +88,16 @@ class MapBuilder
      * @throws \FSi\Bundle\ResourceRepositoryBundle\Exception\ConfigurationException
      * @return array
      */
-    protected function recursiveParseRawMap($rawMap = array(), $parentPath = null)
+    protected function recursiveParseRawMap(?array $rawMap = [], ?string $parentPath = null): array
     {
-        $map = array();
+        $map = [];
 
         if (!is_array($rawMap)) {
             return $map;
         }
 
         foreach ($rawMap as $key => $configuration) {
-            $path = (isset($parentPath))
-                ? $parentPath . '.' . $key
-                : $key;
+            $path = isset($parentPath) ? sprintf('%s.%s', $parentPath, $key) : $key;
 
             $this->validateConfiguration($configuration, $path);
 
@@ -136,17 +123,19 @@ class MapBuilder
     /**
      * @param array $configuration
      * @param string $path
-     * @throws \FSi\Bundle\ResourceRepositoryBundle\Exception\ConfigurationException
      * @return ResourceInterface
+     * @throws ConfigurationException
      */
-    protected function createResource($configuration, $path)
+    protected function createResource(array $configuration, string $path): ResourceInterface
     {
         $type = $configuration['type'];
 
         if (!array_key_exists($type, $this->resourceTypes)) {
-            throw new ConfigurationException(
-                sprintf('"%s" is not a valid resource type. Try one from: %s', $type, implode(', ', array_keys($this->resourceTypes)))
-            );
+            throw new ConfigurationException(sprintf(
+                '"%s" is not a valid resource type. Try one from: %s',
+                $type,
+                implode(', ', array_keys($this->resourceTypes))
+            ));
         }
 
         $class = $this->resourceTypes[$type];
@@ -154,11 +143,7 @@ class MapBuilder
         return new $class($path);
     }
 
-    /**
-     * @param ResourceInterface $resource
-     * @param $configuration
-     */
-    protected function addConstraints(ResourceInterface $resource, $configuration)
+    protected function addConstraints(ResourceInterface $resource, array $configuration): void
     {
         if (isset($configuration['constraints'])) {
             $constraints = $configuration['constraints'];
@@ -173,7 +158,7 @@ class MapBuilder
         }
     }
 
-    protected function setFormOptions(ResourceInterface $resource, $configuration)
+    protected function setFormOptions(ResourceInterface $resource, array $configuration): void
     {
         if (isset($configuration['form_options']) && is_array($configuration['form_options'])) {
             $resource->setFormOptions($configuration['form_options']);
@@ -181,47 +166,47 @@ class MapBuilder
     }
 
     /**
-     * @param $configuration
-     * @param $path
-     * @throws \FSi\Bundle\ResourceRepositoryBundle\Exception\ConfigurationException
+     * @param array $configuration
+     * @param string $path
+     * @return void
+     * @throws ConfigurationException
      */
-    protected function validateConfiguration($configuration, $path)
+    protected function validateConfiguration(array $configuration, string $path): void
     {
         if (strlen($path) > 255) {
-            throw new ConfigurationException(
-                sprintf('"%s..." key is too long. Maximum key length is 255 characters', substr($path, 0, 32))
-            );
+            throw new ConfigurationException(sprintf(
+                '"%s..." key is too long. Maximum key length is 255 characters',
+                substr($path, 0, 32)
+            ));
         }
 
         if (!array_key_exists('type', $configuration)) {
-            throw new ConfigurationException(
-                sprintf('Missing "type" declaration in "%s" element configuration', $path)
-            );
+            throw new ConfigurationException(sprintf(
+                'Missing "type" declaration in "%s" element configuration',
+                $path
+            ));
         }
 
     }
 
     /**
-     * @param $configuration
-     * @throws \FSi\Bundle\ResourceRepositoryBundle\Exception\ConfigurationException
+     * @param array $configuration
+     * @return void
+     * @throws ConfigurationException
      */
-    protected function validateResourceConfiguration($configuration)
+    protected function validateResourceConfiguration(array $configuration): void
     {
-        $validKeys = array(
-            'form_options',
-            'constraints'
-        );
-
-        foreach ($configuration as $key => $options) {
-            if ($key === 'type') {
+        $validKeys = ['form_options', 'constraints'];
+        foreach (array_keys($configuration) as $key) {
+            if ($key === 'type' || in_array($key, $validKeys, true)) {
                 continue;
             }
 
-            if (!in_array($key, $validKeys)) {
-                throw new ConfigurationException(
-                    sprintf('"%s" is not a valid resource type option. Try one from: %s', $key, implode(', ', $validKeys))
-                );
-            }
+            throw new ConfigurationException(sprintf(
+                '"%s" is not a valid resource type option. Try one from: %s',
+                $key,
+                implode(', ', $validKeys)
+            ));
         }
     }
 }

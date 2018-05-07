@@ -7,37 +7,26 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
+
+use Symfony\Component\Form\Extension\Core\Type\NumberType as NumberFormType;
 
 class NumberType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getResourceProperty()
+    public function getResourceProperty(): string
     {
         return 'numberValue';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getFormType()
+    protected function getFormType(): string
     {
-        return 'number';
+        return NumberFormType::class;
     }
 
-    protected function buildFormOptions()
+    protected function buildFormOptions(): array
     {
-        $options = parent::buildFormOptions();
-
-        $options = array_merge(
-            array(
-                'precision' => 4
-            ),
-            $options
-        );
-
-        return $options;
+        return array_merge(['precision' => 4], parent::buildFormOptions());
     }
 }

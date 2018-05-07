@@ -7,11 +7,12 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceCKEditorPass;
-use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceFSiCKEditorPass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceFSiFilePass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourcePass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\TwigFormPass;
@@ -22,16 +23,12 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 class FSiResourceRepositoryBundle extends Bundle
 {
     /**
-     * @param ContainerBuilder $container
+     * {@inheritdoc}
      */
     public function build(ContainerBuilder $container)
     {
         if ($container->hasExtension('fsi_doctrine_extensions')) {
             $container->addCompilerPass(new ResourceFSiFilePass());
-        }
-
-        if ($container->hasExtension('fsi_form_extensions')) {
-            $container->addCompilerPass(new ResourceFSiCKEditorPass());
         }
 
         if ($container->hasExtension('fos_ck_editor')) {
@@ -43,11 +40,14 @@ class FSiResourceRepositoryBundle extends Bundle
         $container->addCompilerPass(
             DoctrineOrmMappingsPass::createXmlMappingDriver(
                 $this->getDoctrineMappings(),
-                array('doctrine.orm.entity_manager')
+                ['doctrine.orm.entity_manager']
             )
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getContainerExtension()
     {
         if (null === $this->extension) {
@@ -62,8 +62,8 @@ class FSiResourceRepositoryBundle extends Bundle
      */
     private function getDoctrineMappings()
     {
-        return array(
+        return [
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'FSi\Bundle\ResourceRepositoryBundle\Model',
-        );
+        ];
     }
 }

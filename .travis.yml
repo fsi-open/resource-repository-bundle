@@ -1,27 +1,16 @@
 language: php
 
-php:
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
-  - hhvm
-
-env:
-  - COMPOSER_FLAGS=""
-  - COMPOSER_FLAGS="--prefer-lowest"
+matrix:
+  include:
+    - php: 7.1
+      env:
+        - COMPOSER_FLAGS='--prefer-lowest'
+    - php: 7.1
 
 sudo: false
 
-matrix:
-  allow_failures:
-    - php: 7.0
-    - php: hhvm
-
 before_script:
   - phpenv config-rm xdebug.ini
-  # Avoid issues on composer update
-  - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-  - composer update --prefer-source ${COMPOSER_FLAGS}
+  - composer update $COMPOSER_FLAGS
 
 script: ./bin/phpspec run -f pretty

@@ -7,14 +7,14 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\Model;
 
 Interface ResourceValue
 {
     /**
      * @param string $key
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */
     public function setKey($key);
 
@@ -25,8 +25,6 @@ Interface ResourceValue
 
     /**
      * @param string $textValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */
     public function setTextValue($textValue);
 
@@ -36,45 +34,37 @@ Interface ResourceValue
     public function getTextValue();
 
     /**
-     * @param mixed $dateValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
+     * @param \DateTimeInterface $dateValue
      */
     public function setDateValue($dateValue);
 
     /**
-     * @return mixed
+     * @return \DateTimeImmutable
      */
     public function getDateValue();
 
     /**
-     * @param \DateTime $datetimeValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
+     * @param \DateTimeInterface $datetimeValue
      */
     public function setDatetimeValue($datetimeValue);
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      */
     public function getDatetimeValue();
 
     /**
-     * @param mixed $timeValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
+     * @param \DateTimeInterface $timeValue
      */
     public function setTimeValue($timeValue);
 
     /**
-     * @return mixed
+     * @return \DateTimeImmutable
      */
     public function getTimeValue();
 
     /**
      * @param mixed $numberValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */
     public function setNumberValue($numberValue);
 
@@ -85,8 +75,6 @@ Interface ResourceValue
 
     /**
      * @param int $integerValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */
     public function setIntegerValue($integerValue);
 
@@ -97,8 +85,6 @@ Interface ResourceValue
 
     /**
      * @param boolean $boolValue
-     *
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\Resource
      */
     public function setBoolValue($boolValue);
 

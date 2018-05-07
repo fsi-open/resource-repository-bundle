@@ -7,10 +7,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository;
 
 use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 class Repository
 {
@@ -20,7 +23,7 @@ class Repository
     protected $builder;
 
     /**
-     * @var \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository
+     * @var ResourceValueRepository
      */
     protected $resourceValueRepository;
 
@@ -30,41 +33,39 @@ class Repository
     protected $resourceValueClass;
 
     /**
-     * @param MapBuilder $builder
-     * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository $valueRepository
-     * @param string $resourceValueClass
+     * @var PropertyAccessor
      */
-    public function __construct(MapBuilder $builder, ResourceValueRepository $valueRepository, $resourceValueClass)
-    {
+    protected $accessor;
+
+    public function __construct(
+        MapBuilder $builder,
+        ResourceValueRepository $valueRepository,
+        string $resourceValueClass
+    ) {
         $this->builder = $builder;
         $this->resourceValueRepository = $valueRepository;
         $this->resourceValueClass = $resourceValueClass;
+        $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
     /**
-     * Get resource by key
-     *
      * @param string $key
      * @return null|mixed
      */
-    public function get($key)
+    public function get(string $key)
     {
         $resource = $this->builder->getResource($key);
-
-        if (!isset($resource)) {
+        if (null === $resource) {
             return null;
         }
 
         $entity = $this->resourceValueRepository->get($resource->getName());
-
-        if (!isset($entity)) {
+        if (null === $entity) {
             return null;
         }
 
-        $accessor = PropertyAccess::createPropertyAccessor();
-        $value = $accessor->getValue($entity, $resource->getResourceProperty());
-
-        if (isset($value) && !(is_string($value) && empty($value))) {
+        $value = $this->accessor->getValue($entity, $resource->getResourceProperty());
+        if (null !== $value && !(is_string($value) && empty($value))) {
             return $value;
         }
 
@@ -73,27 +74,25 @@ class Repository
 
     /**
      * @param string $key
-     * @param mixed
+     * @param mixed $value
+     * @return void
      */
-    public function set($key, $value)
+    public function set(string $key, $value): void
     {
         $resource = $this->builder->getResource($key);
 
         $entity = $this->resourceValueRepository->get($resource->getName());
-
-        $accessor = PropertyAccess::createPropertyAccessor();
-
         if (isset($entity) && !isset($value)) {
             $this->resourceValueRepository->remove($entity);
             return;
         }
 
         if (isset($entity)) {
-            $accessor->setValue($entity, $resource->getResourceProperty(), $value);
+            $this->accessor->setValue($entity, $resource->getResourceProperty(), $value);
             $this->resourceValueRepository->save($entity);
         } else {
             $entity = new $this->resourceValueClass();
-            $accessor->setValue($entity, $resource->getResourceProperty(), $value);
+            $this->accessor->setValue($entity, $resource->getResourceProperty(), $value);
             $this->resourceValueRepository->add($entity);
         }
     }

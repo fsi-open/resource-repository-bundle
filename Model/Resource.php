@@ -7,9 +7,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\Model;
 
-class Resource implements ResourceInterface
+use DateTimeImmutable;
+
+class Resource implements ResourceValue
 {
     /**
      * @var string
@@ -22,22 +26,22 @@ class Resource implements ResourceInterface
     protected $textValue;
 
     /**
-     * @var \DateTime
+     * @var DateTimeImmutable
      */
     protected $datetimeValue;
 
     /**
-     * @var
+     * @var DateTimeImmutable
      */
     protected $dateValue;
 
     /**
-     * @var
+     * @var DateTimeImmutable
      */
     protected $timeValue;
 
     /**
-     * @var
+     * @var int
      */
     protected $numberValue;
 
@@ -56,145 +60,81 @@ class Resource implements ResourceInterface
         $this->boolValue = false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setKey($key)
     {
         $this->key = $key;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getKey()
     {
         return $this->key;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setTextValue($textValue)
     {
         $this->textValue = $textValue;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTextValue()
     {
         return $this->textValue;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDateValue($dateValue)
     {
         $this->dateValue = $dateValue;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDateValue()
     {
         return $this->dateValue;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDatetimeValue($datetimeValue)
     {
         $this->datetimeValue = $datetimeValue;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDatetimeValue()
     {
         return $this->datetimeValue;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setTimeValue($timeValue)
     {
         $this->timeValue = $timeValue;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTimeValue()
     {
         return $this->timeValue;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setNumberValue($numberValue)
     {
         $this->numberValue = $numberValue;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getNumberValue()
     {
         return $this->numberValue;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setIntegerValue($integerValue)
     {
         $this->integerValue = $integerValue;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getIntegerValue()
     {
         return $this->integerValue;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setBoolValue($boolValue)
     {
         $this->boolValue = $boolValue;
-
-        return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBoolValue()
     {
         return $this->boolValue;

@@ -7,34 +7,28 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
 use Symfony\Component\Validator\Constraints\Url;
+use Symfony\Component\Form\Extension\Core\Type\UrlType as UrlFormType;
 
 class UrlType extends AbstractType
 {
-    /**
-     * @param string $name
-     */
-    public function __construct($name)
+    public function __construct(string $name)
     {
         parent::__construct($name);
         $this->constraints[] = new Url();
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getResourceProperty()
+    public function getResourceProperty(): string
     {
         return 'textValue';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getFormType()
+    protected function getFormType(): string
     {
-        return 'url';
+        return UrlFormType::class;
     }
 }

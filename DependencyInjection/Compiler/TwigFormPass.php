@@ -7,14 +7,13 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
-/**
- * @author Norbert Orzechowicz <norbert@fsi.pl>
- */
 class TwigFormPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
@@ -25,7 +24,7 @@ class TwigFormPass implements CompilerPassInterface
 
         $container->setParameter('twig.form.resources', array_merge(
             $container->getParameter('twig.form.resources'),
-            array('@FSiResourceRepository/Form/form_div_layout.html.twig')
+            ['@FSiResourceRepository/Form/form_div_layout.html.twig']
         ));
     }
 }

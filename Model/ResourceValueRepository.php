@@ -7,29 +7,17 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\Model;
 
 interface ResourceValueRepository
 {
-    /**
-     * @param $key
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue
-     */
-    public function get($key);
+    public function get(string $key): ResourceValue;
 
-    /**
-     * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue $resourceValue
-     */
-    public function add(ResourceValue $resourceValue);
+    public function add(ResourceValue $resourceValue): void;
 
+    public function save(ResourceValue $resourceValue): void;
 
-    /**
-     * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue $resourceValue
-     */
-    public function save(ResourceValue $resourceValue);
-
-    /**
-     * @param \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue $resourceValue
-     */
-    public function remove(ResourceValue $resourceValue);
+    public function remove(ResourceValue $resourceValue): void;
 }

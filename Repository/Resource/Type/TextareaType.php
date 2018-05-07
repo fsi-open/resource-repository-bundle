@@ -7,23 +7,21 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
+
+use Symfony\Component\Form\Extension\Core\Type\TextareaType as TextareaFormType;
 
 class TextareaType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getResourceProperty()
+    public function getResourceProperty(): string
     {
         return 'textValue';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getFormType()
+    protected function getFormType(): string
     {
-        return 'textarea';
+        return TextareaFormType::class;
     }
 }

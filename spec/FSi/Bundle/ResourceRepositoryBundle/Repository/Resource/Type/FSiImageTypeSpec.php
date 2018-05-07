@@ -1,9 +1,19 @@
 <?php
 
+/**
+ * (c) FSi sp. z o.o. <info@fsi.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
 namespace spec\FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
+use FSi\Bundle\DoctrineExtensionsBundle\Form\Type\FSi\ImageType;
+use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\ResourceInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -17,7 +27,7 @@ class FSiImageTypeSpec extends ObjectBehavior
 
     function it_is_resource()
     {
-        $this->shouldImplement('FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\ResourceInterface');
+        $this->shouldImplement(ResourceInterface::class);
     }
 
     function it_return_text_entity_field()
@@ -32,10 +42,10 @@ class FSiImageTypeSpec extends ObjectBehavior
 
     function it_return_form_builder(FormFactory $factory, FormBuilder $form)
     {
-        $factory->createNamedBuilder('fileValue', 'fsi_image', null, array(
+        $factory->createNamedBuilder('fileValue', ImageType::class, null, [
             'label' => false,
             'required' => false,
-        ))->shouldBeCalled()->willReturn($form);
+        ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturn($form);
     }
@@ -44,32 +54,32 @@ class FSiImageTypeSpec extends ObjectBehavior
     {
         $this->addConstraint($constraint);
 
-        $factory->createNamedBuilder('fileValue', 'fsi_image', null, array(
+        $factory->createNamedBuilder('fileValue', ImageType::class, null, [
             'label' => false,
             'required' => false,
-            'constraints' => array(
+            'constraints' => [
                 $constraint
-            )
-        ))->shouldBeCalled()->willReturn($form);
+            ]
+        ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturn($form);
     }
 
     function it_return_form_builder_with_form_options_added_to_resource_definition(FormFactory $factory, FormBuilder $form)
     {
-        $this->setFormOptions(array(
-            'attr' => array(
+        $this->setFormOptions([
+            'attr' => [
                 'class' => 'class-name'
-            )
-        ));
+            ]
+        ]);
 
-        $factory->createNamedBuilder('fileValue', 'fsi_image', null, array(
+        $factory->createNamedBuilder('fileValue', ImageType::class, null, [
             'label' => false,
             'required' => false,
-            'attr' => array(
+            'attr' => [
                 'class' => 'class-name'
-            )
-        ))->shouldBeCalled()->willReturn($form);
+            ]
+        ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturn($form);
     }

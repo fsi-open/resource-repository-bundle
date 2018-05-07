@@ -7,8 +7,11 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Validator\Constraint;
 
@@ -30,32 +33,23 @@ abstract class AbstractType implements ResourceInterface
     protected $formOptions;
 
     /**
-     * @var null|\Symfony\Component\Form\FormBuilderInterface
+     * @var null|FormBuilderInterface
      */
     protected $formBuilder;
 
-    /**
-     * @param $name
-     */
-    public function __construct($name)
+    public function __construct(string $name)
     {
         $this->name = $name;
-        $this->constraints = array();
-        $this->formOptions = array();
+        $this->constraints = [];
+        $this->formOptions = [];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFormBuilder(FormFactoryInterface $factory)
+    public function getFormBuilder(FormFactoryInterface $factory): FormBuilderInterface
     {
         if (!isset($this->formBuilder)) {
             $this->formBuilder = $factory->createNamedBuilder(
@@ -69,54 +63,31 @@ abstract class AbstractType implements ResourceInterface
         return $this->formBuilder;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function addConstraint(Constraint $constraint)
+    public function addConstraint(Constraint $constraint): void
     {
         $this->constraints[] = $constraint;
     }
 
-    /**
-     * @param array $options
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\ResourceInterface
-     */
-    public function setFormOptions(array $options)
+    public function setFormOptions(array $options): void
     {
         $this->formOptions = $options;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    abstract public function getResourceProperty();
+    abstract public function getResourceProperty(): string;
 
     /**
      * Method should return form type used to modify resource.
      *
      * @return string
      */
-    abstract protected function getFormType();
+    abstract protected function getFormType(): string;
 
-    /**
-     * @return array
-     */
-    protected function buildFormOptions()
+    protected function buildFormOptions(): array
     {
-        $options = array(
-            'required' => false,
-            'label' => false,
-        );
-
-        $options = array_merge($options, $this->formOptions);
+        $options = array_merge(['required' => false, 'label' => false], $this->formOptions);
 
         if (count($this->constraints)) {
-            $options = array_merge(
-                $options,
-                array(
-                    'constraints' => $this->constraints
-                )
-            );
+            $options = array_merge($options, ['constraints' => $this->constraints]);
         }
 
         return $options;

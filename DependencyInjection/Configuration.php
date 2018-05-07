@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -22,7 +24,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('fsi_resource_repository');
 
-        $supportedDrivers = array('orm');
+        $supportedDrivers = ['orm'];
 
         $rootNode->children()
             ->scalarNode('db_driver')

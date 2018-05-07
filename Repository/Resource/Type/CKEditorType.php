@@ -7,25 +7,21 @@
  * file that was distributed with this source code.
  */
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
+
+use FOS\CKEditorBundle\Form\Type\CKEditorType as CKEditorFormType;
 
 class CKEditorType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getResourceProperty()
+    public function getResourceProperty(): string
     {
         return 'textValue';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getFormType()
+    protected function getFormType(): string
     {
-        return method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
-            ? 'FOS\CKEditorBundle\Form\Type\CKEditorType'
-            : 'ckeditor';
+        return CKEditorFormType::class;
     }
 }
