@@ -34,7 +34,7 @@
     },
     "suggest": {
         "fsi/doctrine-extensions-bundle": "For using fsi_file resource type",
-        "egeloen/ckeditor-bundle": "For using ckeditor resource type"
+        "friendsofsymfony/ckeditor-bundle": "For using ckeditor resource type"
     },
     "config": {
         "bin-dir": "bin"

@@ -86,14 +86,4 @@ class CKEditorTypeSpec extends ObjectBehavior
 
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf(FormBuilder::class);
     }
-
-    /**
-     * @return string
-     */
-    private function getCKEditorFormType()
-    {
-        return method_exists('Symfony\Component\Form\AbstractType', 'getBlockPrefix')
-            ? 'FOS\CKEditorBundle\Form\Type\CKEditorType'
-            : 'ckeditor';
-    }
 }
