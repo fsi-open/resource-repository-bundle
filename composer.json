@@ -25,7 +25,7 @@
     },
     "require-dev": {
         "doctrine/orm": "^2.5",
-        "egeloen/ckeditor-bundle": "^5.0",
+        "friendsofsymfony/ckeditor-bundle": "^1.0",
         "phpspec/phpspec": "^4.0",
         "phpspec/prophecy": "^1.7",
         "fsi/doctrine-extensions": "^1.0|^2.0@dev",
@@ -34,7 +34,7 @@
     },
     "suggest": {
         "fsi/doctrine-extensions-bundle": "For using fsi_file resource type",
-        "egeloen/ckeditor-bundle": "For using ckeditor resource type"
+        "friendsofsymfony/ckeditor-bundle": "For using ckeditor resource type"
     },
     "config": {
         "bin-dir": "bin"

@@ -13,7 +13,7 @@ namespace spec\FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\CKEditorType as FSiCKEditorType;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\ResourceInterface;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactory;

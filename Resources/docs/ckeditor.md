@@ -16,7 +16,7 @@ Add to composer.json following lines
 ## 2. Application Kernel
  
 Register bundle in AppKernel  
-**IMPORTANT!!** make sure that ``Ivory\CKEditorBundle\IvoryCKEditorBundle()`` is registered
+**IMPORTANT!!** make sure that ``FOS\CKEditorBundle\FOSCKEditorBundle()`` is registered
 **before** ``FSi\Bundle\ResourceRepositoryBundle\FSiResourceRepositoryBundle()``. In other way you will not be able
 to use ckeditor resource type.
 
@@ -26,9 +26,9 @@ to use ckeditor resource type.
 public function registerBundles()
 {
     $bundles = array(
-        new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+        new FOS\CKEditorBundle\FOSCKEditorBundle(),
 
-        // FSiResourceRepositoryBundle must be after IvoryCKEditorBundle
+        // FSiResourceRepositoryBundle must be after FOSCKEditorBundle
 
         new FSi\Bundle\ResourceRepositoryBundle\FSiResourceRepositoryBundle()
     );
@@ -52,4 +52,4 @@ resources:
                 label: Content
 ```
 
-To read about ckeditor form type options go to [IvoryCKEditorBundle](https://github.com/egeloen/IvoryCKEditorBundle/blob/master/Resources/doc/configuration.md)
+To read about ckeditor form type options go to [FOSCKEditorBundle](https://github.com/FriendsOfSymfony/FOSCKEditorBundle/blob/master/docs/usage/config.rst)

@@ -43,7 +43,7 @@ class FSiResourceRepositoryBundleSpec extends ObjectBehavior
     function it_add_compiler_pass_during_build(ContainerBuilder $container)
     {
         $container->hasExtension('fsi_doctrine_extensions')->shouldBeCalled()->willReturn(true);
-        $container->hasExtension('ivory_ck_editor')->shouldBeCalled()->willReturn(true);
+        $container->hasExtension('fos_ck_editor')->shouldBeCalled()->willReturn(true);
         $container->addCompilerPass(Argument::type(ResourceFSiFilePass::class))->shouldBeCalled();
         $container->addCompilerPass(Argument::type(ResourceCKEditorPass::class))->shouldBeCalled();
         $container->addCompilerPass(Argument::type(TwigFormPass::class))->shouldBeCalled();

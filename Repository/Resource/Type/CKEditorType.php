@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type;
 
-use Ivory\CKEditorBundle\Form\Type\CKEditorType as CKEditorFormType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType as CKEditorFormType;
 
 class CKEditorType extends AbstractType
 {
