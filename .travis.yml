@@ -13,4 +13,4 @@ before_script:
   - phpenv config-rm xdebug.ini
   - composer update $COMPOSER_FLAGS
 
-script: ./bin/phpspec run -f pretty
+script: ./vendor/bin/phpspec run -f pretty

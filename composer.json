@@ -37,7 +37,7 @@
         "friendsofsymfony/ckeditor-bundle": "For using ckeditor resource type"
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "vendor/bin"
     },
     "autoload": {
         "psr-4": { "FSi\\Bundle\\ResourceRepositoryBundle\\": "" }
