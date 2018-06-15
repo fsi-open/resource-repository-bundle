@@ -28,6 +28,7 @@
         "friendsofsymfony/ckeditor-bundle": "^1.0",
         "phpspec/phpspec": "^4.0",
         "phpspec/prophecy": "^1.7",
+        "phpunit/phpunit": "^7.2",
         "fsi/doctrine-extensions": "^1.0|^2.0@dev",
         "fsi/doctrine-extensions-bundle": "^1.0|^2.0@dev",
         "fsi/form-extensions-bundle": "^2.0@dev"
@@ -41,6 +42,9 @@
     },
     "autoload": {
         "psr-4": { "FSi\\Bundle\\ResourceRepositoryBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "FSi\\Bundle\\ResourceRepositoryBundle\\Tests\\": "tests" }
     },
     "extra": {
         "branch-alias": {
