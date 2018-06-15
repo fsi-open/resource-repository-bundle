@@ -30,3 +30,14 @@ to only support PHP versions equal or higher to it.
 
 Class `FSi\Bundle\ResourceRepositoryBundle\Entity\ResourceRepository` has been
 removed due to being deprecated.
+
+## Removed all *.class container parameters
+
+Following parameters have been deleted:
+
+- `fsi_resource_repository.resource.value.repository.class`
+- `fsi_resource_repository.resource.map_builder.class`
+- `fsi_resource_repository.resource.repository.class`
+- `fsi_resource_repository.twig.extension.resource_repository.class`
+- `fsi_resource_repository.form.type.resource.class`
+- `fsi_resource_repository.form.type.resource_collection.class`
