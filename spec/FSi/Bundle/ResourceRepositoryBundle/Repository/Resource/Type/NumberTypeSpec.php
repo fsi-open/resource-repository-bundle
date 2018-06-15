@@ -51,7 +51,7 @@ class NumberTypeSpec extends ObjectBehavior
         $factory->createNamedBuilder('numberValue', NumberType::class, null, [
             'label' => false,
             'required' => false,
-            'precision' => 4
+            'scale' => 4
         ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf(FormBuilder::class);
@@ -68,7 +68,7 @@ class NumberTypeSpec extends ObjectBehavior
             'label' => false,
             'required' => false,
             'constraints' => [$notBlank],
-            'precision' => 4
+            'scale' => 4
         ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf(FormBuilder::class);
@@ -86,7 +86,7 @@ class NumberTypeSpec extends ObjectBehavior
             'label' => false,
             'required' => false,
             'attr' => ['class' => 'class-name'],
-            'precision' => 4
+            'scale' => 4
         ])->shouldBeCalled()->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf(FormBuilder::class);
@@ -94,12 +94,12 @@ class NumberTypeSpec extends ObjectBehavior
 
     function it_should_allow_override_form_options(FormFactory $factory, FormBuilder $form)
     {
-        $this->setFormOptions(['precision' => 8]);
+        $this->setFormOptions(['scale' => 8]);
 
         $factory->createNamedBuilder('numberValue', NumberType::class, null, [
             'label' => false,
             'required' => false,
-            'precision' => 8
+            'scale' => 8
         ])->willReturn($form);
 
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf(FormBuilder::class);

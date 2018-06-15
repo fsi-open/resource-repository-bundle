@@ -22,16 +22,25 @@ class ResourceFSiFilePass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        $definition = new Definition(FSiFileType::class);
-        $definition->addTag('resource.type', ['alias' => 'fsi_file']);
-        $container->setDefinition('fsi_resource_repository.resource.type.fsi_file', $definition);
+        $fileTypeDefinition = new Definition(FSiFileType::class);
+        $fileTypeDefinition->addTag('resource.type', ['alias' => 'fsi_file']);
+        $container->setDefinition(
+            'fsi_resource_repository.resource.type.fsi_file',
+            $fileTypeDefinition
+        );
 
-        $definition = new Definition(FSiImageType::class);
-        $definition->addTag('resource.type', ['alias' => 'fsi_image']);
-        $container->setDefinition('fsi_resource_repository.resource.type.fsi_image', $definition);
+        $imageTypeDefinition = new Definition(FSiImageType::class);
+        $imageTypeDefinition->addTag('resource.type', ['alias' => 'fsi_image']);
+        $container->setDefinition(
+            'fsi_resource_repository.resource.type.fsi_image',
+            $imageTypeDefinition
+        );
 
-        $definition = new Definition(FSiRemovableFileType::class);
-        $definition->addTag('resource.type', ['alias' => 'fsi_removable_file']);
-        $container->setDefinition('fsi_resource_repository.resource.type.fsi_removable_file', $definition);
+        $removableTypeDefinition = new Definition(FSiRemovableFileType::class);
+        $removableTypeDefinition->addTag('resource.type', ['alias' => 'fsi_removable_file']);
+        $container->setDefinition(
+            'fsi_resource_repository.resource.type.fsi_removable_file',
+            $removableTypeDefinition
+        );
     }
 }

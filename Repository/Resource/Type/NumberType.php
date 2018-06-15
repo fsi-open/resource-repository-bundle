@@ -27,6 +27,6 @@ class NumberType extends AbstractType
 
     protected function buildFormOptions(): array
     {
-        return array_merge(['precision' => 4], parent::buildFormOptions());
+        return array_merge(['scale' => 4], parent::buildFormOptions());
     }
 }

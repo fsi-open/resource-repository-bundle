@@ -13,14 +13,14 @@ namespace spec\FSi\Bundle\ResourceRepositoryBundle\Repository;
 
 use FSi\Bundle\ResourceRepositoryBundle\Exception\ConfigurationException;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder;
-use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\TypeIntegerType;
+use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\IntegerType;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class MapBuilderSpec extends ObjectBehavior
 {
-    protected $resources = ['text' => TextType::class, 'integer' => TypeIntegerType::class];
+    protected $resources = ['text' => TextType::class, 'integer' => IntegerType::class];
 
     function let()
     {

@@ -20,7 +20,7 @@ class MapBuilder
     /**
      * Template used to create constraint object
      */
-    const CONSTRAINT_CLASS = 'Symfony\\Component\\Validator\\Constraints\\%s';
+    private const CONSTRAINT_CLASS = 'Symfony\\Component\\Validator\\Constraints\\%s';
 
     /**
      * @var array
@@ -48,11 +48,14 @@ class MapBuilder
 
     public function __construct(string $mapPath, array $resourceTypes = [])
     {
-        foreach ($resourceTypes as $type => $class) {
+        array_walk($resourceTypes, function (string $class, string $type): void {
             $this->resourceTypes[$type] = $class;
-        }
+        });
 
-        $this->map = $this->recursiveParseRawMap(Yaml::parse(file_get_contents($mapPath)));
+        $this->map = true === file_exists($mapPath)
+            ? $this->recursiveParseRawMap(Yaml::parse(file_get_contents($mapPath)))
+            : []
+        ;
     }
 
     /**

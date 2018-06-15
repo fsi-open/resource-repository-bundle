@@ -16,22 +16,22 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
-    /**
-     * {@inheritDoc}
-     */
+    private const SUPPORTED_DRIVERS = ['orm'];
+
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('fsi_resource_repository');
 
-        $supportedDrivers = ['orm'];
-
         $rootNode->children()
             ->scalarNode('db_driver')
                 ->defaultValue('orm')
                 ->validate()
-                    ->ifNotInArray($supportedDrivers)
-                    ->thenInvalid('The driver %s is not supported. Please choose one of ' . implode(', ', $supportedDrivers))
+                    ->ifNotInArray(self::SUPPORTED_DRIVERS)
+                    ->thenInvalid(
+                        'The driver %s is not supported. Please choose one of '
+                        . implode(', ', self::SUPPORTED_DRIVERS)
+                    )
                 ->end()
                 ->cannotBeOverwritten()
                 ->cannotBeEmpty()

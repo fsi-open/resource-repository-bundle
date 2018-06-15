@@ -22,16 +22,13 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class FSiResourceRepositoryBundle extends Bundle
 {
-    /**
-     * {@inheritdoc}
-     */
     public function build(ContainerBuilder $container)
     {
-        if ($container->hasExtension('fsi_doctrine_extensions')) {
+        if (true === $container->hasExtension('fsi_doctrine_extensions')) {
             $container->addCompilerPass(new ResourceFSiFilePass());
         }
 
-        if ($container->hasExtension('fos_ck_editor')) {
+        if (true === $container->hasExtension('fos_ck_editor')) {
             $container->addCompilerPass(new ResourceCKEditorPass());
         }
 
@@ -45,9 +42,6 @@ class FSiResourceRepositoryBundle extends Bundle
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getContainerExtension()
     {
         if (null === $this->extension) {
@@ -57,10 +51,7 @@ class FSiResourceRepositoryBundle extends Bundle
         return $this->extension;
     }
 
-    /**
-     * @return array
-     */
-    private function getDoctrineMappings()
+    private function getDoctrineMappings(): array
     {
         return [
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'FSi\Bundle\ResourceRepositoryBundle\Model',

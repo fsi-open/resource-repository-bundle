@@ -21,7 +21,7 @@ class ResourcePass implements CompilerPassInterface
     {
         $resources = [];
         foreach ($container->findTaggedServiceIds('resource.type') as $serviceId => $tag) {
-            if (!isset($tag[0]['alias'])) {
+            if (false === \array_key_exists('alias', $tag[0])) {
                 throw new CompilerPassException(sprintf('Service %s missing alias attribute', $serviceId));
             }
 
