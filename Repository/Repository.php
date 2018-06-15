@@ -82,12 +82,10 @@ class Repository
         $resource = $this->builder->getResource($key);
 
         $entity = $this->resourceValueRepository->get($resource->getName());
-        if (isset($entity) && !isset($value)) {
+        if (null !== $entity && null === $value) {
             $this->resourceValueRepository->remove($entity);
             return;
-        }
-
-        if (isset($entity)) {
+        } elseif (null !== $entity) {
             $this->accessor->setValue($entity, $resource->getResourceProperty(), $value);
             $this->resourceValueRepository->save($entity);
         } else {

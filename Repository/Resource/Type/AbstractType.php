@@ -51,7 +51,7 @@ abstract class AbstractType implements ResourceInterface
 
     public function getFormBuilder(FormFactoryInterface $factory): FormBuilderInterface
     {
-        if (!isset($this->formBuilder)) {
+        if (null === $this->formBuilder) {
             $this->formBuilder = $factory->createNamedBuilder(
                 $this->getResourceProperty(),
                 $this->getFormType(),
@@ -85,8 +85,7 @@ abstract class AbstractType implements ResourceInterface
     protected function buildFormOptions(): array
     {
         $options = array_merge(['required' => false, 'label' => false], $this->formOptions);
-
-        if (count($this->constraints)) {
+        if (0 !== count($this->constraints)) {
             $options = array_merge($options, ['constraints' => $this->constraints]);
         }
 

@@ -30,7 +30,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
         }
         $resource = parent::find($id, $lockMode, $lockVersion);
 
-        if (!isset($resource)) {
+        if (null === $resource) {
             $resourceClass = $this->getClassName();
             $resource = new $resourceClass();
             $resource->setKey($id);
@@ -69,7 +69,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
      * @param null $limit
      * @param null $offset
      * @return array|void
-     * @throws \FSi\Bundle\ResourceRepositoryBundle\Exception\EntityRepositoryException
+     * @throws EntityRepositoryException
      */
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
@@ -80,7 +80,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
      * Unsupported method
      *
      * @return array|void
-     * @throws \FSi\Bundle\ResourceRepositoryBundle\Exception\EntityRepositoryException
+     * @throws EntityRepositoryException
      */
     public function findAll()
     {
@@ -93,7 +93,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
      * @param array $criteria
      * @param array $orderBy
      * @return object|void
-     * @throws \FSi\Bundle\ResourceRepositoryBundle\Exception\EntityRepositoryException
+     * @throws EntityRepositoryException
      */
     public function findOneBy(array $criteria, array $orderBy = null)
     {

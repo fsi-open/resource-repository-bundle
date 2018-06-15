@@ -43,13 +43,12 @@ class ResourceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(['data_class' => $this->resourceClass]);
-
         $resolver->setRequired(['resource_key']);
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if (!$this->mapBuilder->hasResource($options['resource_key'])) {
+        if (false === $this->mapBuilder->hasResource($options['resource_key'])) {
             throw new ResourceFormTypeException(sprintf('"%s" is not a valid resource key', $options['resource_key']));
         }
 
