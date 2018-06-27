@@ -26,9 +26,8 @@
     "require-dev": {
         "doctrine/orm": "^2.5",
         "friendsofsymfony/ckeditor-bundle": "^1.0",
-        "fsi/doctrine-extensions": "^1.0|^2.0@dev",
-        "fsi/doctrine-extensions-bundle": "^1.0|^2.0@dev",
-        "fsi/form-extensions-bundle": "^2.0@dev",
+        "fsi/doctrine-extensions-bundle": "^1.0|^2.0",
+        "fsi/form-extensions-bundle": "^2.0",
         "phpunit/phpunit": "^7.1",
         "phpspec/phpspec": "^4.3",
         "phpspec/prophecy": "^1.7",
@@ -52,8 +51,10 @@
     },
     "extra": {
         "branch-alias": {
+            "dev-master": "3.0-dev",
+            "2.0": "2.0-dev",
             "1.1": "1.1-dev",
-            "dev-master": "2.0-dev"
+            "1.0": "1.0-dev"
         }
     }
 }
