@@ -35,9 +35,9 @@ public function indexAction(Request $request)
     ));
 
     if ($request->isMethod('POST')) {
-        $form->submit($request);
+        $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $entity = $form->getData();
 
             $this->getDoctrine()->getManager()->persist($entity);
@@ -45,9 +45,10 @@ public function indexAction(Request $request)
         }
     }
 
-    return $this->render('@FSiCompanySite/Default/index.html.twig', array(
-        'form' => $form->createView()
-    ));
+    return $this->render(
+        '@FSiCompanySite/Default/index.html.twig', 
+        ['form' => $form->createView()]
+    );
 }
 ```
 

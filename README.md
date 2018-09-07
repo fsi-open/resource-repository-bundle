@@ -1,10 +1,20 @@
 # Resource Repository Bundle
 
-Almost every single website have content that exist just in one place. For example text box at main page.
-There is no problem if this text is static but what if site admin needs to modify it?
-Then you should use ResourceRepositoryBundle that allows you to define resources in resource map and use them in Twig
-templates or in controller. Resources are stored in database but you should not use them as normal Entity.
-Resource is accessible only through ``Resource\Repository`` object that is registered as Symfony2 service.
+This bundle provides an easy and extendible way of creating various editable resources.
+Be it simple or formatted text, an image, a PDF file or a number value, you can
+use one of the predefined types to handle it's database storage and displaying in
+template. Should you require to, you can define your own types.
+
+Basically, this bundle exists so you do not have to create dedicated entities for
+simple content.
+
+In order to access and modify said resources, you will have to use the [Repository/Repository](https://github.com/fsi-open/resource-repository-bundle/blob/master/Repository/Repository.php)
+class (registered as a service). It will automatically fetch, save and handle the values conversion.
+
+For displaying the values in templates, the bundle is integrated with Twig templating
+language.
+
+All of the above are described in detail in the documentation linked below.
 
 Build Status:  
 [![Build Status](https://travis-ci.org/fsi-open/resource-repository-bundle.png?branch=master)](https://travis-ci.org/fsi-open/resource-repository-bundle) - Master  
@@ -21,6 +31,5 @@ Documentation:
 * [Resource Map](Resources/docs/resource_map.md)
 * [Basic Usage](Resources/docs/basic_usage.md)
 * [File Upload](Resources/docs/file_upload.md)
-* [FSI CKEditor (deprecated)](Resources/docs/fsi_ckeditor.md)
 * [CKEditor](Resources/docs/ckeditor.md)
 * [Adding new resource type](Resources/docs/adding_new_resource_type.md)
