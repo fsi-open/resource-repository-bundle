@@ -5,9 +5,7 @@ Add to composer.json following lines
 
 ```
 "require": {
-    "doctrine/doctrine-bundle": "dev-master",
-    "doctrine/doctrine-cache-bundle": "dev-master"
-    "fsi/resource-repository-bundle": "~1.1"
+    "fsi/resource-repository-bundle": "^2.0"
 }
 ```
 
@@ -20,11 +18,11 @@ Register bundle in AppKernel
 
 public function registerBundles()
 {
-    $bundles = array(
+    $bundles = [
         // ...
         new FSi\Bundle\ResourceRepositoryBundle\FSiResourceRepositoryBundle()
         // ...
-    );
+    ];
 
     return $bundles;
 }

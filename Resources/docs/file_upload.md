@@ -1,23 +1,20 @@
 # File Upload
 
-To use file as a resource type you need to register [FSiDoctrineExtensionsBundle](https://github.com/fsi-open/doctrine-extensions-bundle)
-in your application. Following instruction will help you in this.
+To use file as a resource type you need to add the [FSiDoctrineExtensionsBundle](https://github.com/fsi-open/doctrine-extensions-bundle)
+to your application.
 
 ## 1. Composer
-Add to composer.json following lines
 
-```
-"require": {
-    "fsi/doctrine-extensions-bundle" : "1.0.*"
-}
-```
+The following command will add the bundle to your `composer.json`:
+
+`composer require fsi/doctrine-extensions-bundle:^2.0`
 
 ## 2. Application Kernel
 
-Register bundle in AppKernel  
+Now, register the bundle in `AppKernel.php` (or `bundles.php` if you use the Flex way).
 **IMPORTANT!!** make sure that ``FSi\Bundle\DoctrineExtensionsBundle\FSiDoctrineExtensionsBundle()`` is registered
-**before** ``FSi\Bundle\ResourceRepositoryBundle\FSiResourceRepositoryBundle()``. In other way you will not be able
-to use file resource type.
+**before** ``FSi\Bundle\ResourceRepositoryBundle\FSiResourceRepositoryBundle()``. Otherwise you will not be able
+to use the file type resource.
 
 ```php
 // app/AppKernel.php
@@ -39,10 +36,11 @@ public function registerBundles()
 
 ## 3. Modify resource entity
 
-Now you need to change BaseResource class in your [Resource Entity](installation.md#3-create-entity) from
+Now you need to change the BaseResource class of your [Resource Entity](installation.md#3-create-entity) from
 ``FSi\Bundle\ResourceRepositoryBundle\Model\Resource`` to ``FSi\Bundle\ResourceRepositoryBundle\Model\ResourceFSiFile``
 
-This is how your Resource class should look now
+This is how your Resource class should look now:
+
 ```php
 <?php
 
@@ -60,19 +58,19 @@ class Resource extends BaseResource
 }
 ```
 
-## 4. Update db schema
+## 4. Update the database schema
 
-Update your database schema
+Update your database schema:
 
 ```
 $ php app/console doctrine:schema:update --force
 ```
 
-And now you should be able to use new resource types in your [Resource Map](resource_map.md). These types are:
+And now you should be able to use the new resource types in your [Resource Map](resource_map.md). These types are:
 
-- ``fsi_file`` - any file uploaded through uploadable doctrine extension
-- ``fsi_image`` - only images uploaded through uploadable doctrine extension
-- ``fsi_removable_file`` - one of the above with additional option to delete uploaded files
+- ``fsi_file`` - any file uploaded through uploadable doctrine extension,
+- ``fsi_image`` - only images uploaded through uploadable doctrine extension,
+- ``fsi_removable_file`` - one of the above with additional option to delete the uploaded file.
 
 Example:
 

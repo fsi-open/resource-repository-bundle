@@ -1,7 +1,7 @@
 # CKEditor Wysiwyg
 
 WYSIWYG (What you see is what you get) editor.
-To use ``ckeditor`` resource type you need to register ``egeloen/ckeditor-bundle`` that provide ``ckeditor``
+To use ``ckeditor`` resource type you need to register ``friendsofsymfony/ckeditor-bundle`` that provide ``ckeditor``
 form type.
 
 ## 1. Composer
@@ -9,7 +9,7 @@ Add to composer.json following lines
 
 ```
 "require": {
-    "egeloen/ckeditor-bundle" : "~2.5"
+    "friendsofsymfony/ckeditor-bundle" : "^1.0"
 }
 ```
 
@@ -25,13 +25,13 @@ to use ckeditor resource type.
 
 public function registerBundles()
 {
-    $bundles = array(
+    $bundles = [
         new FOS\CKEditorBundle\FOSCKEditorBundle(),
 
         // FSiResourceRepositoryBundle must be after FOSCKEditorBundle
 
         new FSi\Bundle\ResourceRepositoryBundle\FSiResourceRepositoryBundle()
-    );
+    ];
 
     return $bundles;
 }
