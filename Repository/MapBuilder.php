@@ -95,7 +95,7 @@ class MapBuilder
     {
         $map = [];
 
-        if (!is_array($rawMap)) {
+        if (false === is_array($rawMap)) {
             return $map;
         }
 
@@ -133,7 +133,7 @@ class MapBuilder
     {
         $type = $configuration['type'];
 
-        if (!array_key_exists($type, $this->resourceTypes)) {
+        if (false === array_key_exists($type, $this->resourceTypes)) {
             throw new ConfigurationException(sprintf(
                 '"%s" is not a valid resource type. Try one from: %s',
                 $type,
@@ -183,7 +183,7 @@ class MapBuilder
             ));
         }
 
-        if (!array_key_exists('type', $configuration)) {
+        if (false === array_key_exists('type', $configuration)) {
             throw new ConfigurationException(sprintf(
                 'Missing "type" declaration in "%s" element configuration',
                 $path
