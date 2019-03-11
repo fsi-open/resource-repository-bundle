@@ -11,7 +11,9 @@ declare(strict_types=1);
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Model;
 
+use DateTime;
 use DateTimeImmutable;
+use DateTimeInterface;
 
 class Resource implements ResourceValue
 {
@@ -82,7 +84,7 @@ class Resource implements ResourceValue
 
     public function setDateValue($dateValue)
     {
-        $this->dateValue = $dateValue;
+        $this->dateValue = $this->toDateTimeImmutable($dateValue);
     }
 
     public function getDateValue()
@@ -92,7 +94,7 @@ class Resource implements ResourceValue
 
     public function setDatetimeValue($datetimeValue)
     {
-        $this->datetimeValue = $datetimeValue;
+        $this->datetimeValue = $this->toDateTimeImmutable($datetimeValue);
     }
 
     public function getDatetimeValue()
@@ -102,7 +104,7 @@ class Resource implements ResourceValue
 
     public function setTimeValue($timeValue)
     {
-        $this->timeValue = $timeValue;
+        $this->timeValue = $this->toDateTimeImmutable($timeValue);
     }
 
     public function getTimeValue()
@@ -138,5 +140,21 @@ class Resource implements ResourceValue
     public function getBoolValue()
     {
         return $this->boolValue;
+    }
+
+    /**
+     * Symfony date/time/datetime forms do not allow for default DateTimeImmutable
+     * value until version 4.2, so the values need to be casted manually.
+     *
+     * @param DateTimeInterface|null $value
+     * @return DateTimeImmutable|null
+     */
+    private function toDateTimeImmutable(?DateTimeInterface $value): ?DateTimeImmutable
+    {
+        if (true === $value instanceof DateTime) {
+            $value = DateTimeImmutable::createFromMutable($value);
+        }
+
+        return $value;
     }
 }
