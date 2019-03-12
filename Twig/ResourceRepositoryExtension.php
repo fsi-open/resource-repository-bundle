@@ -15,21 +15,16 @@ use FSi\Bundle\ResourceRepositoryBundle\Repository\Repository;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class ResourceRepositoryExtension extends AbstractExtension
+final class ResourceRepositoryExtension extends AbstractExtension
 {
     /**
      * @var Repository
      */
-    protected $repository;
+    private $repository;
 
     public function __construct(Repository $repository)
     {
         $this->repository = $repository;
-    }
-
-    public function getName()
-    {
-        return 'fsi_resource_repository';
     }
 
     public function getFunctions()
@@ -40,7 +35,7 @@ class ResourceRepositoryExtension extends AbstractExtension
             }),
             new TwigFunction('get_resource', function(string $key, $default = null) {
                 $value = $this->repository->get($key);
-                return is_null($value) ? $default : $value;
+                return null !== $value ? $value : $default;
             })
         ];
     }
