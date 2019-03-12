@@ -17,17 +17,17 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ResourceType extends AbstractType
+final class ResourceType extends AbstractType
 {
     /**
      * @var MapBuilder
      */
-    protected $mapBuilder;
+    private $mapBuilder;
 
     /**
      * @var string
      */
-    protected $resourceClass;
+    private $resourceClass;
 
     public function __construct(MapBuilder $mapBuilder, string $resourceClass)
     {
@@ -49,7 +49,7 @@ class ResourceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if (false === $this->mapBuilder->hasResource($options['resource_key'])) {
-            throw new ResourceFormTypeException(sprintf('"%s" is not a valid resource key', $options['resource_key']));
+            throw new ResourceFormTypeException("\"{$options['resource_key']}\" is not a valid resource key");
         }
 
         $resource = $this->mapBuilder->getResource($options['resource_key']);
