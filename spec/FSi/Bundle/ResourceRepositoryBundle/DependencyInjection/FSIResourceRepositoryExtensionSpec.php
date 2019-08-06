@@ -54,6 +54,9 @@ class FSIResourceRepositoryExtensionSpec extends ObjectBehavior
         $builder->setAlias(ResourceValueRepository::class, Argument::type(Alias::class))->shouldBeCalled();
         $builder->setAlias('fsi_resource_repository.repository', Argument::type(Alias::class))->shouldBeCalled();
         $builder->setAlias(Repository::class, Argument::type(Alias::class))->shouldBeCalled();
+        if (true === method_exists(ContainerBuilder::class, 'removeBindings')) {
+            $builder->removeBindings(Argument::type('string'))->shouldBeCalled();
+        }
 
         $this->load([['db_driver' => 'orm', 'resource_class' => Resource::class]], $builder);
     }
