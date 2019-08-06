@@ -16,7 +16,7 @@ use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\IntegerType;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType;
 use PHPUnit\Framework\TestCase;
 
-class MapBuilderTest extends TestCase
+final class MapBuilderTest extends TestCase
 {
     public function testNonExistantMap()
     {
