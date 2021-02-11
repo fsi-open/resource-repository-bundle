@@ -1,6 +1,5 @@
-vendor/
 bin/
 src/
-
-composer.phar
+vendor/
 composer.lock
+.phpunit.result.cache
