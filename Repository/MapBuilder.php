@@ -88,7 +88,7 @@ class MapBuilder
     /**
      * @param array $rawMap
      * @param null|string $parentPath
-     * @throws \FSi\Bundle\ResourceRepositoryBundle\Exception\ConfigurationException
+     * @throws ConfigurationException
      * @return array
      */
     protected function recursiveParseRawMap(?array $rawMap = [], ?string $parentPath = null): array
@@ -104,7 +104,7 @@ class MapBuilder
 
             $this->validateConfiguration($configuration, $path);
 
-            if ($configuration['type'] == 'group') {
+            if ('group' === $configuration['type']) {
                 unset($configuration['type']);
                 $map[$key] = $this->recursiveParseRawMap($configuration, $path);
                 continue;
@@ -189,7 +189,6 @@ class MapBuilder
                 $path
             ));
         }
-
     }
 
     /**

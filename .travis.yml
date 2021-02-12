@@ -19,5 +19,7 @@ before_script:
     - composer update $COMPOSER_FLAGS
 
 script:
+    - vendor/bin/phpcs
+    - vendor/bin/phpstan analyze -c phpstan.neon
     - vendor/bin/phpspec run -f pretty
     - vendor/bin/phpunit

@@ -21,32 +21,32 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class TextareaTypeSpec extends ObjectBehavior
 {
-    public function let()
+    public function let(): void
     {
         $this->beConstructedWith('resource_group.resource_textarea');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(FSiTextareaType::class);
     }
 
-    function it_is_resource()
+    public function it_is_resource(): void
     {
         $this->shouldImplement(ResourceInterface::class);
     }
 
-    function it_return_text_entity_field()
+    public function it_return_text_entity_field(): void
     {
         $this->getResourceProperty()->shouldReturn('textValue');
     }
 
-    function it_return_valid_name()
+    public function it_return_valid_name(): void
     {
         $this->getName()->shouldReturn('resource_group.resource_textarea');
     }
 
-    function it_return_form_builder(FormFactory $factory, FormBuilder $form)
+    public function it_return_form_builder(FormFactory $factory, FormBuilder $form): void
     {
         $factory->createNamedBuilder('textValue', TextareaType::class, null, [
             'label' => false,
@@ -56,8 +56,11 @@ class TextareaTypeSpec extends ObjectBehavior
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf(FormBuilder::class);
     }
 
-    function it_return_form_builder_with_validation_constraints(FormFactory $factory, FormBuilder $form, NotBlank $constraint)
-    {
+    public function it_return_form_builder_with_validation_constraints(
+        FormFactory $factory,
+        FormBuilder $form,
+        NotBlank $constraint
+    ): void {
         $this->addConstraint($constraint);
 
         $factory->createNamedBuilder('textValue', TextareaType::class, null, [
@@ -71,8 +74,10 @@ class TextareaTypeSpec extends ObjectBehavior
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf(FormBuilder::class);
     }
 
-    function it_return_form_builder_with_form_options_added_to_resource_definition(FormFactory $factory, FormBuilder $form)
-    {
+    public function it_return_form_builder_with_form_options_added_to_resource_definition(
+        FormFactory $factory,
+        FormBuilder $form
+    ): void {
         $this->setFormOptions([
             'attr' => [
                 'class' => 'class-name'

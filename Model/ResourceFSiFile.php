@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Model;
 
+use FSi\DoctrineExtensions\Uploadable\File;
+
 class ResourceFSiFile extends Resource
 {
     /**
@@ -19,7 +21,7 @@ class ResourceFSiFile extends Resource
     protected $fileKeyValue;
 
     /**
-     * @var \FSi\DoctrineExtensions\Uploadable\File|null
+     * @var File|null
      */
     protected $fileValue;
 
@@ -40,7 +42,7 @@ class ResourceFSiFile extends Resource
     }
 
     /**
-     * @param \FSi\DoctrineExtensions\Uploadable\File|null $fileValue
+     * @param File|null $fileValue
      */
     public function setFileValue($fileValue)
     {
@@ -48,7 +50,7 @@ class ResourceFSiFile extends Resource
     }
 
     /**
-     * @return \FSi\DoctrineExtensions\Uploadable\File|null
+     * @return File|null
      */
     public function getFileValue()
     {

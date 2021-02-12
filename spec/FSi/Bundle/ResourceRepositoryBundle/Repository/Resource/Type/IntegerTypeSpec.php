@@ -21,32 +21,32 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class IntegerTypeSpec extends ObjectBehavior
 {
-    public function let()
+    public function let(): void
     {
         $this->beConstructedWith('resource_group.resource_integer');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(FSiIntegerType::class);
     }
 
-    function it_is_resource()
+    public function it_is_resource(): void
     {
         $this->shouldImplement(ResourceInterface::class);
     }
 
-    function it_return_email_entity_field()
+    public function it_return_email_entity_field(): void
     {
         $this->getResourceProperty()->shouldReturn('integerValue');
     }
 
-    function it_return_valid_name()
+    public function it_return_valid_name(): void
     {
         $this->getName()->shouldReturn('resource_group.resource_integer');
     }
 
-    function it_return_form_builder(FormFactory $factory, FormBuilder $form)
+    public function it_return_form_builder(FormFactory $factory, FormBuilder $form): void
     {
         $factory->createNamedBuilder('integerValue', IntegerType::class, null, [
             'label' => false,
@@ -56,8 +56,11 @@ class IntegerTypeSpec extends ObjectBehavior
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf(FormBuilder::class);
     }
 
-    function it_return_form_builder_with_validation_constraints(FormFactory $factory, FormBuilder $form, NotBlank $notBlank)
-    {
+    public function it_return_form_builder_with_validation_constraints(
+        FormFactory $factory,
+        FormBuilder $form,
+        NotBlank $notBlank
+    ): void {
         $this->addConstraint($notBlank);
 
         $factory->createNamedBuilder('integerValue', IntegerType::class, null, [
@@ -69,8 +72,10 @@ class IntegerTypeSpec extends ObjectBehavior
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf(FormBuilder::class);
     }
 
-    function it_return_form_builder_with_form_options_added_to_resource_definition(FormFactory $factory, FormBuilder $form)
-    {
+    public function it_return_form_builder_with_form_options_added_to_resource_definition(
+        FormFactory $factory,
+        FormBuilder $form
+    ): void {
         $this->setFormOptions(['attr' => ['class' => 'class-name']]);
         $factory->createNamedBuilder('integerValue', IntegerType::class, null, [
             'label' => false,

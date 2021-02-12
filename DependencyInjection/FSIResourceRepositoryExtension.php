@@ -26,7 +26,7 @@ class FSIResourceRepositoryExtension extends Extension
         $container->setParameter('fsi_resource_repository.resource.map_path', $config['map_path']);
         $container->setParameter('fsi_resource_repository.resource.value.class', $config['resource_class']);
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
 
         $loader->load($config['db_driver'] . '.xml');

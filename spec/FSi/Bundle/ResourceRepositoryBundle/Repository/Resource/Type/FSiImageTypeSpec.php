@@ -20,27 +20,27 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class FSiImageTypeSpec extends ObjectBehavior
 {
-    public function let()
+    public function let(): void
     {
         $this->beConstructedWith('resource_group.resource_fsi_image');
     }
 
-    function it_is_resource()
+    public function it_is_resource(): void
     {
         $this->shouldImplement(ResourceInterface::class);
     }
 
-    function it_return_text_entity_field()
+    public function it_return_text_entity_field(): void
     {
         $this->getResourceProperty()->shouldReturn('fileValue');
     }
 
-    function it_return_valid_name()
+    public function it_return_valid_name(): void
     {
         $this->getName()->shouldReturn('resource_group.resource_fsi_image');
     }
 
-    function it_return_form_builder(FormFactory $factory, FormBuilder $form)
+    public function it_return_form_builder(FormFactory $factory, FormBuilder $form): void
     {
         $factory->createNamedBuilder('fileValue', ImageType::class, null, [
             'label' => false,
@@ -50,8 +50,11 @@ class FSiImageTypeSpec extends ObjectBehavior
         $this->getFormBuilder($factory)->shouldReturn($form);
     }
 
-    function it_return_form_builder_with_validation_constraints(FormFactory $factory, FormBuilder $form, NotBlank $constraint)
-    {
+    public function it_return_form_builder_with_validation_constraints(
+        FormFactory $factory,
+        FormBuilder $form,
+        NotBlank $constraint
+    ): void {
         $this->addConstraint($constraint);
 
         $factory->createNamedBuilder('fileValue', ImageType::class, null, [
@@ -65,8 +68,10 @@ class FSiImageTypeSpec extends ObjectBehavior
         $this->getFormBuilder($factory)->shouldReturn($form);
     }
 
-    function it_return_form_builder_with_form_options_added_to_resource_definition(FormFactory $factory, FormBuilder $form)
-    {
+    public function it_return_form_builder_with_form_options_added_to_resource_definition(
+        FormFactory $factory,
+        FormBuilder $form
+    ): void {
         $this->setFormOptions([
             'attr' => [
                 'class' => 'class-name'

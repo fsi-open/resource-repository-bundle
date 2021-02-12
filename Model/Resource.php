@@ -14,6 +14,10 @@ namespace FSi\Bundle\ResourceRepositoryBundle\Model;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
+use InvalidArgumentException;
+
+use function get_class;
+use function method_exists;
 
 class Resource implements ResourceValue
 {
@@ -151,10 +155,18 @@ class Resource implements ResourceValue
      */
     private function toDateTimeImmutable(?DateTimeInterface $value): ?DateTimeImmutable
     {
-        if (true === $value instanceof DateTime) {
-            $value = DateTimeImmutable::createFromMutable($value);
+        if (null === $value) {
+            return null;
         }
 
-        return $value;
+        if (true === $value instanceof DateTime) {
+            return DateTimeImmutable::createFromMutable($value);
+        } elseif (true === $value instanceof DateTimeImmutable) {
+            return $value;
+        }
+
+        throw new InvalidArgumentException(
+            sprintf("Don't know how to convert %s to %s", get_class($value), DateTimeImmutable::class)
+        );
     }
 }

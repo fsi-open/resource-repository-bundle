@@ -23,7 +23,7 @@ abstract class AbstractType implements ResourceInterface
     protected $name;
 
     /**
-     * @var Constraint[]
+     * @var array<Constraint>
      */
     protected $constraints;
 
@@ -33,7 +33,7 @@ abstract class AbstractType implements ResourceInterface
     protected $formOptions;
 
     /**
-     * @var null|FormBuilderInterface
+     * @var FormBuilderInterface|null
      */
     protected $formBuilder;
 

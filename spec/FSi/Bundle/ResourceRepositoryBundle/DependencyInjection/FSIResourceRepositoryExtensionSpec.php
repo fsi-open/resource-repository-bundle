@@ -15,9 +15,9 @@ use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\FSIResourceRepositor
 use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Repository;
-use FSi\DemoBundle\Entity\Resource;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use FSi\Bundle\ResourceRepositoryBundle\Tests\Entity\Resource;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -25,17 +25,17 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class FSIResourceRepositoryExtensionSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(FSIResourceRepositoryExtension::class);
     }
 
-    function it_should_have_a_valid_alias()
+    public function it_should_have_a_valid_alias(): void
     {
         $this->getAlias()->shouldReturn('fsi_resource_repository');
     }
 
-    function it_should_add_resource_map_parameter_to_container(ContainerBuilder $builder)
+    public function it_should_add_resource_map_parameter_to_container(ContainerBuilder $builder): void
     {
         $builder->hasExtension(Argument::type('string'))->willReturn(false);
         if (method_exists(ContainerBuilder::class, 'fileExists')) {
@@ -45,7 +45,8 @@ class FSIResourceRepositoryExtensionSpec extends ObjectBehavior
         }
         $builder->setDefinition(Argument::type('string'), Argument::type(Definition::class))->shouldBeCalled();
 
-        $builder->setParameter('fsi_resource_repository.resource.map_path', '%kernel.root_dir%/config/resource_map.yml')->shouldBeCalled();
+        $builder->setParameter('fsi_resource_repository.resource.map_path', '%kernel.root_dir%/config/resource_map.yml')
+            ->shouldBeCalled();
         $builder->setParameter('fsi_resource_repository.resource.value.class', Resource::class)->shouldBeCalled();
 
         $builder->setAlias('fsi_resource_repository.map_builder', Argument::type(Alias::class))->shouldBeCalled();
