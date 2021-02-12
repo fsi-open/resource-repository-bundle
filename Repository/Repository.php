@@ -83,7 +83,7 @@ class Repository
             $this->resourceValueRepository->remove($entity);
         } else {
             $this->accessor->setValue($entity, $resource->getResourceProperty(), $value);
-            $this->resourceValueRepository->save($entity);
+            $this->resourceValueRepository->add($entity);
         }
     }
 }

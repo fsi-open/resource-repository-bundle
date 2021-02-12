@@ -92,7 +92,7 @@ class RepositorySpec extends ObjectBehavior
         $repository->get('resources_group.resource_a.en')->willReturn($entity);
         $builder->getResource(Argument::type('string'))->willReturn($resource);
         $resource->getResourceProperty()->willReturn('textValue');
-        $repository->save(Argument::type(Resource::class))->shouldBeCalled();
+        $repository->add(Argument::type(Resource::class))->shouldBeCalled();
 
         $this->set('resources_group.resource_a', 'text');
     }

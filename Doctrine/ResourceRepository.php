@@ -46,19 +46,20 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
 
     public function save(ResourceValue $resourceValue): void
     {
-        $this->_em->persist($resourceValue);
-        $this->_em->flush();
+        $this->getEntityManager()->persist($resourceValue);
+        $this->getEntityManager()->flush();
     }
 
     public function add(ResourceValue $resourceValue): void
     {
-        $this->save($resourceValue);
+        $this->getEntityManager()->persist($resourceValue);
+        $this->getEntityManager()->flush();
     }
 
     public function remove(ResourceValue $resourceValue): void
     {
-        $this->_em->remove($resourceValue);
-        $this->_em->flush();
+        $this->getEntityManager()->remove($resourceValue);
+        $this->getEntityManager()->flush();
     }
 
     /**
