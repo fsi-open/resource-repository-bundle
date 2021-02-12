@@ -16,68 +16,69 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use FSi\Bundle\ResourceRepositoryBundle\Doctrine\ResourceRepository;
 use FSi\Bundle\ResourceRepositoryBundle\Exception\EntityRepositoryException;
-use FSi\Bundle\ResourceRepositoryBundle\Model\Resource as BaseResource;
 use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use spec\FSi\Bundle\ResourceRepositoryBundle\Doctrine\Resource;
-
-class Resource extends BaseResource
-{
-}
+use FSi\Bundle\ResourceRepositoryBundle\Tests\Entity\Resource;
 
 class ResourceRepositorySpec extends ObjectBehavior
 {
-    function let(EntityManager $em, ClassMetadata $class)
+    public function let(EntityManager $em, ClassMetadata $class): void
     {
         $class->name = Resource::class;
         $this->beConstructedWith($em, $class);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(ResourceRepository::class);
     }
 
-    function it_is_doctrine_entity_repository()
+    public function it_is_doctrine_entity_repository(): void
     {
         $this->shouldBeAnInstanceOf(EntityRepository::class);
     }
 
-    function it_throw_exception_during_findBy_method()
+    public function it_throw_exception_during_findBy_method(): void
     {
         $this->shouldThrow(
-            new EntityRepositoryException('Method "findBy" is not supported in "FSiResourceRepository:Resource" entity repository')
+            new EntityRepositoryException(
+                sprintf('Method "findBy" is not supported in "%s" entity repository', Resource::class)
+            )
         )->during('findBy', [[]]);
     }
 
-    function it_throw_exception_during_findAll_method()
+    public function it_throw_exception_during_findAll_method(): void
     {
         $this->shouldThrow(
-            new EntityRepositoryException('Method "findAll" is not supported in "FSiResourceRepository:Resource" entity repository')
+            new EntityRepositoryException(
+                sprintf('Method "findAll" is not supported in "%s" entity repository', Resource::class)
+            )
         )->during('findAll', []);
     }
 
-    function it_throw_exception_during_findOneBy_method()
+    public function it_throw_exception_during_findOneBy_method(): void
     {
         $this->shouldThrow(
-            new EntityRepositoryException('Method "findOneBy" is not supported in "FSiResourceRepository:Resource" entity repository')
+            new EntityRepositoryException(
+                sprintf('Method "findOneBy" is not supported in "%s" entity repository', Resource::class)
+            )
         )->during('findOneBy', [[]]);
     }
 
-    function it_return_entity_even_if_it_not_exist_in_db(EntityManager $em)
+    public function it_return_entity_even_if_it_not_exist_in_db(EntityManager $em): void
     {
         $em->find(Argument::any(), 'resources.resource_a', Argument::any(), Argument::any())->willReturn(null);
         $this->find('resources.resource_a')->shouldReturnResourceWithKey('resources.resource_a');
     }
 
-    function it_return_entity_in_get_method(EntityManager $em)
+    public function it_return_entity_in_get_method(EntityManager $em): void
     {
         $em->find(Argument::any(), 'resources.resource_a', Argument::any(), Argument::any())->willReturn(null);
         $this->get('resources.resource_a')->shouldReturnResourceWithKey('resources.resource_a');
     }
 
-    function it_adds_new_resource_value_entity(EntityManager $em, ResourceValue $resourceValue)
+    public function it_adds_new_resource_value_entity(EntityManager $em, ResourceValue $resourceValue): void
     {
         $em->persist($resourceValue)->shouldBeCalled();
         $em->flush()->shouldBeCalled();
@@ -85,7 +86,7 @@ class ResourceRepositorySpec extends ObjectBehavior
         $this->add($resourceValue);
     }
 
-    function it_saves_new_resource_value_entity(EntityManager $em, ResourceValue $resourceValue)
+    public function it_saves_new_resource_value_entity(EntityManager $em, ResourceValue $resourceValue): void
     {
         $em->persist($resourceValue)->shouldBeCalled();
         $em->flush()->shouldBeCalled();
@@ -93,7 +94,7 @@ class ResourceRepositorySpec extends ObjectBehavior
         $this->save($resourceValue);
     }
 
-    function it_removes_resource_value_entity(EntityManager $em, ResourceValue $resourceValue)
+    public function it_removes_resource_value_entity(EntityManager $em, ResourceValue $resourceValue): void
     {
         $em->remove($resourceValue)->shouldBeCalled();
         $em->flush()->shouldBeCalled();
@@ -101,10 +102,10 @@ class ResourceRepositorySpec extends ObjectBehavior
         $this->remove($resourceValue);
     }
 
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
-            'returnResourceWithKey' => function($subject, $key) {
+            'returnResourceWithKey' => function ($subject, $key) {
                 if (!$subject instanceof Resource) {
                     return false;
                 }

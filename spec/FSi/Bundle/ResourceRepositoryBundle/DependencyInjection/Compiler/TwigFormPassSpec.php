@@ -18,17 +18,17 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class TwigFormPassSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(TwigFormPass::class);
     }
 
-    function it_is_complier_pass()
+    public function it_is_complier_pass(): void
     {
         $this->shouldBeAnInstanceOf(CompilerPassInterface::class);
     }
 
-    function it_should_add_resource_path_during_process_method(ContainerBuilder $container)
+    public function it_should_add_resource_path_during_process_method(ContainerBuilder $container): void
     {
         $container->hasParameter('twig.form.resources')->shouldBeCalled()->willReturn(true);
 

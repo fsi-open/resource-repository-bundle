@@ -11,6 +11,9 @@ declare(strict_types=1);
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Model;
 
+use DateTimeImmutable;
+use DateTimeInterface;
+
 interface ResourceValue
 {
     /**
@@ -34,32 +37,32 @@ interface ResourceValue
     public function getTextValue();
 
     /**
-     * @param \DateTimeInterface $dateValue
+     * @param DateTimeInterface $dateValue
      */
     public function setDateValue($dateValue);
 
     /**
-     * @return \DateTimeImmutable
+     * @return DateTimeImmutable
      */
     public function getDateValue();
 
     /**
-     * @param \DateTimeInterface $datetimeValue
+     * @param DateTimeInterface $datetimeValue
      */
     public function setDatetimeValue($datetimeValue);
 
     /**
-     * @return \DateTimeImmutable
+     * @return DateTimeImmutable
      */
     public function getDatetimeValue();
 
     /**
-     * @param \DateTimeInterface $timeValue
+     * @param DateTimeInterface $timeValue
      */
     public function setTimeValue($timeValue);
 
     /**
-     * @return \DateTimeImmutable
+     * @return DateTimeImmutable
      */
     public function getTimeValue();
 

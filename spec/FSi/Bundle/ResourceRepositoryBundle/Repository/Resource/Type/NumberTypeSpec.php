@@ -21,32 +21,32 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class NumberTypeSpec extends ObjectBehavior
 {
-    public function let()
+    public function let(): void
     {
         $this->beConstructedWith('resource_group.resource_number');
     }
 
-    function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(FSiNumberType::class);
     }
 
-    function it_is_resource()
+    public function it_is_resource(): void
     {
         $this->shouldImplement(ResourceInterface::class);
     }
 
-    function it_return_email_entity_field()
+    public function it_return_email_entity_field(): void
     {
         $this->getResourceProperty()->shouldReturn('numberValue');
     }
 
-    function it_return_valid_name()
+    public function it_return_valid_name(): void
     {
         $this->getName()->shouldReturn('resource_group.resource_number');
     }
 
-    function it_return_form_builder(FormFactory $factory, FormBuilder $form)
+    public function it_return_form_builder(FormFactory $factory, FormBuilder $form): void
     {
         $factory->createNamedBuilder('numberValue', NumberType::class, null, [
             'label' => false,
@@ -57,11 +57,11 @@ class NumberTypeSpec extends ObjectBehavior
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf(FormBuilder::class);
     }
 
-    function it_return_form_builder_with_validation_constraints(
+    public function it_return_form_builder_with_validation_constraints(
         FormFactory $factory,
         FormBuilder $form,
         NotBlank $notBlank
-    ) {
+    ): void {
         $this->addConstraint($notBlank);
 
         $factory->createNamedBuilder('numberValue', NumberType::class, null, [
@@ -74,10 +74,10 @@ class NumberTypeSpec extends ObjectBehavior
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf(FormBuilder::class);
     }
 
-    function it_return_form_builder_with_form_options_added_to_resource_definition(
+    public function it_return_form_builder_with_form_options_added_to_resource_definition(
         FormFactory $factory,
         FormBuilder $form
-    ) {
+    ): void {
         $this->setFormOptions([
             'attr' => ['class' => 'class-name']
         ]);
@@ -92,7 +92,7 @@ class NumberTypeSpec extends ObjectBehavior
         $this->getFormBuilder($factory)->shouldReturnAnInstanceOf(FormBuilder::class);
     }
 
-    function it_should_allow_override_form_options(FormFactory $factory, FormBuilder $form)
+    public function it_should_allow_override_form_options(FormFactory $factory, FormBuilder $form): void
     {
         $this->setFormOptions(['scale' => 8]);
 

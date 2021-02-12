@@ -1,6 +1,6 @@
-vendor/
 bin/
 src/
-
-composer.phar
+vendor/
 composer.lock
+.phpcs-cache
+.phpunit.result.cache

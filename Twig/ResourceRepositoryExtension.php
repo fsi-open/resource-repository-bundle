@@ -30,10 +30,10 @@ final class ResourceRepositoryExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('has_resource', function(string $key): bool {
+            new TwigFunction('has_resource', function (string $key): bool {
                 return null !== $this->repository->get($key);
             }),
-            new TwigFunction('get_resource', function(string $key, $default = null) {
+            new TwigFunction('get_resource', function (string $key, $default = null) {
                 $value = $this->repository->get($key);
                 return null !== $value ? $value : $default;
             })

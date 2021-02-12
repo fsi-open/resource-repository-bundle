@@ -25,22 +25,22 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class FSiResourceRepositoryBundleSpec extends ObjectBehavior
 {
-    function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(FSiResourceRepositoryBundle::class);
     }
 
-    function it_is_bundle()
+    public function it_is_bundle(): void
     {
         $this->shouldBeAnInstanceOf(Bundle::class);
     }
 
-    function it_have_fsi_resource_repository_extension()
+    public function it_have_fsi_resource_repository_extension(): void
     {
         $this->getContainerExtension()->shouldReturnAnInstanceOf(FSIResourceRepositoryExtension::class);
     }
 
-    function it_add_compiler_pass_during_build(ContainerBuilder $container)
+    public function it_add_compiler_pass_during_build(ContainerBuilder $container): void
     {
         $container->hasExtension('fsi_doctrine_extensions')->shouldBeCalled()->willReturn(true);
         $container->hasExtension('fos_ck_editor')->shouldBeCalled()->willReturn(true);

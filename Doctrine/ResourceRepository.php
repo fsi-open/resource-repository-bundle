@@ -21,11 +21,11 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
      * @param mixed $id
      * @param int $lockMode
      * @param null $lockVersion
-     * @return \FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue
+     * @return ResourceValue
      */
     public function find($id, $lockMode = null, $lockVersion = null)
     {
-        if ($lockMode === null && \Doctrine\ORM\Version::compare('2.5.0-dev') === 1) {
+        if ($lockMode === null) {
             $lockMode = LockMode::NONE;
         }
         $resource = parent::find($id, $lockMode, $lockVersion);
@@ -46,19 +46,20 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
 
     public function save(ResourceValue $resourceValue): void
     {
-        $this->_em->persist($resourceValue);
-        $this->_em->flush();
+        $this->getEntityManager()->persist($resourceValue);
+        $this->getEntityManager()->flush();
     }
 
     public function add(ResourceValue $resourceValue): void
     {
-        $this->save($resourceValue);
+        $this->getEntityManager()->persist($resourceValue);
+        $this->getEntityManager()->flush();
     }
 
     public function remove(ResourceValue $resourceValue): void
     {
-        $this->_em->remove($resourceValue);
-        $this->_em->flush();
+        $this->getEntityManager()->remove($resourceValue);
+        $this->getEntityManager()->flush();
     }
 
     /**

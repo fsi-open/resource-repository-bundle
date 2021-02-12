@@ -19,34 +19,27 @@ use Twig\TwigFunction;
 
 class ResourceRepositoryExtensionSpec extends ObjectBehavior
 {
-    function let(Repository $repository)
+    public function let(Repository $repository): void
     {
         $this->beConstructedWith($repository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(ResourceRepositoryExtension::class);
     }
 
-    function it_is_twig_extension()
+    public function it_is_twig_extension(): void
     {
         $this->shouldBeAnInstanceOf(AbstractExtension::class);
     }
 
-    function it_have_fsi_resource_repository_name()
-    {
-        $this->getName()->shouldReturn('fsi_resource_repository');
-    }
-
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
-            'haveFunction' => function($subject, $key) {
-                $filter = function ($function) use ($key) {
-                    return $function instanceof TwigFunction
-                        && $function->getName() == $key
-                    ;
+            'haveFunction' => function ($subject, $key) {
+                $filter = static function ($function) use ($key): bool {
+                    return $function instanceof TwigFunction && $function->getName() === $key;
                 };
 
                 return count(array_filter($subject, $filter)) > 0;

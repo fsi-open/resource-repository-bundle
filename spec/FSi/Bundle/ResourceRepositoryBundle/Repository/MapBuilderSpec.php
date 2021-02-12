@@ -22,7 +22,7 @@ class MapBuilderSpec extends ObjectBehavior
 {
     protected $resources = ['text' => TextType::class, 'integer' => IntegerType::class];
 
-    function let()
+    public function let(): void
     {
         $this->beConstructedWith(
             __DIR__ . '/../../../../Fixtures/simple_valid_map.yml',
@@ -30,12 +30,12 @@ class MapBuilderSpec extends ObjectBehavior
         );
     }
 
-    function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(MapBuilder::class);
     }
 
-    function it_should_have_valid_simple_map()
+    public function it_should_have_valid_simple_map(): void
     {
         $this->getMap()->shouldHaveMap([
             'main_resource_group' => [
@@ -48,75 +48,89 @@ class MapBuilderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_should_return_text_type_object()
+    public function it_should_return_text_type_object(): void
     {
         $this->getResource('main_resource_group.resource_block.resource_a')
             ->shouldReturnAnInstanceOf(TextType::class);
     }
 
-    function it_should_return_false_if_resource_key_does_not_exists()
+    public function it_should_return_false_if_resource_key_does_not_exists(): void
     {
         $this->hasResource('this.is.not.a.resource.key')->shouldReturn(false);
     }
 
-    function it_should_throw_exception_when_group_does_not_have_type()
+    public function it_should_throw_exception_when_group_does_not_have_type(): void
     {
         $this->shouldThrow(
-            new ConfigurationException('Missing "type" declaration in "main_resource_group.resource_block" element configuration')
+            new ConfigurationException(
+                'Missing "type" declaration in "main_resource_group.resource_block" element configuration'
+            )
         )->during('__construct', [
                 __DIR__ . '/../../../../Fixtures/simple_map_with_missing_group_type.yml',
                 $this->resources
         ]);
     }
 
-    function it_should_throw_exception_when_element_have_invalid_type()
+    public function it_should_throw_exception_when_element_have_invalid_type(): void
     {
         $this->shouldThrow(
-            new ConfigurationException('"this_is_not_a_valid_type" is not a valid resource type. Try one from: text, integer')
+            new ConfigurationException(
+                '"this_is_not_a_valid_type" is not a valid resource type. Try one from: text, integer'
+            )
         )->during('__construct', [
                 __DIR__ . '/../../../../Fixtures/simple_map_with_invalid_resource_type.yml',
                 $this->resources
         ]);
     }
 
-    function it_should_throw_exception_when_resource_path_is_longer_than_255_characters()
+    public function it_should_throw_exception_when_resource_path_is_longer_than_255_characters(): void
     {
         $this->shouldThrow(
-            new ConfigurationException('"main_resource_group.this_is_long..." key is too long. Maximum key length is 255 characters')
+            new ConfigurationException(
+                '"main_resource_group.this_is_long..." key is too long. Maximum key length is 255 characters'
+            )
         )->during('__construct', [
                 __DIR__ . '/../../../../Fixtures/simple_map_with_too_long_path.yml',
                 $this->resources
         ]);
     }
 
-    function it_should_parse_empty_file_witht_resource_map()
+    public function it_should_parse_empty_file_without_resource_map(): void
     {
         $this->beConstructedWith(__DIR__ . '/../../../../Fixtures/empty_map.yml', $this->resources);
         $this->getMap()->shouldReturn([]);
     }
 
-    function it_should_create_resource_with_validator()
+    public function it_should_create_resource_with_validator(): void
     {
         $text = new TextType('resources.resource_text');
         $text->addConstraint(new NotBlank());
 
-        $this->beConstructedWith(__DIR__ . '/../../../../Fixtures/simple_valid_map_with_validators.yml', $this->resources);
+        $this->beConstructedWith(
+            __DIR__ . '/../../../../Fixtures/simple_valid_map_with_validators.yml',
+            $this->resources
+        );
         $this->getResource('resources.resource_text')->shouldBeLike($text);
     }
 
-    function it_should_create_resource_with_form_options()
+    public function it_should_create_resource_with_form_options(): void
     {
         $text = new TextType('resources.resource_text');
         $text->setFormOptions(['attr' => ['class' => 'class-name']]);
 
-        $this->beConstructedWith(__DIR__ . '/../../../../Fixtures/simple_valid_map_with_form_options.yml', $this->resources);
+        $this->beConstructedWith(
+            __DIR__ . '/../../../../Fixtures/simple_valid_map_with_form_options.yml',
+            $this->resources
+        );
         $this->getResource('resources.resource_text')->shouldBeLike($text);
     }
 
-    function it_should_throw_exception_when_resource_type_have_invalid_option()
+    public function it_should_throw_exception_when_resource_type_have_invalid_option(): void
     {
         $this->shouldThrow(
-            new ConfigurationException('"form-options" is not a valid resource type option. Try one from: form_options, constraints')
+            new ConfigurationException(
+                '"form-options" is not a valid resource type option. Try one from: form_options, constraints'
+            )
         )->during('__construct', [
                 __DIR__ . '/../../../../Fixtures/simple_valid_map_with_invalid_type_options.yml',
                 $this->resources
@@ -126,8 +140,8 @@ class MapBuilderSpec extends ObjectBehavior
     public function getMatchers(): array
     {
         return [
-            'haveMap' => function($map, $expectedMap) {
-                $walker = function ($map, $expectedMap) use (&$walker) {
+            'haveMap' => function ($map, $expectedMap) {
+                $walker = static function ($map, $expectedMap) use (&$walker) {
                     foreach ($map as $key => $element) {
                         if (!array_key_exists($key, $expectedMap)) {
                             return false;

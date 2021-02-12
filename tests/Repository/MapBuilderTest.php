@@ -18,18 +18,18 @@ use PHPUnit\Framework\TestCase;
 
 final class MapBuilderTest extends TestCase
 {
-    public function testNonExistantMap()
+    public function testNonExistantMap(): void
     {
-        $this->assertCount(0, (new MapBuilder('non existant path'))->getMap());
+        self::assertCount(0, (new MapBuilder('non existant path'))->getMap());
     }
 
-    public function testExistingMap()
+    public function testExistingMap(): void
     {
         $mapBuilder = new MapBuilder(
             __DIR__ . '/../../spec/Fixtures/simple_valid_map.yml',
             ['text' => TextType::class, 'integer' => IntegerType::class]
         );
 
-        $this->assertCount(1, $mapBuilder->getMap());
+        self::assertCount(1, $mapBuilder->getMap());
     }
 }
