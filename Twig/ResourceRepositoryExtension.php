@@ -17,22 +17,23 @@ use Twig\TwigFunction;
 
 final class ResourceRepositoryExtension extends AbstractExtension
 {
-    /**
-     * @var Repository
-     */
-    private $repository;
+    private Repository $repository;
 
     public function __construct(Repository $repository)
     {
         $this->repository = $repository;
     }
 
-    public function getFunctions()
+    /**
+     * @return array<TwigFunction>
+     */
+    public function getFunctions(): array
     {
         return [
-            new TwigFunction('has_resource', function (string $key): bool {
-                return null !== $this->repository->get($key);
-            }),
+            new TwigFunction(
+                'has_resource',
+                fn (string $key): bool => null !== $this->repository->get($key)
+            ),
             new TwigFunction('get_resource', function (string $key, $default = null) {
                 $value = $this->repository->get($key);
                 return null !== $value ? $value : $default;
