@@ -15,6 +15,7 @@ use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappi
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceCKEditorPass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceFSiFilePass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourcePass;
+use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceWebFilePass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\TwigFormPass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\FSIResourceRepositoryExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -26,6 +27,9 @@ class FSiResourceRepositoryBundle extends Bundle
     {
         if (true === $container->hasExtension('fsi_doctrine_extensions')) {
             $container->addCompilerPass(new ResourceFSiFilePass());
+        }
+        if (true === $container->hasExtension('fsi_files')) {
+            $container->addCompilerPass(new ResourceWebFilePass());
         }
 
         if (true === $container->hasExtension('fos_ck_editor')) {

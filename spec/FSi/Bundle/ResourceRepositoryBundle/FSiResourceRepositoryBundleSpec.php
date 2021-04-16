@@ -15,6 +15,7 @@ use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappi
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceCKEditorPass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceFSiFilePass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourcePass;
+use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceWebFilePass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\TwigFormPass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\FSIResourceRepositoryExtension;
 use FSi\Bundle\ResourceRepositoryBundle\FSiResourceRepositoryBundle;
@@ -43,8 +44,10 @@ class FSiResourceRepositoryBundleSpec extends ObjectBehavior
     public function it_add_compiler_pass_during_build(ContainerBuilder $container): void
     {
         $container->hasExtension('fsi_doctrine_extensions')->shouldBeCalled()->willReturn(true);
+        $container->hasExtension('fsi_files')->shouldBeCalled()->willReturn(true);
         $container->hasExtension('fos_ck_editor')->shouldBeCalled()->willReturn(true);
         $container->addCompilerPass(Argument::type(ResourceFSiFilePass::class))->shouldBeCalled();
+        $container->addCompilerPass(Argument::type(ResourceWebFilePass::class))->shouldBeCalled();
         $container->addCompilerPass(Argument::type(ResourceCKEditorPass::class))->shouldBeCalled();
         $container->addCompilerPass(Argument::type(TwigFormPass::class))->shouldBeCalled();
         $container->addCompilerPass(Argument::type(ResourcePass::class))->shouldBeCalled();
