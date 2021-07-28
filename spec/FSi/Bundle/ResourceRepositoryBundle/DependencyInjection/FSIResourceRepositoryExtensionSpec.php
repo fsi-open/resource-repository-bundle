@@ -45,7 +45,7 @@ class FSIResourceRepositoryExtensionSpec extends ObjectBehavior
         }
         $builder->setDefinition(Argument::type('string'), Argument::type(Definition::class))->shouldBeCalled();
 
-        $builder->setParameter('fsi_resource_repository.resource.map_path', '%kernel.root_dir%/config/resource_map.yml')
+        $builder->setParameter('fsi_resource_repository.resource.map_path', '%kernel.project_dir%/config/resource_map.yml')
             ->shouldBeCalled();
         $builder->setParameter('fsi_resource_repository.resource.value.class', Resource::class)->shouldBeCalled();
 

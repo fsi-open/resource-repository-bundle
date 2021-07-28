@@ -29,14 +29,14 @@
         "symfony/framework-bundle": "^4.4|^5.0",
         "symfony/property-access": "^4.4|^5.0",
         "symfony/validator": "^4.4|^5.0",
-        "twig/twig": "^2.13"
+        "twig/twig": "^2.13|^3.0"
     },
     "require-dev": {
         "doctrine/orm": "^2.5",
         "friendsofsymfony/ckeditor-bundle": "^2.1",
-        "fsi/doctrine-extensions-bundle": "^2.1",
+        "fsi/doctrine-extensions-bundle": "^2.1@dev",
         "fsi/files": "^1.1",
-        "fsi/form-extensions-bundle": "^2.0",
+        "fsi/form-extensions-bundle": "^2.0@dev",
         "phpunit/phpunit": "^8.0",
         "phpspec/phpspec": "^6.0",
         "phpstan/phpstan": "^0.12.66",

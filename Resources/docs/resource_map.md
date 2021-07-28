@@ -6,7 +6,7 @@ You can change it via application configuration:
 # app/config/config.yml
 
 fsi_resource_repository:
-    map_path: %kernel.root_dir%/config/my_map_file_name.yml
+    map_path: %kernel.project_dir%/config/my_map_file_name.yml
 ```
 
 Example resource map:
