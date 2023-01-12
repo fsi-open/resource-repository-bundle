@@ -155,18 +155,14 @@ class Resource implements ResourceValue
      */
     private function toDateTimeImmutable(?DateTimeInterface $value): ?DateTimeImmutable
     {
-        if (null === $value) {
-            return null;
-        }
-
         if (true === $value instanceof DateTime) {
             return DateTimeImmutable::createFromMutable($value);
-        } elseif (true === $value instanceof DateTimeImmutable) {
+        }
+
+        if (true === $value instanceof DateTimeImmutable) {
             return $value;
         }
 
-        throw new InvalidArgumentException(
-            sprintf("Don't know how to convert %s to %s", get_class($value), DateTimeImmutable::class)
-        );
+        return null;
     }
 }
