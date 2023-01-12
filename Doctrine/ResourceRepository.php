@@ -19,7 +19,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
 {
     /**
      * @param mixed $id
-     * @param int $lockMode
+     * @param 0|1|2|4|null $lockMode
      * @param null $lockVersion
      * @return ResourceValue
      */
