@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace FSi\Bundle\ResourceRepositoryBundle\Tests\Repository;
+namespace tests\FSi\Bundle\ResourceRepositoryBundle\Repository;
 
 use FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\IntegerType;

@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace FSi\Bundle\ResourceRepositoryBundle\Tests\Entity;
+namespace tests\FSi\Bundle\ResourceRepositoryBundle\Entity;
 
 use FSi\Bundle\ResourceRepositoryBundle\Model\Resource as BaseResource;
 
