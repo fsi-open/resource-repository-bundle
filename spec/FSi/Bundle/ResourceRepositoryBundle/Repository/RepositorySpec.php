@@ -17,7 +17,7 @@ use FSi\Bundle\ResourceRepositoryBundle\Repository\Repository;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use FSi\Bundle\ResourceRepositoryBundle\Tests\Entity\Resource;
+use tests\FSi\Bundle\ResourceRepositoryBundle\Entity\Resource;
 
 class RepositorySpec extends ObjectBehavior
 {

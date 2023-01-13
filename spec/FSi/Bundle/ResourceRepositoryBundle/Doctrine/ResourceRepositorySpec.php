@@ -19,7 +19,7 @@ use FSi\Bundle\ResourceRepositoryBundle\Exception\EntityRepositoryException;
 use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use FSi\Bundle\ResourceRepositoryBundle\Tests\Entity\Resource;
+use tests\FSi\Bundle\ResourceRepositoryBundle\Entity\Resource;
 
 class ResourceRepositorySpec extends ObjectBehavior
 {

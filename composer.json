@@ -16,7 +16,7 @@
     "autoload-dev": {
         "psr-4": {
             "spec\\": "spec",
-            "FSi\\Bundle\\ResourceRepositoryBundle\\Tests\\": "tests"
+            "tests\\FSi\\Bundle\\ResourceRepositoryBundle\\": "tests"
         }
     },
     "require": {
