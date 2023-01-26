@@ -19,6 +19,7 @@ use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceWeb
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\TwigFormPass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\FSIResourceRepositoryExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class FSiResourceRepositoryBundle extends Bundle
@@ -46,7 +47,7 @@ class FSiResourceRepositoryBundle extends Bundle
         );
     }
 
-    public function getContainerExtension()
+    public function getContainerExtension(): ?ExtensionInterface
     {
         if (null === $this->extension) {
             $this->extension = new FSIResourceRepositoryExtension();
