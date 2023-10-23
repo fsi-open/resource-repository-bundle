@@ -1,102 +1,113 @@
 # File Upload
 
-To use file as a resource type you need to add the [FSiDoctrineExtensionsBundle](https://github.com/fsi-open/doctrine-extensions-bundle)
-to your application.
+To use file as a resource type you need to add the [Files](https://github.com/fsi-open/files)
+library to your application.
 
 ## 1. Composer
 
 The following command will add the bundle to your `composer.json`:
 
-`composer require fsi/doctrine-extensions-bundle:^2.0`
+```bash
+composer require fsi/files
+```
 
 ## 2. Application Kernel
 
-Now, register the bundle in `AppKernel.php` (or `bundles.php` if you use the Flex way).
-**IMPORTANT!!** make sure that ``FSi\Bundle\DoctrineExtensionsBundle\FSiDoctrineExtensionsBundle()`` is registered
-**before** ``FSi\Bundle\ResourceRepositoryBundle\FSiResourceRepositoryBundle()``. Otherwise you will not be able
+Now, register the bundle in `bundles.php`.
+**IMPORTANT!!** make sure that ``FSi\Component\Files\Integration\Symfony\FilesBundle`` is registered
+**before** ``FSi\Bundle\ResourceRepositoryBundle\FSiResourceRepositoryBundle``. Otherwise you will not be able
 to use the file type resource.
 
 ```php
-// app/AppKernel.php
+// config/bundles.php
+<?php
 
-public function registerBundles()
-{
-    $bundles = array(
-        new Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(), // required by FSiDoctrineExtensionsBundle
-        new FSi\Bundle\DoctrineExtensionsBundle\FSiDoctrineExtensionsBundle(),
+return [
+    // ... packages required by FilesBundle
+    FSi\Component\Files\Integration\Symfony\FilesBundle::class => ['all' => true],
 
-        // FSiResourceRepositoryBundle must be after FSiDoctrineExtensionsBundle
-
-        new FSi\Bundle\ResourceRepositoryBundle\FSiResourceRepositoryBundle()
-    );
-
-    return $bundles;
-}
+    // FSiResourceRepositoryBundle must be after FilesBundle
+    FSi\Bundle\ResourceRepositoryBundle\FSiResourceRepositoryBundle::class => ['all' => true]
+];
 ```
 
-## 3. Modify resource entity
+## 3. Create or modify the resource entity
 
-Now you need to change the BaseResource class of your [Resource Entity](installation.md#3-create-entity) from
-``FSi\Bundle\ResourceRepositoryBundle\Model\Resource`` to ``FSi\Bundle\ResourceRepositoryBundle\Model\ResourceFSiFile``
+Now you need to change the extended class of your [Resource Entity](installation.md#3-create-entity) from
+``FSi\Bundle\ResourceRepositoryBundle\Model\Resource`` to ``FSi\Bundle\ResourceRepositoryBundle\Model\ResourceWebFile``
 
 This is how your Resource class should look now:
 
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\DemoBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceFSiFile as BaseResource;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Table;
+use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceWebFile;
 
-/**
- * @ORM\Entity(repositoryClass="FSi\Bundle\ResourceRepositoryBundle\Doctrine\ResourceRepository")
- * @ORM\Table(name="fsi_resource")
- */
-class Resource extends BaseResource
+// You can use whatever drive you want for mapping
+#[Entity(repositoryClass: "FSi\Bundle\ResourceRepositoryBundle\Doctrine\ResourceRepository"]
+#[Table(name: "fsi_resource")]
+class Resource extends ResourceWebFile
 {
 }
 ```
 
 ## 4. Update the database schema
 
-Update your database schema:
+Update your database schema forcefully:
 
+```bash
+$ php bin/console doctrine:schema:update --force
 ```
-$ php app/console doctrine:schema:update --force
+
+or via migrations:
+
+```bash
+php bin/console doctrine:migrations:diff
+php bin/console doctrine:migrations:migrate -n
 ```
 
-And now you should be able to use the new resource types in your [Resource Map](resource_map.md). These types are:
-
-- ``fsi_file`` - any file uploaded through uploadable doctrine extension,
-- ``fsi_image`` - only images uploaded through uploadable doctrine extension,
-- ``fsi_removable_file`` - one of the above with additional option to delete the uploaded file.
+And now you should be able to use the new ``web_file`` resource type in your [Resource Map](resource_map.md).
+See the [related documentation](https://github.com/fsi-open/files/blob/master/doc/usage.md#form) on how to use it.
 
 Example:
 
 ```yaml
-# app/config/resource_map.yml
+# config/resource_map.yaml
 
 resources:
     type: group
     home_page:
         type: group
+        terms_of_service:
+            type: web_file
+            form_options:
+                label: Terms of service
+            constraints:
+                FSi\Component\Files\Integration\Symfony\Validator\Constraint\UploadedWebFile:
+                    mimeTypes: ["application/pdf"]
         header:
-            type: fsi_image
+            type: web_file
             form_options:
                 label: Header background
+                image: true
             constraints:
-                FSi\Bundle\DoctrineExtensionsBundle\Validator\Constraints\Image:
+                FSi\Component\Files\Integration\Symfony\Validator\Constraint\UploadedImage:
                     maxWidth: 1650
                     maxHeight: 600
         advertisement:
-            type: fsi_removable_file
+            type: web_file
             form_options:
                 label: Advertisement
-                file_type: fsi_image
-                file_options:
-                    constraints:
-                        FSi\Bundle\DoctrineExtensionsBundle\Validator\Constraints\Image:
-                            maxWidth: 400
-                            maxHeight: 500
+                image: true
+                removable: true
+                constraints:
+                    FSi\Component\Files\Integration\Symfony\Validator\Constraint\UploadedImage:
+                        maxWidth: 400
+                        maxHeight: 500
 ```

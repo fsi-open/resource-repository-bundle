@@ -13,7 +13,6 @@ namespace FSi\Bundle\ResourceRepositoryBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceCKEditorPass;
-use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceFSiFilePass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourcePass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\ResourceWebFilePass;
 use FSi\Bundle\ResourceRepositoryBundle\DependencyInjection\Compiler\TwigFormPass;
@@ -26,9 +25,6 @@ class FSiResourceRepositoryBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
-        if (true === $container->hasExtension('fsi_doctrine_extensions')) {
-            $container->addCompilerPass(new ResourceFSiFilePass());
-        }
         if (true === $container->hasExtension('fsi_files')) {
             $container->addCompilerPass(new ResourceWebFilePass());
         }

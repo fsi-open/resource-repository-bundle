@@ -5,7 +5,6 @@ matrix:
         - php: 7.4
           env:
             - COMPOSER_FLAGS='--prefer-lowest'
-        - php: 8.0
         - php: 8.1
 
 cache:

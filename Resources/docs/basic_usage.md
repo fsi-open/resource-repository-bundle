@@ -1,22 +1,38 @@
 # Basic usage
 
-First of all you need to remember few simple rules
+## Accessing resources in PHP
 
-## Get resource object in controller
+All resources should be accessed via the ``FSi\Bundle\ResourceRepositoryBundle\Repository\Repository`` service.
+**Important** it is not a Doctrine ORM repository!
 
-To get resource content you should use only ``fsi_resource_repository.repository`` service,
-like in following example:
-
-> **Important** - fsi_resource_repository.repository is not a Doctrine ORM repository!
-> It's instance of ``FSi\Bundle\ResourceRepositoryBundle\Repository\Repository`` class
+### Example usage inside of a controller:
 
 ```php
 
-public function indexAction()
-{
-    $this->get('fsi_resource_repository.repository')->get('resources.resource_text');
-}
+declare(strict_types=1);
 
+namespace FSi\Bundle\DemoBundle\Controller;
+
+use FSi\Bundle\ResourceRepositoryBundle\Repository\Repository;
+use Symfony\Component\HttpFoundation\Response;
+
+final class DemoController
+{
+    private Repository $resourceRepository;
+
+    // ... constructor
+
+    public function __invoke(): Response
+    {
+        // get value
+        $textResource = $this->resourceRepository->get('resources.resource_text');
+
+        // set value
+        $this->resourceRepository->set('resources.resource_text', 'some value');
+
+        // return response
+    }
+}
 ```
 
 ## Modify resource value
@@ -24,37 +40,50 @@ public function indexAction()
 To modify resource/resources you should use ``resource`` form type.
 
 ```php
-// Single resource editor
-public function indexAction(Request $request)
+
+declare(strict_types=1);
+
+namespace FSi\Bundle\DemoBundle\Controller;
+
+use Doctrine\ORM\EntityManagerInterface;
+use FSi\Bundle\ResourceRepositoryBundle\Repository\Repository;
+use Symfony\Component\HttpFoundation\Response;
+use Twig\Environment;
+
+final class DemoController
 {
-    $resource = $this->get('fsi_resource_repository.entity.repository')
-        ->get('resources.resource_text');
+    private Repository $resourceRepository;
+    private EntityManagerInterface $manager;
+    private Environment $twig;
 
-    $form = $this->createForm('resource', $resource, array(
-        'resource_key' => 'resources.resource_text'
-    ));
+    // ... constructor
 
-    if ($request->isMethod('POST')) {
+    public function __invoke(Request $request): Response
+    {
+        $resource = $this->resourceRepository->get('resources.resource_text');
+
+        $form = $this->createForm('resource', $resource, [
+            'resource_key' => 'resources.resource_text'
+        ]);
+
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entity = $form->getData();
-
-            $this->getDoctrine()->getManager()->persist($entity);
-            $this->getDoctrine()->getManager()->flush();
+        if (true === $form->isSubmitted() && true === $form->isValid()) {
+            $manager->flush();
         }
-    }
 
-    return $this->render(
-        '@FSiCompanySite/Default/index.html.twig', 
-        ['form' => $form->createView()]
-    );
+        return new Response(
+            $this->twig->render(
+                '@FSiCompanySite/Default/index.html.twig',
+                ['form' => $form->createView()]
+            )
+        );
+    }
 }
 ```
 
 ## Display resource in twig
 
-Display resources in Twig you should use ``get_resource`` and ``has_resource`` functions.
+To display resources in Twig templates you can use ``get_resource`` and ``has_resource`` functions.
 
 ```twig
 {# index.html.twig #}
@@ -69,19 +98,4 @@ You can use second argument as a default value in case that resource is not fill
 
 ```twig
 {{ get_resource('resources.resource_text', 'in construction...') }}
-```
-
-## Get / set resource value from php
-
-Sometimes it's useful to get value of a resource in your PHP code, e.g. when it holds some configuration variable.
-You can do it by directly accessing the ``fsi_resource_repository.repository`` service:
-
-```php
-$text = $container->get('fsi_resource_repository.repository')->get('resources.resource_text');
-```
-
-It's also possible to set value of a resource e.g. when loading database fixtures during application deploy:
-
-```php
-$container->get('fsi_resource_repository.repository')->set('resources.resource_text', 'some text');
 ```

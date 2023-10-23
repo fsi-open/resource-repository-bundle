@@ -7,40 +7,30 @@ form type.
 ## 1. Composer
 Add to composer.json following lines
 
-```
+```bash
 "require": {
-    "friendsofsymfony/ckeditor-bundle" : "^1.0"
+    "friendsofsymfony/ckeditor-bundle" : "^2.0"
 }
 ```
 
-## 2. Application Kernel
- 
-Register bundle in AppKernel  
-**IMPORTANT!!** make sure that ``FOS\CKEditorBundle\FOSCKEditorBundle()`` is registered
-**before** ``FSi\Bundle\ResourceRepositoryBundle\FSiResourceRepositoryBundle()``. In other way you will not be able
-to use ckeditor resource type.
+## 2. Bundles
 
 ```php
-// app/AppKernel.php
+// config/bundles.php
+<?php
 
-public function registerBundles()
-{
-    $bundles = [
-        new FOS\CKEditorBundle\FOSCKEditorBundle(),
+return [
+    FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
 
-        // FSiResourceRepositoryBundle must be after FOSCKEditorBundle
-
-        new FSi\Bundle\ResourceRepositoryBundle\FSiResourceRepositoryBundle()
-    ];
-
-    return $bundles;
-}
+    // FSiResourceRepositoryBundle must be after FOSCKEditorBundle
+    FSi\Bundle\ResourceRepositoryBundle\FSiResourceRepositoryBundle::class => ['all' => true]
+];
 ```
 
 Example:
 
 ```yaml
-# app/config/resource_map.yml
+# config/resource_map.yaml
 
 resources:
     type: group

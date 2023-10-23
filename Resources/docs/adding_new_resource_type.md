@@ -6,6 +6,8 @@ First you need to create resource type class that implements ``ResourceInterface
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\DemoBundle\Repository\Resource\Type;
 
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\AbstractType;
@@ -34,6 +36,8 @@ For EmailType the best choice is probably ``textValue``
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\DemoBundle\Repository\Resource\Type;
 
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\AbstractType;
@@ -42,10 +46,7 @@ use Symfony\Component\Validator\Constraints\Email;
 
 class EmailType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getResourceProperty()
+    public function getResourceProperty(): string
     {
         return 'textValue';
     }
@@ -58,28 +59,25 @@ form type.
 ```php
 <?php
 
+declare(strict_types=1);
+
 namespace FSi\Bundle\DemoBundle\Repository\Resource\Type;
 
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Validator\Constraints\Email;
 
 class EmailType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getResourceProperty()
+    public function getResourceProperty(): string
     {
         return 'textValue';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getFormType()
+    protected function getFormType(): string
     {
-        return 'email';
+        return EmailType::class;
     }
 }
 ```
@@ -87,8 +85,8 @@ class EmailType extends AbstractType
 Now the last thing is to create service with ``resource.type`` tag and ``email`` alias.
 
 ```
-    <service id="fsi_demo_bundle.resource.type.url" class="FSi\Bundle\DemoBundle\Repository\Resource\Type\EmailType">
-        <tag name="resource.type" alias="email"/>
+    <service id="FSi\Bundle\DemoBundle\Repository\Resource\Type\EmailType">
+        <tag name="resource.type" alias="email" />
     </service>
 ```
 

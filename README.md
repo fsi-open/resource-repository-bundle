@@ -1,9 +1,9 @@
 # Resource Repository Bundle
 
 This bundle provides an easy and extendible way of creating various editable resources.
-Be it simple or formatted text, an image, a PDF file or a number value, you can
-use one of the predefined types to handle it's database storage and displaying in
-template. Should you require to, you can define your own types.
+Be it simple or formatted text, a number, an image or a PDF file, you can use one of 
+the predefined types to handle it's database storage and displaying in template. 
+Should you require to, you can define your own types.
 
 Basically, this bundle exists so you do not have to create dedicated entities for
 simple content.
@@ -18,12 +18,10 @@ All of the above are described in detail in the documentation linked below.
 
 Build Status:  
 [![Build Status](https://travis-ci.org/fsi-open/resource-repository-bundle.png?branch=master)](https://travis-ci.org/fsi-open/resource-repository-bundle) - Master  
+[![Build Status](https://travis-ci.org/fsi-open/resource-repository-bundle.png?branch=2.0)](https://travis-ci.org/fsi-open/resource-repository-bundle) - 2.0  
 [![Build Status](https://travis-ci.org/fsi-open/resource-repository-bundle.png?branch=1.0)](https://travis-ci.org/fsi-open/resource-repository-bundle) - 1.0  
 
 [![Latest Stable Version](https://poser.pugx.org/fsi/resource-repository-bundle/v/stable.png)](https://packagist.org/packages/fsi/resource-repository-bundle)
-
-Code quality:
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/fsi-open/resource-repository-bundle/badges/quality-score.png?s=d40261524da1024a92e98b410d97a6568745b06a)](https://scrutinizer-ci.com/g/fsi-open/resource-repository-bundle/)
 
 Documentation:
 
