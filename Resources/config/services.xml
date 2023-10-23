@@ -54,13 +54,13 @@
         </service>
 
         <!-- Twig Extension -->
-        <service id="fsi_resource_repository.twig.extension.resource_repository" class="FSi\Bundle\ResourceRepositoryBundle\Twig\ResourceRepositoryExtension">
+        <service id="FSi\Bundle\ResourceRepositoryBundle\Twig\ResourceRepositoryExtension">
             <tag name="twig.extension" />
             <argument type="service" id="fsi_resource_repository.resource.repository"></argument>
         </service>
 
         <!-- Symfony Form Types -->
-        <service id="fsi_resource_repository.form.type.resource" class="FSi\Bundle\ResourceRepositoryBundle\Form\Type\ResourceType">
+        <service id="FSi\Bundle\ResourceRepositoryBundle\Form\Type\ResourceType">
             <tag name="form.type" alias="resource" />
             <argument type="service" id="fsi_resource_repository.resource.map_builder"/>
             <argument>%fsi_resource_repository.resource.value.class%</argument>

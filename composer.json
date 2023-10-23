@@ -20,16 +20,16 @@
         }
     },
     "require": {
-        "php": "^7.4|^8.1",
+        "php": "^7.4|^8.0",
         "doctrine/dbal": "^2.8|^3.0",
-        "doctrine/doctrine-bundle": "^1.12|^2.3",
-        "symfony/dependency-injection": "^4.4|^5.4",
-        "symfony/doctrine-bridge": "^4.4|^5.4",
-        "symfony/form" : "^4.4|^5.4",
-        "symfony/framework-bundle": "^4.4|^5.4",
-        "symfony/property-access": "^4.4|^5.4",
+        "doctrine/doctrine-bundle": "^1.12|^2.10",
+        "symfony/dependency-injection": "^4.4|^5.4|^6.0",
+        "symfony/doctrine-bridge": "^4.4|^5.4|^6.0",
+        "symfony/form" : "^4.4|^5.4|^6.0",
+        "symfony/framework-bundle": "^4.4|^5.4|^6.0",
+        "symfony/property-access": "^4.4|^5.4|^6.0",
         "symfony/validator": "^4.4|^5.4",
-        "twig/twig": "^2.13|^3.0"
+        "twig/twig": "^3.7"
     },
     "require-dev": {
         "doctrine/orm": "^2.5",

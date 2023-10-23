@@ -46,29 +46,32 @@ declare(strict_types=1);
 namespace FSi\Bundle\DemoBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
+use FSi\Bundle\ResourceRepositoryBundle\Form\Type\ResourceType;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Repository;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
 final class DemoController
 {
     private Repository $resourceRepository;
-    private EntityManagerInterface $manager;
+    private FormFactoryInterface $formFactory;
     private Environment $twig;
 
     // ... constructor
 
     public function __invoke(Request $request): Response
     {
-        $resource = $this->resourceRepository->get('resources.resource_text');
+        $resource = new FSiResource();
+        $resource->setTextValue($this->resourceRepository->get('resources.resource_text'));
 
-        $form = $this->createForm('resource', $resource, [
+        $form = $this->formFactory->create(ResourceType::class, $resource, [
             'resource_key' => 'resources.resource_text'
         ]);
 
         $form->handleRequest($request);
         if (true === $form->isSubmitted() && true === $form->isValid()) {
-            $manager->flush();
+            $this->resourceRepository->set('resources.resource_text', $resource->getTextValue());
         }
 
         return new Response(

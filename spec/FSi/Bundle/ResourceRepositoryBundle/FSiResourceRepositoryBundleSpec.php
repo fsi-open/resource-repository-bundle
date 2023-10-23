@@ -44,11 +44,11 @@ class FSiResourceRepositoryBundleSpec extends ObjectBehavior
     {
         $container->hasExtension('fsi_files')->shouldBeCalled()->willReturn(true);
         $container->hasExtension('fos_ck_editor')->shouldBeCalled()->willReturn(true);
-        $container->addCompilerPass(Argument::type(ResourceWebFilePass::class))->shouldBeCalled();
-        $container->addCompilerPass(Argument::type(ResourceCKEditorPass::class))->shouldBeCalled();
-        $container->addCompilerPass(Argument::type(TwigFormPass::class))->shouldBeCalled();
-        $container->addCompilerPass(Argument::type(ResourcePass::class))->shouldBeCalled();
-        $container->addCompilerPass(Argument::type(DoctrineOrmMappingsPass::class))->shouldBeCalled();
+        $container->addCompilerPass(Argument::type(ResourceWebFilePass::class))->willReturn($container)->shouldBeCalled();
+        $container->addCompilerPass(Argument::type(ResourceCKEditorPass::class))->willReturn($container)->shouldBeCalled();
+        $container->addCompilerPass(Argument::type(TwigFormPass::class))->willReturn($container)->shouldBeCalled();
+        $container->addCompilerPass(Argument::type(ResourcePass::class))->willReturn($container)->shouldBeCalled();
+        $container->addCompilerPass(Argument::type(DoctrineOrmMappingsPass::class))->willReturn($container)->shouldBeCalled();
 
         $this->build($container);
     }
