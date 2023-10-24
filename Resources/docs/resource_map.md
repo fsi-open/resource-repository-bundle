@@ -1,18 +1,19 @@
 # Resource Map
 
-Resource map is nothing more than yaml. ``app/config/resource_map.yml`` is default path to resource map.
-You can change it via application configuration:
-```
-# app/config/config.yml
+Resource map is nothing more than yaml. ``config/resource_map.yaml`` is default path to resource map.
+You can change it via your application configuration:
 
+```yaml
+# config/packages/fsi_resource_repository.yml
+---
 fsi_resource_repository:
-    map_path: %kernel.project_dir%/config/my_map_file_name.yml
+    map_path: %kernel.project_dir%/config/my_map_file_name.yaml
 ```
 
 Example resource map:
 
 ```yaml
-# app/config/resource_map.yml
+# config/resource_map.yaml
 
 resources:
     type: group
@@ -47,7 +48,7 @@ Available resource types
 * ``bool``
 * ``url``
 * ``email``
-* [fsi_file (not available default)](file_upload.md)
+* [web_file (not available default)](file_upload.md)
 * [fsi_ckeditor (deprecated, not available default)](fsi_ckeditor.md)
 * [ckeditor (not available default)](ckeditor.md)
 
@@ -56,7 +57,7 @@ Available resource types
 ### Validation
 
 Multiple constraints can be set to each resource type.
-You can use all Symfony2 constraints just passing their short name (like NotBlank or Length) or custom one by passing full
+You can use all Symfony constraints just passing their short name (like NotBlank or Length) or custom one by passing full
 class name (like FSi\Bundle\DemoBundle\Validator\Constraints\NotBlank)
 
 
