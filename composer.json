@@ -22,7 +22,7 @@
     "require": {
         "php": "^7.4|^8.0",
         "doctrine/dbal": "^2.8|^3.0",
-        "doctrine/doctrine-bundle": "^1.12|^2.10",
+        "doctrine/doctrine-bundle": "^1.12|^2.0",
         "symfony/dependency-injection": "^4.4|^5.4|^6.0",
         "symfony/doctrine-bridge": "^4.4|^5.4|^6.0",
         "symfony/form" : "^4.4|^5.4|^6.0",
