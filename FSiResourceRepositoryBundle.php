@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class FSiResourceRepositoryBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         if (true === $container->hasExtension('fsi_files')) {
             $container->addCompilerPass(new ResourceWebFilePass());
