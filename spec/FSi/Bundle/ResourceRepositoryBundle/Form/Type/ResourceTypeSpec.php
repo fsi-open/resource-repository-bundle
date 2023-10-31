@@ -46,8 +46,8 @@ class ResourceTypeSpec extends ObjectBehavior
 
     public function it_configures_options(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(['data_class' => Resource::class])->shouldBeCalled();
-        $resolver->setRequired(['resource_key'])->shouldBeCalled();
+        $resolver->setDefaults(['data_class' => Resource::class])->shouldBeCalled()->willReturn($resolver);
+        $resolver->setRequired(['resource_key'])->shouldBeCalled()->willReturn($resolver);
         $this->configureOptions($resolver);
     }
 
@@ -73,7 +73,7 @@ class ResourceTypeSpec extends ObjectBehavior
         $map->getResource('resources.resource_text')->shouldBeCalled()->willReturn($resource);
         $builder->getFormFactory()->willReturn($factory);
         $resource->getFormBuilder($factory)->shouldBeCalled()->willReturn($textBuilder);
-        $builder->add($textBuilder)->shouldBeCalled();
+        $builder->add($textBuilder)->shouldBeCalled()->willReturn($builder);
         $this->buildForm($builder, ['resource_key' => 'resources.resource_text']);
     }
 }
