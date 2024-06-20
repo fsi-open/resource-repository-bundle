@@ -18,15 +18,10 @@ class Configuration implements ConfigurationInterface
 {
     private const SUPPORTED_DRIVERS = ['orm'];
 
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
-        if (true === method_exists(TreeBuilder::class, 'getRootNode')) {
-            $treeBuilder = new TreeBuilder('fsi_resource_repository');
-            $rootNode = $treeBuilder->getRootNode();
-        } else {
-            $treeBuilder = new TreeBuilder();
-            $rootNode = $treeBuilder->root('fsi_resource_repository');
-        }
+        $treeBuilder = new TreeBuilder('fsi_resource_repository');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode->children()
             ->scalarNode('db_driver')

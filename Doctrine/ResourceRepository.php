@@ -23,7 +23,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
      * @param null $lockVersion
      * @return ResourceValue
      */
-    public function find($id, $lockMode = null, $lockVersion = null)
+    public function find($id, $lockMode = null, $lockVersion = null): ResourceValue
     {
         if ($lockMode === null) {
             $lockMode = LockMode::NONE;
@@ -66,26 +66,26 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
      * Unsupported method
      *
      * @param array $criteria
-     * @param array $orderBy
-     * @param null $limit
-     * @param null $offset
-     * @return array|void
+     * @param array|null $orderBy
+     * @param int|null $limit
+     * @param int|null $offset
+     * @return array
      * @throws EntityRepositoryException
      */
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null): array
     {
-        $this->throwBadMethodException('findBy');
+        throw $this->throwBadMethodException('findBy');
     }
 
     /**
      * Unsupported method
      *
-     * @return array|void
+     * @return array
      * @throws EntityRepositoryException
      */
-    public function findAll()
+    public function findAll(): array
     {
-        $this->throwBadMethodException('findAll');
+        throw $this->throwBadMethodException('findAll');
     }
 
     /**
@@ -93,21 +93,20 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
      *
      * @param array $criteria
      * @param array $orderBy
-     * @return object|void
+     * @return ResourceValue|null
      * @throws EntityRepositoryException
      */
-    public function findOneBy(array $criteria, array $orderBy = null)
+    public function findOneBy(array $criteria, array $orderBy = null): ?ResourceValue
     {
-        $this->throwBadMethodException('findOneBy');
+        throw $this->throwBadMethodException('findOneBy');
     }
 
     /**
      * @param string $method
-     * @throws EntityRepositoryException
      */
-    private function throwBadMethodException(string $method): void
+    private function throwBadMethodException(string $method): EntityRepositoryException
     {
-        throw new EntityRepositoryException(sprintf(
+        return new EntityRepositoryException(sprintf(
             'Method "%s" is not supported in "%s" entity repository',
             $method,
             $this->getEntityName()

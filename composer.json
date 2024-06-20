@@ -32,10 +32,10 @@
         "twig/twig": "^3.7"
     },
     "require-dev": {
-        "doctrine/orm": "^2.5",
+        "doctrine/orm": "^2.5|^3.0",
         "friendsofsymfony/ckeditor-bundle": "^2.1",
-        "fsi/files": "^2.0.4",
-        "fsi/form-extensions-bundle": "^2.2",
+        "fsi/files": "^2.0.4@dev",
+        "fsi/form-extensions-bundle": "^2.2@dev",
         "phpunit/phpunit": "^9.5|^10.0",
         "phpspec/phpspec": "^7.4",
         "phpstan/phpstan": "^1.10",
