@@ -11,7 +11,10 @@ declare(strict_types=1);
 
 namespace spec\FSi\Bundle\ResourceRepositoryBundle\Repository;
 
+use Doctrine\ORM\EntityRepository;
+use Doctrine\Persistence\ObjectRepository;
 use FSi\Bundle\ResourceRepositoryBundle\Doctrine\ResourceRepository;
+use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\MapBuilder;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Repository;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\TextType;
@@ -21,7 +24,7 @@ use tests\FSi\Bundle\ResourceRepositoryBundle\Entity\Resource;
 
 class RepositorySpec extends ObjectBehavior
 {
-    public function let(MapBuilder $builder, ResourceRepository $repository): void
+    public function let(MapBuilder $builder, ResourceValueRepository $repository): void
     {
         $this->beConstructedWith($builder, $repository, Resource::class);
     }
@@ -39,7 +42,7 @@ class RepositorySpec extends ObjectBehavior
 
     public function it_return_null_if_entity_field_is_null(
         MapBuilder $builder,
-        ResourceRepository $repository,
+        ResourceValueRepository $repository,
         TextType $resource,
         Resource $entity
     ): void {
@@ -54,7 +57,7 @@ class RepositorySpec extends ObjectBehavior
 
     public function it_return_null_if_entity_field_is_empty_string(
         MapBuilder $builder,
-        ResourceRepository $repository,
+        ResourceValueRepository $repository,
         TextType $resource,
         Resource $entity
     ): void {
@@ -69,7 +72,7 @@ class RepositorySpec extends ObjectBehavior
 
     public function it_return_0_if_entity_field_is_zero(
         MapBuilder $builder,
-        ResourceRepository $repository,
+        ResourceValueRepository $repository,
         TextType $resource,
         Resource $entity
     ): void {
@@ -84,7 +87,7 @@ class RepositorySpec extends ObjectBehavior
 
     public function it_sets_entity_field_on_existing_value(
         MapBuilder $builder,
-        ResourceRepository $repository,
+        ResourceValueRepository $repository,
         TextType $resource,
         Resource $entity
     ): void {
@@ -99,7 +102,7 @@ class RepositorySpec extends ObjectBehavior
 
     public function it_removes_entity_when_setting_empty_value(
         MapBuilder $builder,
-        ResourceRepository $repository,
+        ResourceValueRepository $repository,
         TextType $resource,
         Resource $entity
     ): void {
