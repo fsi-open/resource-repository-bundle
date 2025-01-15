@@ -34,7 +34,7 @@
     "require-dev": {
         "doctrine/orm": "^2.5|^3.0",
         "friendsofsymfony/ckeditor-bundle": "^2.1",
-        "fsi/files": "^2.0.4",
+        "fsi/files": "^2.0.4|^3.0@dev",
         "fsi/form-extensions-bundle": "^2.2",
         "phpunit/phpunit": "^9.5|^10.0",
         "phpspec/phpspec": "^7.4",
@@ -55,7 +55,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.0-dev",
+            "dev-master": "3.1-dev",
+            "3.0": "3.0-dev",
             "2.2": "2.2-dev",
             "2.1": "2.1-dev",
             "2.0": "2.0-dev",
