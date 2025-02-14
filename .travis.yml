@@ -15,15 +15,21 @@ matrix:
         - php: 7.4
         - php: 8.0
         - php: 8.1
+          before_install:
+              - composer require --dev symfony/clock
         - php: 8.2
+          before_install:
+              - composer require --dev symfony/clock
         - php: 8.3
+          before_install:
+              - composer require --dev symfony/clock
 
 cache:
     directories:
         - $HOME/.composer/cache
         - vendor
 
-before_script:
+install:
     - phpenv config-rm xdebug.ini
     - composer validate
     - composer update $COMPOSER_FLAGS
