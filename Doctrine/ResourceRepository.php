@@ -72,7 +72,7 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
      * @return array
      * @throws EntityRepositoryException
      */
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null): array
+    public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null): array
     {
         throw $this->throwBadMethodException('findBy');
     }
@@ -92,11 +92,11 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
      * Unsupported method
      *
      * @param array $criteria
-     * @param array $orderBy
+     * @param array|null $orderBy
      * @return ResourceValue|null
      * @throws EntityRepositoryException
      */
-    public function findOneBy(array $criteria, array $orderBy = null): ?ResourceValue
+    public function findOneBy(array $criteria, ?array $orderBy = null): ?ResourceValue
     {
         throw $this->throwBadMethodException('findOneBy');
     }
