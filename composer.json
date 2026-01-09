@@ -19,6 +19,12 @@
             "tests\\FSi\\Bundle\\ResourceRepositoryBundle\\": "tests"
         }
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/fsi-open/phpspec.git"
+        }
+    ],
     "require": {
         "php": "^7.4|^8.0",
         "doctrine/dbal": "^2.8|^3.0",
