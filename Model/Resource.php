@@ -14,145 +14,109 @@ namespace FSi\Bundle\ResourceRepositoryBundle\Model;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
-use InvalidArgumentException;
-
-use function get_class;
-use function method_exists;
 
 class Resource implements ResourceValue
 {
-    /**
-     * @var string
-     */
-    protected $key;
+    protected string $key;
 
-    /**
-     * @var string
-     */
-    protected $textValue;
+    protected ?string $textValue = null;
 
-    /**
-     * @var DateTimeImmutable
-     */
-    protected $datetimeValue;
+    protected ?DateTimeImmutable $datetimeValue = null;
 
-    /**
-     * @var DateTimeImmutable
-     */
-    protected $dateValue;
+    protected ?DateTimeImmutable $dateValue = null;
 
-    /**
-     * @var DateTimeImmutable
-     */
-    protected $timeValue;
+    protected ?DateTimeImmutable $timeValue = null;
 
-    /**
-     * @var int
-     */
-    protected $numberValue;
+    protected string|null $numberValue = null;
 
-    /**
-     * @var int
-     */
-    protected $integerValue;
+    protected ?int $integerValue = null;
 
-    /**
-     * @var bool
-     */
-    protected $boolValue;
+    protected ?bool $boolValue = null;
 
     public function __construct()
     {
-        $this->boolValue = false;
     }
 
-    public function setKey($key)
+    public function setKey(string $key): void
     {
         $this->key = $key;
     }
 
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
 
-    public function setTextValue($textValue)
+    public function setTextValue(?string $textValue): void
     {
         $this->textValue = $textValue;
     }
 
-    public function getTextValue()
+    public function getTextValue(): ?string
     {
         return $this->textValue;
     }
 
-    public function setDateValue($dateValue)
+    public function setDateValue(?DateTimeInterface $dateValue): void
     {
         $this->dateValue = $this->toDateTimeImmutable($dateValue);
     }
 
-    public function getDateValue()
+    public function getDateValue(): ?DateTimeImmutable
     {
         return $this->dateValue;
     }
 
-    public function setDatetimeValue($datetimeValue)
+    public function setDatetimeValue(?DateTimeInterface $datetimeValue): void
     {
         $this->datetimeValue = $this->toDateTimeImmutable($datetimeValue);
     }
 
-    public function getDatetimeValue()
+    public function getDatetimeValue(): ?DateTimeImmutable
     {
         return $this->datetimeValue;
     }
 
-    public function setTimeValue($timeValue)
+    public function setTimeValue(?DateTimeInterface $timeValue): void
     {
         $this->timeValue = $this->toDateTimeImmutable($timeValue);
     }
 
-    public function getTimeValue()
+    public function getTimeValue(): ?DateTimeImmutable
     {
         return $this->timeValue;
     }
 
-    public function setNumberValue($numberValue)
+    public function setNumberValue(string|null $numberValue): void
     {
         $this->numberValue = $numberValue;
     }
 
-    public function getNumberValue()
+    public function getNumberValue(): string|null
     {
         return $this->numberValue;
     }
 
-    public function setIntegerValue($integerValue)
+    public function setIntegerValue(?int $integerValue): void
     {
         $this->integerValue = $integerValue;
     }
 
-    public function getIntegerValue()
+    public function getIntegerValue(): ?int
     {
         return $this->integerValue;
     }
 
-    public function setBoolValue($boolValue)
+    public function setBoolValue(?bool $boolValue): void
     {
         $this->boolValue = $boolValue;
     }
 
-    public function getBoolValue()
+    public function getBoolValue(): ?bool
     {
         return $this->boolValue;
     }
 
-    /**
-     * Symfony date/time/datetime forms do not allow for default DateTimeImmutable
-     * value until version 4.2, so the values need to be casted manually.
-     *
-     * @param DateTimeInterface|null $value
-     * @return DateTimeImmutable|null
-     */
     private function toDateTimeImmutable(?DateTimeInterface $value): ?DateTimeImmutable
     {
         if (true === $value instanceof DateTime) {

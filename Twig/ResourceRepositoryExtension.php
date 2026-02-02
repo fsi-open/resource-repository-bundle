@@ -25,7 +25,7 @@ final class ResourceRepositoryExtension extends AbstractExtension
     }
 
     /**
-     * @return array<TwigFunction>
+     * @return array<int, TwigFunction>
      */
     public function getFunctions(): array
     {
@@ -36,7 +36,7 @@ final class ResourceRepositoryExtension extends AbstractExtension
             ),
             new TwigFunction('get_resource', function (string $key, $default = null) {
                 $value = $this->repository->get($key);
-                return null !== $value ? $value : $default;
+                return $value ?? $default;
             })
         ];
     }

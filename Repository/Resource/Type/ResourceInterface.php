@@ -21,13 +21,14 @@ interface ResourceInterface
 
     /**
      * Return property that is used in Resource entity to store resource value.
-     *
-     * @return string
      */
     public function getResourceProperty(): string;
 
     public function addConstraint(Constraint $constraint): void;
 
+    /**
+     * @param array<string, mixed> $options
+     */
     public function setFormOptions(array $options): void;
 
     public function getFormBuilder(FormFactoryInterface $factory): FormBuilderInterface;

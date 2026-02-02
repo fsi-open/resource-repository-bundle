@@ -76,13 +76,13 @@ class RepositorySpec extends ObjectBehavior
         TextType $resource,
         Resource $entity
     ): void {
-        $entity->getTextValue()->willReturn(0);
+        $entity->getTextValue()->willReturn('0');
         $resource->getName()->willReturn('resources_group.resource_a.en');
         $repository->get('resources_group.resource_a.en')->willReturn($entity);
         $builder->getResource(Argument::type('string'))->willReturn($resource);
         $resource->getResourceProperty()->willReturn('textValue');
 
-        $this->get('resources_group.resource_a')->shouldReturn(0);
+        $this->get('resources_group.resource_a')->shouldReturn('0');
     }
 
     public function it_sets_entity_field_on_existing_value(

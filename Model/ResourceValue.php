@@ -16,83 +16,35 @@ use DateTimeInterface;
 
 interface ResourceValue
 {
-    /**
-     * @param string $key
-     */
-    public function setKey($key);
+    public function setKey(string $key): void;
 
-    /**
-     * @return string
-     */
-    public function getKey();
+    public function getKey(): string;
 
-    /**
-     * @param string $textValue
-     */
-    public function setTextValue($textValue);
+    public function setTextValue(?string $textValue): void;
 
-    /**
-     * @return string
-     */
-    public function getTextValue();
+    public function getTextValue(): ?string;
 
-    /**
-     * @param DateTimeInterface $dateValue
-     */
-    public function setDateValue($dateValue);
+    public function setDateValue(?DateTimeInterface $dateValue): void;
 
-    /**
-     * @return DateTimeImmutable
-     */
-    public function getDateValue();
+    public function getDateValue(): ?DateTimeImmutable;
 
-    /**
-     * @param DateTimeInterface $datetimeValue
-     */
-    public function setDatetimeValue($datetimeValue);
+    public function setDatetimeValue(?DateTimeInterface $datetimeValue): void;
 
-    /**
-     * @return DateTimeImmutable
-     */
-    public function getDatetimeValue();
+    public function getDatetimeValue(): ?DateTimeImmutable;
 
-    /**
-     * @param DateTimeInterface $timeValue
-     */
-    public function setTimeValue($timeValue);
+    public function setTimeValue(?DateTimeInterface $timeValue): void;
 
-    /**
-     * @return DateTimeImmutable
-     */
-    public function getTimeValue();
+    public function getTimeValue(): ?DateTimeImmutable;
 
-    /**
-     * @param mixed $numberValue
-     */
-    public function setNumberValue($numberValue);
+    public function setNumberValue(string|null $numberValue): void;
 
-    /**
-     * @return mixed
-     */
-    public function getNumberValue();
+    public function getNumberValue(): string|null;
 
-    /**
-     * @param int $integerValue
-     */
-    public function setIntegerValue($integerValue);
+    public function setIntegerValue(?int $integerValue): void;
 
-    /**
-     * @return int
-     */
-    public function getIntegerValue();
+    public function getIntegerValue(): ?int;
 
-    /**
-     * @param boolean $boolValue
-     */
-    public function setBoolValue($boolValue);
+    public function setBoolValue(?bool $boolValue): void;
 
-    /**
-     * @return boolean
-     */
-    public function getBoolValue();
+    public function getBoolValue(): ?bool;
 }

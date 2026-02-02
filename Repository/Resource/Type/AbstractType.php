@@ -17,31 +17,26 @@ use Symfony\Component\Validator\Constraint;
 
 abstract class AbstractType implements ResourceInterface
 {
-    /**
-     * @var string
-     */
-    protected $name;
+    protected string $name;
 
     /**
      * @var array<Constraint>
      */
-    protected $constraints;
+    protected array $constraints;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
-    protected $formOptions;
+    protected array $formOptions;
 
-    /**
-     * @var FormBuilderInterface|null
-     */
-    protected $formBuilder;
+    protected ?FormBuilderInterface $formBuilder;
 
     public function __construct(string $name)
     {
         $this->name = $name;
         $this->constraints = [];
         $this->formOptions = [];
+        $this->formBuilder = null;
     }
 
     public function getName(): string
@@ -82,6 +77,9 @@ abstract class AbstractType implements ResourceInterface
      */
     abstract protected function getFormType(): string;
 
+    /**
+     * @return array<string, mixed>
+     */
     protected function buildFormOptions(): array
     {
         $options = array_merge(['required' => false, 'label' => false], $this->formOptions);

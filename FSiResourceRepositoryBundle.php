@@ -45,17 +45,25 @@ class FSiResourceRepositoryBundle extends Bundle
 
     public function getContainerExtension(): ?ExtensionInterface
     {
-        if (null === $this->extension) {
+        if (false === $this->extension instanceof FSIResourceRepositoryExtension) {
             $this->extension = new FSIResourceRepositoryExtension();
         }
 
         return $this->extension;
     }
 
+    /**
+     * @return array<string, string>
+     */
     private function getDoctrineMappings(): array
     {
+        $realpath = realpath(__DIR__ . '/Resources/config/doctrine/model');
+        if (false === $realpath) {
+            return [];
+        }
+
         return [
-            realpath(__DIR__ . '/Resources/config/doctrine/model') => 'FSi\Bundle\ResourceRepositoryBundle\Model',
+            $realpath => 'FSi\Bundle\ResourceRepositoryBundle\Model',
         ];
     }
 }
