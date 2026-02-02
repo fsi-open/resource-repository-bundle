@@ -24,9 +24,8 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
      * @param mixed $id
      * @param 0|1|2|4|null $lockMode
      * @param null $lockVersion
-     * @return ResourceValue
      */
-    public function find($id, $lockMode = null, $lockVersion = null): ResourceValue
+    public function find($id, $lockMode = null, $lockVersion = null): ?ResourceValue
     {
         if ($lockMode === null) {
             $lockMode = LockMode::NONE;
