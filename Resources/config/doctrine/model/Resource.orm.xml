@@ -13,7 +13,7 @@
         <field name="timeValue" column="time_value" type="time_immutable" nullable="true"/>
         <field name="numberValue" column="number_value" type="decimal" precision="20" scale="4" nullable="true"/>
         <field name="integerValue" column="integer_value" type="integer" nullable="true"/>
-        <field name="boolValue" column="bool_value" type="boolean" />
+        <field name="boolValue" column="bool_value" type="boolean" nullable="true"/>
     </mapped-superclass>
 
 </doctrine-mapping>
