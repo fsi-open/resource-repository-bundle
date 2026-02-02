@@ -62,7 +62,7 @@ class Repository
         $entity = $this->resourceValueRepository->get($resource->getName());
 
         $value = $this->accessor->getValue($entity, $resource->getResourceProperty());
-        if (null !== $value && !(is_string($value) && empty($value))) {
+        if (null !== $value && '' !== $value) {
             return $value;
         }
 

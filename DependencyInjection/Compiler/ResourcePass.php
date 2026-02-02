@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 class ResourcePass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $resources = [];
         foreach ($container->findTaggedServiceIds('resource.type') as $serviceId => $tag) {

@@ -14,6 +14,7 @@ namespace FSi\Bundle\ResourceRepositoryBundle\Repository;
 use FSi\Bundle\ResourceRepositoryBundle\Exception\ConfigurationException;
 use FSi\Bundle\ResourceRepositoryBundle\Repository\Resource\Type\ResourceInterface;
 use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\Validator\Constraint;
 
 class MapBuilder
 {
@@ -23,37 +24,41 @@ class MapBuilder
     private const CONSTRAINT_CLASS = 'Symfony\\Component\\Validator\\Constraints\\%s';
 
     /**
-     * @var array
-     */
-    protected $rawArray;
-
-    /**
      * Parsed resources map
      *
-     * @var array
+     * @var array<string, mixed>
      */
-    protected $map;
+    protected array $map;
 
     /**
      * Array that holds every single resource under unique key
      *
-     * @var array
+     * @var array<string, mixed>
      */
-    protected $resources = [];
+    protected array $resources = [];
 
     /**
-     * @var string[]
+     * @var array<string, class-string<ResourceInterface>>
      */
-    protected $resourceTypes = [];
+    protected array $resourceTypes = [];
 
+    /**
+     * @param array<string, class-string<ResourceInterface>> $resourceTypes
+     */
     public function __construct(string $mapPath, array $resourceTypes = [])
     {
         array_walk($resourceTypes, function (string $class, string $type): void {
             $this->resourceTypes[$type] = $class;
         });
 
+        $contents = file_get_contents($mapPath);
+        if (false === $contents) {
+            $this->map = [];
+            return;
+        }
+
         $this->map = true === file_exists($mapPath)
-            ? $this->recursiveParseRawMap(Yaml::parse(file_get_contents($mapPath)))
+            ? $this->recursiveParseRawMap(Yaml::parse($contents))
             : []
         ;
     }
@@ -61,7 +66,7 @@ class MapBuilder
     /**
      * Return nested array where keys represent groups and values are resource types.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getMap(): array
     {
@@ -80,18 +85,18 @@ class MapBuilder
         return $this->resources[$key];
     }
 
-    public function hasResource($key): bool
+    public function hasResource(string $key): bool
     {
         return array_key_exists($key, $this->resources);
     }
 
     /**
-     * @param array $rawMap
+     * @param array<string, mixed> $rawMap
      * @param null|string $parentPath
      * @throws ConfigurationException
-     * @return array
+     * @return array<string, mixed>
      */
-    protected function recursiveParseRawMap(?array $rawMap = [], ?string $parentPath = null): array
+    protected function recursiveParseRawMap(?array $rawMap, ?string $parentPath = null): array
     {
         $map = [];
 
@@ -124,9 +129,7 @@ class MapBuilder
     }
 
     /**
-     * @param array $configuration
-     * @param string $path
-     * @return ResourceInterface
+     * @param array<string, mixed> $configuration
      * @throws ConfigurationException
      */
     protected function createResource(array $configuration, string $path): ResourceInterface
@@ -146,6 +149,9 @@ class MapBuilder
         return new $class($path);
     }
 
+    /**
+     * @param array<string, mixed> $configuration
+     */
     protected function addConstraints(ResourceInterface $resource, array $configuration): void
     {
         if (isset($configuration['constraints'])) {
@@ -155,12 +161,21 @@ class MapBuilder
                 if (!class_exists($constraint)) {
                     $constraint = sprintf(self::CONSTRAINT_CLASS, ucfirst($constraint));
                 }
+                if (!class_exists($constraint) || false === is_subclass_of($constraint, Constraint::class)) {
+                    throw new ConfigurationException(sprintf(
+                        '"%s" is not a valid constraint class',
+                        $constraint
+                    ));
+                }
 
                 $resource->addConstraint(new $constraint($constraintOptions));
             }
         }
     }
 
+    /**
+     * @param array<string, mixed> $configuration
+     */
     protected function setFormOptions(ResourceInterface $resource, array $configuration): void
     {
         if (isset($configuration['form_options']) && is_array($configuration['form_options'])) {
@@ -169,9 +184,7 @@ class MapBuilder
     }
 
     /**
-     * @param array $configuration
-     * @param string $path
-     * @return void
+     * @param array<string, mixed> $configuration
      * @throws ConfigurationException
      */
     protected function validateConfiguration(array $configuration, string $path): void
@@ -192,8 +205,7 @@ class MapBuilder
     }
 
     /**
-     * @param array $configuration
-     * @return void
+     * @param array<string, mixed> $configuration
      * @throws ConfigurationException
      */
     protected function validateResourceConfiguration(array $configuration): void

@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class ResourceCKEditorPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $definition = new Definition(CKEditorType::class);
         $definition->addTag('resource.type', ['alias' => 'ckeditor']);

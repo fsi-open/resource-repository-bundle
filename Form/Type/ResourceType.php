@@ -19,15 +19,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ResourceType extends AbstractType
 {
-    /**
-     * @var MapBuilder
-     */
-    private $mapBuilder;
-
-    /**
-     * @var string
-     */
-    private $resourceClass;
+    private MapBuilder $mapBuilder;
+    private string $resourceClass;
 
     public function __construct(MapBuilder $mapBuilder, string $resourceClass)
     {
@@ -35,18 +28,18 @@ final class ResourceType extends AbstractType
         $this->resourceClass = $resourceClass;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'resource';
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(['data_class' => $this->resourceClass]);
         $resolver->setRequired(['resource_key']);
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if (false === $this->mapBuilder->hasResource($options['resource_key'])) {
             throw new ResourceFormTypeException("\"{$options['resource_key']}\" is not a valid resource key");

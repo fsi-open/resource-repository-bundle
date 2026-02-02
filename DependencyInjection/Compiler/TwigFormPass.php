@@ -16,14 +16,14 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 class TwigFormPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (false === $container->hasParameter('twig.form.resources')) {
             return;
         }
 
         $container->setParameter('twig.form.resources', array_merge(
-            $container->getParameter('twig.form.resources'),
+            (array) $container->getParameter('twig.form.resources'),
             ['@FSiResourceRepository/Form/form_div_layout.html.twig']
         ));
     }

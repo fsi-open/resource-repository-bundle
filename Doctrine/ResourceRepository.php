@@ -15,6 +15,9 @@ use FSi\Bundle\ResourceRepositoryBundle\Exception\EntityRepositoryException;
 use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue;
 use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository;
 
+/**
+ * @extends EntityRepository<ResourceValue>
+ */
 class ResourceRepository extends EntityRepository implements ResourceValueRepository
 {
     /**
@@ -62,48 +65,21 @@ class ResourceRepository extends EntityRepository implements ResourceValueReposi
         $this->getEntityManager()->flush();
     }
 
-    /**
-     * Unsupported method
-     *
-     * @param array $criteria
-     * @param array|null $orderBy
-     * @param int|null $limit
-     * @param int|null $offset
-     * @return array
-     * @throws EntityRepositoryException
-     */
     public function findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null): array
     {
         throw $this->throwBadMethodException('findBy');
     }
 
-    /**
-     * Unsupported method
-     *
-     * @return array
-     * @throws EntityRepositoryException
-     */
     public function findAll(): array
     {
         throw $this->throwBadMethodException('findAll');
     }
 
-    /**
-     * Unsupported method
-     *
-     * @param array $criteria
-     * @param array|null $orderBy
-     * @return ResourceValue|null
-     * @throws EntityRepositoryException
-     */
     public function findOneBy(array $criteria, ?array $orderBy = null): ?ResourceValue
     {
         throw $this->throwBadMethodException('findOneBy');
     }
 
-    /**
-     * @param string $method
-     */
     private function throwBadMethodException(string $method): EntityRepositoryException
     {
         return new EntityRepositoryException(sprintf(
