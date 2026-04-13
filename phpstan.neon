@@ -6,7 +6,7 @@ parameters:
     paths:
         - .
     excludePaths:
-        - DependencyInjection/Configuration
+        - DependencyInjection/Configuration.php
         - Resources
         - spec
         - vendor

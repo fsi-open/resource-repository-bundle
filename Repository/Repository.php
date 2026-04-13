@@ -82,8 +82,8 @@ class Repository
         if (null === $value) {
             $this->resourceValueRepository->remove($entity);
         } else {
-            $this->accessor->setValue($entity, $resource->getResourceProperty(), $value);
             $this->resourceValueRepository->add($entity);
+            $this->accessor->setValue($entity, $resource->getResourceProperty(), $value);
         }
     }
 }
