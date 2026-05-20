@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace FSi\Bundle\ResourceRepositoryBundle\Repository;
 
+use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValue;
 use FSi\Bundle\ResourceRepositoryBundle\Model\ResourceValueRepository;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -82,8 +83,9 @@ class Repository
         if (null === $value) {
             $this->resourceValueRepository->remove($entity);
         } else {
-            $this->resourceValueRepository->add($entity);
             $this->accessor->setValue($entity, $resource->getResourceProperty(), $value);
+            /** @var ResourceValue $entity */
+            $this->resourceValueRepository->add($entity);
         }
     }
 }
